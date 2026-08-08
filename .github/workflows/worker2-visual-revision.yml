@@ -1,0 +1,45 @@
+name: Worker 2 visual revision QA
+
+on:
+  push:
+    paths:
+      - 'tools/worker2_visual_patch.py'
+      - '.github/workflows/worker2-visual-revision.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  revise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply targeted visual diversity patch
+        run: python3 tools/worker2_visual_patch.py
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start HTTP server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w2v2.log 2>&1 &
+          sleep 2
+      - name: Regression QA and previews
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),path=require('path'),{chromium}=require('playwright');
+          const slugs=['aracsi-szepitok-balatonfured','euphoria-beauty-med-balatonfured','pure-white-beauty-balatonfured','agi-kozmetika-balatonfured','minnie-fodraszat-balatonfured','balassa-szalon-siofok','fellai-barber-shop-siofok','loreal-professionnel-siofok','barbershop-by-balassa-siofok','edina-fodraszat-siofok','selfie-fodraszat-siofok','szalonskicc-fodraszat-siofok','sd-beauty-project-keszthely','qubee-barbershop-keszthely','dreamhair-keszthely','pure-studio-keszthely','szipi-barbershop-keszthely','gold-hajstudio-keszthely','borbely-cafe-keszthely','dorka-fodrasza-keszthely'];
+          (async()=>{const b=await chromium.launch({headless:true}),items=[];for(const slug of slugs){const it={slug,errors:[]};for(const [mode,w,h] of [['desktop',1440,900],['mobile',390,844]]){const c=await b.newContext({viewport:{width:w,height:h}}),p=await c.newPage(),ce=[],pe=[],rf=[];p.on('console',m=>{if(m.type()==='error')ce.push(m.text())});p.on('pageerror',e=>pe.push(String(e)));p.on('requestfailed',r=>rf.push(r.url()));let res=null;try{res=await p.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'networkidle',timeout:60000})}catch(e){it.errors.push(`${mode}:nav`)};const m=await p.evaluate(()=>({sw:document.documentElement.scrollWidth,iw:innerWidth,heads:[...document.querySelectorAll('h1,h2,h3')].map(x=>{let r=x.getBoundingClientRect();return [r.left,r.right]}),v2:document.documentElement.innerHTML.includes('worker2-visual-v2')}));if(!res||res.status()>=400)it.errors.push(`${mode}:http`);if(ce.length||pe.length||rf.length)it.errors.push(`${mode}:runtime`);if(m.sw>m.iw+1)it.errors.push(`${mode}:overflow`);if(m.heads.some(x=>x[0]<-1||x[1]>m.iw+1))it.errors.push(`${mode}:heading`);if(!m.v2)it.errors.push(`${mode}:patch-missing`);if(mode==='mobile'){const menu=p.locator('#menu'),nav=p.locator('#nav');await menu.click();if(!(await nav.evaluate(e=>e.classList.contains('open'))))it.errors.push('mobile:menu')}await p.goto(`http://127.0.0.1:8765/${slug}/`);await p.screenshot({path:path.join(slug,`preview-${mode}.png`),fullPage:false});await c.close()}it.pass=!it.errors.length;items.push(it);console.log(`W2V2 ${slug} ${it.pass?'PASS':'FAIL'} ${it.errors.join(',')}`)}await b.close();fs.writeFileSync('worker2-visual-revision.json',JSON.stringify({passed:items.filter(x=>x.pass).length,failed:items.filter(x=>!x.pass).length,items},null,2));if(items.some(x=>!x.pass))process.exitCode=1})();
+          NODE
+      - name: Commit revision if regression QA passed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add aracsi-szepitok-balatonfured euphoria-beauty-med-balatonfured pure-white-beauty-balatonfured agi-kozmetika-balatonfured minnie-fodraszat-balatonfured balassa-szalon-siofok fellai-barber-shop-siofok loreal-professionnel-siofok barbershop-by-balassa-siofok edina-fodraszat-siofok selfie-fodraszat-siofok szalonskicc-fodraszat-siofok sd-beauty-project-keszthely qubee-barbershop-keszthely dreamhair-keszthely pure-studio-keszthely szipi-barbershop-keszthely gold-hajstudio-keszthely borbely-cafe-keszthely dorka-fodrasza-keszthely
+          git add worker2-visual-revision.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Worker 2 visual diversity revision and regression QA'
+          git pull --rebase origin main
+          git push origin HEAD:main
