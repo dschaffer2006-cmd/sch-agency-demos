@@ -6,6 +6,11 @@ on:
     paths:
       - 'tools/worker4_generate.py'
       - '.github/workflows/worker4-batch.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/worker4_generate.py'
+      - '.github/workflows/worker4-batch.yml'
   workflow_dispatch:
 
 permissions:
@@ -16,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Generate Worker 4 sites
         run: python3 tools/worker4_generate.py
       - name: Install Playwright Chromium
@@ -59,4 +66,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add stilus-kozmetika-tapolca loreal-by-andras-tapolca luxury-szalon-tapolca pipere-box-tapolca shiny-hair-nail-tapolca charm-fodrasz-ajka hidegheti-judit-ajka classic-vibe-barber-ajka tesco-ajka-hipermarket infinity-hairstudio-papa icon-barber-shop-papa barber-gang-papa suvi-the-barber-papa anflor-fodraszat-papa hajvarazs-fodrasz-papa spirit-hair-zalaegerszeg figaro-fodraszat-barber-zalaegerszeg hairclub-borondi-levente-zalaegerszeg bibor-hajszalon-zalaegerszeg hajhosszabbitas-fodraszat-zalaegerszeg
           git add worker4-qa-report.json
-          if git diff --cached --quiet; then echo 'Worker 4 batch unchanged.'; else git commit -m 'Build Worker 4 website batch 61-80'; git push; fi
+          if git diff --cached --quiet; then echo 'Worker 4 batch unchanged.'; else git commit -m 'Build Worker 4 website batch 61-80'; git push origin HEAD:${{ github.head_ref || github.ref_name }}; fi
