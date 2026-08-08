@@ -1,0 +1,23 @@
+Worker 4 public Pages manifest
+source_branch=main
+source_path=/
+w4-stilus-kozmetika-tapolca/index.html
+w4-loreal-by-andras-tapolca/index.html
+w4-luxury-szalon-tapolca/index.html
+w4-pipere-box-tapolca/index.html
+w4-shiny-hair-nail-tapolca/index.html
+w4-charm-fodrasz-ajka/index.html
+w4-hidegheti-judit-ajka/index.html
+w4-classic-vibe-barber-ajka/index.html
+w4-tesco-ajka-hipermarket/index.html
+w4-infinity-hairstudio-papa/index.html
+w4-icon-barber-shop-papa/index.html
+w4-barber-gang-papa/index.html
+w4-suvi-the-barber-papa/index.html
+w4-anflor-fodraszat-papa/index.html
+w4-hajvarazs-fodrasz-papa/index.html
+w4-spirit-hair-zalaegerszeg/index.html
+w4-figaro-fodraszat-barber-zalaegerszeg/index.html
+w4-hairclub-borondi-levente-zalaegerszeg/index.html
+w4-bibor-hajszalon-zalaegerszeg/index.html
+w4-hajhosszabbitas-fodraszat-zalaegerszeg/index.html
