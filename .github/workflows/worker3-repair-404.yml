@@ -1,0 +1,58 @@
+name: Worker 3 repair 404 routes
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker3-repair-404.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract Worker 3 payload and write exact manifest
+        run: |
+          python3 <<'PY'
+          import ast, base64, gzip, io, pathlib, tarfile
+          src = pathlib.Path('.github/worker3_payload.py').read_text(encoding='utf-8')
+          tree = ast.parse(src)
+          payload = None
+          for node in tree.body:
+              if isinstance(node, ast.Assign):
+                  for target in node.targets:
+                      if isinstance(target, ast.Name) and target.id == 'PAYLOAD':
+                          payload = ast.literal_eval(node.value)
+          if not payload:
+              raise SystemExit('PAYLOAD not found')
+          raw = base64.b64decode(payload)
+          with tarfile.open(fileobj=io.BytesIO(raw), mode='r:gz') as tf:
+              members = [m for m in tf.getmembers() if m.isfile() and m.name.endswith('/index.html')]
+              paths = sorted(m.name for m in members)
+              tf.extractall('.')
+          pathlib.Path('worker3-manifest.txt').write_text('\n'.join(paths) + '\n', encoding='utf-8')
+          print('Worker 3 index files:', len(paths))
+          print('\n'.join(paths))
+          if len(paths) != 20:
+              raise SystemExit(f'Expected 20 Worker 3 index files, got {len(paths)}')
+          PY
+      - name: Verify every manifest route has index.html
+        run: |
+          while IFS= read -r p; do
+            test -s "$p" || { echo "Missing/empty: $p"; exit 1; }
+          done < worker3-manifest.txt
+      - name: Commit repaired Worker 3 routes and manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add worker3-manifest.txt
+          while IFS= read -r p; do git add "$p"; done < worker3-manifest.txt
+          if git diff --cached --quiet; then
+            echo 'No route content changes; manifest already current.'
+          else
+            git commit -m 'Repair Worker 3 404 routes and publish manifest'
+            git push
+          fi
