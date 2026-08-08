@@ -1,6 +1,10 @@
 name: Generate demo previews
 
 on:
+  push:
+    paths:
+      - '**/index.html'
+      - '.github/workflows/generate-preview.yml'
   workflow_dispatch:
 
 permissions:
