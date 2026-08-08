@@ -1,0 +1,180 @@
+name: Worker 4 repair public Pages routes
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker4-repair-public-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: worker4-pages-repair
+  cancel-in-progress: false
+
+jobs:
+  repair-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Inspect GitHub Pages source and repair Worker 4 routes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="$GITHUB_REPOSITORY"
+          API="https://api.github.com/repos/$REPO/pages"
+          curl -fsSL \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "$API" > /tmp/pages.json
+
+          echo 'Pages configuration:'
+          cat /tmp/pages.json
+          echo
+
+          SOURCE_BRANCH=$(jq -r '.source.branch // empty' /tmp/pages.json)
+          SOURCE_PATH=$(jq -r '.source.path // "/"' /tmp/pages.json)
+          BUILD_TYPE=$(jq -r '.build_type // "legacy"' /tmp/pages.json)
+          echo "build_type=$BUILD_TYPE source_branch=$SOURCE_BRANCH source_path=$SOURCE_PATH"
+
+          SLUGS=(
+            w4-stilus-kozmetika-tapolca
+            w4-loreal-by-andras-tapolca
+            w4-luxury-szalon-tapolca
+            w4-pipere-box-tapolca
+            w4-shiny-hair-nail-tapolca
+            w4-charm-fodrasz-ajka
+            w4-hidegheti-judit-ajka
+            w4-classic-vibe-barber-ajka
+            w4-tesco-ajka-hipermarket
+            w4-infinity-hairstudio-papa
+            w4-icon-barber-shop-papa
+            w4-barber-gang-papa
+            w4-suvi-the-barber-papa
+            w4-anflor-fodraszat-papa
+            w4-hajvarazs-fodrasz-papa
+            w4-spirit-hair-zalaegerszeg
+            w4-figaro-fodraszat-barber-zalaegerszeg
+            w4-hairclub-borondi-levente-zalaegerszeg
+            w4-bibor-hajszalon-zalaegerszeg
+            w4-hajhosszabbitas-fodraszat-zalaegerszeg
+          )
+
+          for s in "${SLUGS[@]}"; do
+            git cat-file -e "origin/main:$s/index.html" || { echo "Missing main payload: $s/index.html"; exit 1; }
+          done
+
+          if [ -z "$SOURCE_BRANCH" ]; then
+            echo 'Pages is not using a branch source; cannot safely patch deployment source automatically.'
+            exit 2
+          fi
+
+          rm -rf /tmp/w4payload
+          mkdir -p /tmp/w4payload
+          git archive origin/main "${SLUGS[@]}" | tar -x -C /tmp/w4payload
+
+          git fetch origin "$SOURCE_BRANCH"
+          git checkout -B "$SOURCE_BRANCH" "origin/$SOURCE_BRANCH"
+
+          DEST='.'
+          if [ "$SOURCE_PATH" = '/docs' ]; then DEST='docs'; fi
+          mkdir -p "$DEST"
+          for s in "${SLUGS[@]}"; do
+            rm -rf "$DEST/$s"
+            cp -R "/tmp/w4payload/$s" "$DEST/$s"
+            test -s "$DEST/$s/index.html"
+          done
+          touch "$DEST/.nojekyll"
+          {
+            echo "Worker 4 public Pages manifest"
+            echo "source_branch=$SOURCE_BRANCH"
+            echo "source_path=$SOURCE_PATH"
+            for s in "${SLUGS[@]}"; do echo "$s/index.html"; done
+          } > "$DEST/worker4-pages-manifest.txt"
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$DEST/.nojekyll" "$DEST/worker4-pages-manifest.txt"
+          for s in "${SLUGS[@]}"; do git add "$DEST/$s"; done
+          if ! git diff --cached --quiet; then
+            git commit -m 'Repair Worker 4 public Pages routes'
+            git push origin "HEAD:$SOURCE_BRANCH"
+          else
+            echo 'All Worker 4 route files already match the Pages source.'
+            # Force a Pages rebuild with a manifest timestamp commit.
+            date -u +'%Y-%m-%dT%H:%M:%SZ' >> "$DEST/worker4-pages-manifest.txt"
+            git add "$DEST/worker4-pages-manifest.txt"
+            git commit -m 'Force Worker 4 Pages rebuild'
+            git push origin "HEAD:$SOURCE_BRANCH"
+          fi
+
+          # Explicitly request a legacy Pages build too; harmless if the push already queued one.
+          curl -sS -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "$API/builds" >/tmp/build-request.json || true
+          cat /tmp/build-request.json || true
+
+      - name: Poll all 20 public Pages URLs until they are live
+        run: |
+          set -euo pipefail
+          SLUGS=(
+            w4-stilus-kozmetika-tapolca
+            w4-loreal-by-andras-tapolca
+            w4-luxury-szalon-tapolca
+            w4-pipere-box-tapolca
+            w4-shiny-hair-nail-tapolca
+            w4-charm-fodrasz-ajka
+            w4-hidegheti-judit-ajka
+            w4-classic-vibe-barber-ajka
+            w4-tesco-ajka-hipermarket
+            w4-infinity-hairstudio-papa
+            w4-icon-barber-shop-papa
+            w4-barber-gang-papa
+            w4-suvi-the-barber-papa
+            w4-anflor-fodraszat-papa
+            w4-hajvarazs-fodrasz-papa
+            w4-spirit-hair-zalaegerszeg
+            w4-figaro-fodraszat-barber-zalaegerszeg
+            w4-hairclub-borondi-levente-zalaegerszeg
+            w4-bibor-hajszalon-zalaegerszeg
+            w4-hajhosszabbitas-fodraszat-zalaegerszeg
+          )
+          BASE='https://dschaffer2006-cmd.github.io/sch-agency-demos'
+          : > /tmp/status.txt
+          ok=0
+          for attempt in $(seq 1 16); do
+            : > /tmp/status.txt
+            bad=0
+            for s in "${SLUGS[@]}"; do
+              code=$(curl -L -sS -o /tmp/body.html --max-time 20 -w '%{http_code}' "$BASE/$s/" || echo 000)
+              echo "$code $BASE/$s/" | tee -a /tmp/status.txt
+              if [ "$code" != '200' ]; then bad=$((bad+1)); fi
+            done
+            if [ "$bad" -eq 0 ]; then ok=1; break; fi
+            echo "Attempt $attempt: $bad routes not live yet; waiting 20s..."
+            sleep 20
+          done
+          cat /tmp/status.txt
+          cp /tmp/status.txt worker4-public-pages-status.txt
+          if [ "$ok" -ne 1 ]; then
+            echo 'One or more Worker 4 public Pages routes still failed.'
+            exit 1
+          fi
+          echo 'WORKER4_PUBLIC_PAGES_OK 20/20'
+
+      - name: Commit successful public status report
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add worker4-public-pages-status.txt
+          git diff --cached --quiet || (git commit -m 'Verify Worker 4 public Pages routes 20 of 20' && git push)
