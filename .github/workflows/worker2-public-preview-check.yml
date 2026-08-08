@@ -1,0 +1,51 @@
+name: Worker 2 public preview check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/worker2-public-preview-check.yml'
+      - 'worker2-preview-check-trigger.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  preview-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check all Worker 2 public preview URLs
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request, urllib.error, time
+          slugs=['aracsi-szepitok-balatonfured','euphoria-beauty-med-balatonfured','pure-white-beauty-balatonfured','agi-kozmetika-balatonfured','minnie-fodraszat-balatonfured','balassa-szalon-siofok','fellai-barber-shop-siofok','loreal-professionnel-siofok','barbershop-by-balassa-siofok','edina-fodraszat-siofok','selfie-fodraszat-siofok','szalonskicc-fodraszat-siofok','sd-beauty-project-keszthely','qubee-barbershop-keszthely','dreamhair-keszthely','pure-studio-keszthely','szipi-barbershop-keszthely','gold-hajstudio-keszthely','borbely-cafe-keszthely','dorka-fodrasza-keszthely']
+          base='https://dschaffer2006-cmd.github.io/sch-agency-demos/'
+          out=[]
+          for slug in slugs:
+            url=base+slug+'/preview-mobile.png'
+            code=None; ctype=''; err=''
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                code=r.getcode(); ctype=r.headers.get('Content-Type','')
+            except urllib.error.HTTPError as e:
+              code=e.code; err=str(e)
+            except Exception as e: err=str(e)
+            ok=(code==200 and ctype.startswith('image/'))
+            out.append({'slug':slug,'url':url,'status':code,'content_type':ctype,'error':err,'ok':ok})
+            print(slug,code,ctype)
+          report={'checked_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'passed':sum(x['ok'] for x in out),'failed':sum(not x['ok'] for x in out),'items':out}
+          open('worker2-public-preview-report.json','w',encoding='utf-8').write(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - name: Commit preview URL report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add worker2-public-preview-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Worker 2 public preview URL report'
+            git pull --rebase origin main || true
+            git push
+          fi
