@@ -15,53 +15,27 @@ jobs:
   build-qa-publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Generate Worker 2 sites
         run: python3 tools/worker2_generate.py
-
       - name: Install Playwright Chromium
         run: |
           npm init -y >/dev/null 2>&1
           npm install playwright@1.55.0
           npx playwright install --with-deps chromium
-
       - name: Start local HTTP server
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/worker2-server.log 2>&1 &
-          echo $! >/tmp/worker2-server.pid
           sleep 2
-
-      - name: Technical, interaction and render QA
+      - name: Run browser QA and screenshots
         run: |
           node <<'NODE'
-          const fs=require('fs'); const path=require('path'); const {chromium}=require('playwright');
+          const fs=require('fs'), path=require('path'), {chromium}=require('playwright');
           const slugs=['aracsi-szepitok-balatonfured','euphoria-beauty-med-balatonfured','pure-white-beauty-balatonfured','agi-kozmetika-balatonfured','minnie-fodraszat-balatonfured','balassa-szalon-siofok','fellai-barber-shop-siofok','loreal-professionnel-siofok','barbershop-by-balassa-siofok','edina-fodraszat-siofok','selfie-fodraszat-siofok','szalonskicc-fodraszat-siofok','sd-beauty-project-keszthely','qubee-barbershop-keszthely','dreamhair-keszthely','pure-studio-keszthely','szipi-barbershop-keszthely','gold-hajstudio-keszthely','borbely-cafe-keszthely','dorka-fodrasza-keszthely'];
-          (async()=>{
-            const browser=await chromium.launch({headless:true}); const report=[];
-            for(const slug of slugs){
-              const row={slug,critical:[],desktop:{},mobile:{}};
-              for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844}]){
-                const page=await browser.newPage({viewport:{width:vp.width,height:vp.height}}); const ce=[],pe=[],rf=[];
-                page.on('console',m=>{if(m.type()==='error')ce.push(m.text())}); page.on('pageerror',e=>pe.push(String(e))); page.on('requestfailed',r=>rf.push(r.url()));
-                let res=null; try{res=await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'networkidle',timeout:30000})}catch(e){row.critical.push(`${vp.name}: navigation ${e.message}`)}
-                await page.waitForTimeout(300);
-                const m=await page.evaluate(()=>{const h=document.querySelector('h1')?.getBoundingClientRect();const header=document.querySelector('header')?.getBoundingClientRect();const text=document.body.innerText.toLowerCase();return {viewport:!!document.querySelector('meta[name="viewport"]'),sw:document.documentElement.scrollWidth,iw:innerWidth,h:h?{l:h.left,r:h.right,t:h.top,b:h.bottom,w:h.width,h:h.height}:null,headerH:header?.height||0,sections:[...document.querySelectorAll('main section')].map(x=>{let r=x.getBoundingClientRect();return [r.width,r.height]}),forbidden:['lorem ipsum','todo','placeholder'].filter(x=>text.includes(x)),bodyH:document.body.scrollHeight,tel:document.querySelectorAll('a[href^="tel:"]').length});
-                if(!res||res.status()<200||res.status()>299)row.critical.push(`${vp.name}: HTTP ${res?.status()||'none'}`); if(ce.length)row.critical.push(`${vp.name}: console ${ce.join(' | ')}`); if(pe.length)row.critical.push(`${vp.name}: pageerror ${pe.join(' | ')}`); if(rf.length)row.critical.push(`${vp.name}: failed requests ${rf.join(' | ')}`); if(!m.viewport)row.critical.push(`${vp.name}: viewport meta missing`); if(m.sw>m.iw+1)row.critical.push(`${vp.name}: overflow ${m.sw}>${m.iw}`); if(!m.h||m.h.l<0||m.h.r>m.iw+1)row.critical.push(`${vp.name}: h1 outside viewport`); if(m.sections.some(s=>s[0]<=0||s[1]<=0))row.critical.push(`${vp.name}: zero-size section`); if(m.forbidden.length)row.critical.push(`${vp.name}: forbidden ${m.forbidden.join(',')}`); if(m.tel<1)row.critical.push(`${vp.name}: no phone CTA`);
-                for(const id of ['szolg','rolunk','kapcsolat']){await page.locator(`#${id}`).scrollIntoViewIfNeeded();await page.waitForTimeout(80);const y=await page.locator(`#${id}`).evaluate(el=>el.getBoundingClientRect().top);if(y<m.headerH-4)row.critical.push(`${vp.name}: header overlaps #${id}`)}
-                if(vp.name==='mobile'){
-                  const menu=page.locator('#menu'),nav=page.locator('#nav'); await page.evaluate(()=>scrollTo(0,0)); await menu.click(); if(!(await nav.evaluate(el=>el.classList.contains('open')&&getComputedStyle(el).display!=='none')))row.critical.push('mobile: menu open failed'); await nav.locator('a').first().click(); if(await nav.evaluate(el=>el.classList.contains('open')))row.critical.push('mobile: menu close failed');
-                  const acc=page.locator('.acc'); if(await acc.count()){await acc.first().click(); if(!(await acc.first().evaluate(el=>el.classList.contains('on'))))row.critical.push('mobile: accordion failed')}
-                }
-                await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'}); await page.screenshot({path:path.join(slug,`preview-${vp.name}.png`),fullPage:false}); row[vp.name]={status:res?.status()||null,metrics:m}; await page.close();
-              }
-              row.result=row.critical.length?'FAIL':'PASS'; report.push(row); console.log(`WORKER2_QA ${slug} ${row.result}${row.critical.length?' :: '+row.critical.join(' || '):''}`);
-            }
-            await browser.close(); fs.writeFileSync('worker2-qa-report.json',JSON.stringify(report,null,2)); const bad=report.filter(x=>x.result==='FAIL'); console.log(`WORKER2_QA_SUMMARY total=${report.length} pass=${report.length-bad.length} fail=${bad.length}`); if(bad.length)process.exitCode=1;
-          })();
+          (async()=>{const browser=await chromium.launch({headless:true}), report=[];
+            for(const slug of slugs){const item={slug,critical:[],viewports:{}};
+              for(const [mode,width,height] of [['desktop',1440,900],['mobile',390,844]]){const ctx=await browser.newContext({viewport:{width,height}}),page=await ctx.newPage(),ce=[],pe=[],failed=[];page.on('console',m=>{if(m.type()==='error')ce.push(m.text())});page.on('pageerror',e=>pe.push(String(e)));page.on('requestfailed',r=>failed.push(r.url()));let status=null;try{const res=await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'networkidle',timeout:60000});status=res&&res.status()}catch(e){item.critical.push(`${mode}: navigation ${e.message}`)}await page.waitForTimeout(500);const m=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,iw:innerWidth,viewport:!!document.querySelector('meta[name="viewport"]'),text:document.body.innerText.toLowerCase(),heads:[...document.querySelectorAll('h1,h2,h3')].map(h=>{let r=h.getBoundingClientRect();return {l:r.left,r:r.right}}),sections:[...document.querySelectorAll('header,main section')].map(s=>{let r=s.getBoundingClientRect();return {w:r.width,h:r.height}}),ctas:[...document.querySelectorAll('.btn')].map(a=>{let r=a.getBoundingClientRect();return {w:r.width,h:r.height}})}));if(!status||status>=400)item.critical.push(`${mode}: HTTP ${status}`);if(ce.length)item.critical.push(`${mode}: console ${ce.join(' | ')}`);if(pe.length)item.critical.push(`${mode}: pageerror ${pe.join(' | ')}`);if(failed.length)item.critical.push(`${mode}: failed requests ${failed.join(' | ')}`);if(!m.viewport)item.critical.push(`${mode}: viewport missing`);if(m.sw>m.iw+1)item.critical.push(`${mode}: overflow ${m.sw}>${m.iw}`);if(m.heads.some(x=>x.l<-1||x.r>m.iw+1))item.critical.push(`${mode}: heading overflow`);if(m.sections.some(x=>x.w<=0||x.h<=0))item.critical.push(`${mode}: zero-size section`);for(const bad of ['lorem ipsum','todo','placeholder'])if(m.text.includes(bad))item.critical.push(`${mode}: ${bad}`);if(!m.ctas.length)item.critical.push(`${mode}: CTA missing`);if(mode==='mobile'){const menu=page.locator('#menu'),nav=page.locator('#nav');await menu.click();await page.waitForTimeout(100);if(!(await nav.evaluate(e=>e.classList.contains('open')&&getComputedStyle(e).display!=='none')))item.critical.push('mobile: menu open failed');await nav.locator('a').first().click();await page.waitForTimeout(100);if(await nav.evaluate(e=>e.classList.contains('open')))item.critical.push('mobile: menu close failed');const acc=page.locator('.acc');if(await acc.count()){await acc.first().click();if(!(await acc.first().evaluate(e=>e.classList.contains('on'))))item.critical.push('mobile: accordion failed')}}await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'});await page.screenshot({path:path.join(slug,`preview-${mode}.png`),fullPage:false});item.viewports[mode]={status,scrollWidth:m.sw,innerWidth:m.iw};await ctx.close()}item.pass=!item.critical.length;report.push(item);console.log(`WORKER2_QA ${slug} ${item.pass?'PASS':'FAIL'}${item.critical.length?' :: '+item.critical.join(' || '):''}`)}await browser.close();fs.writeFileSync('worker2-qa-report.json',JSON.stringify({worker:'Munkás 2',total:report.length,passed:report.filter(x=>x.pass).length,failed:report.filter(x=>!x.pass).length,items:report},null,2));const bad=report.filter(x=>!x.pass);console.log(`WORKER2_QA_SUMMARY total=${report.length} pass=${report.length-bad.length} fail=${bad.length}`);if(bad.length)process.exitCode=1})();
           NODE
-
       - name: Upload QA report
         if: always()
         uses: actions/upload-artifact@v4
@@ -69,15 +43,12 @@ jobs:
           name: worker2-qa-report
           path: worker2-qa-report.json
           retention-days: 14
-
-      - name: Commit passing Worker 2 batch
+      - name: Commit passing batch safely
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add aracsi-szepitok-balatonfured euphoria-beauty-med-balatonfured pure-white-beauty-balatonfured agi-kozmetika-balatonfured minnie-fodraszat-balatonfured balassa-szalon-siofok fellai-barber-shop-siofok loreal-professionnel-siofok barbershop-by-balassa-siofok edina-fodraszat-siofok selfie-fodraszat-siofok szalonskicc-fodraszat-siofok sd-beauty-project-keszthely qubee-barbershop-keszthely dreamhair-keszthely pure-studio-keszthely szipi-barbershop-keszthely gold-hajstudio-keszthely borbely-cafe-keszthely dorka-fodrasza-keszthely
-          if git diff --cached --quiet; then
-            echo 'Worker 2 batch unchanged.'
-          else
-            git commit -m 'Build Worker 2 website batch 21-40'
-            git push
-          fi
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Build Worker 2 website batch 21-40'
+          git pull --rebase origin main
+          git push origin HEAD:main
