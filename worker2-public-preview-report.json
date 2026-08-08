@@ -1,0 +1,167 @@
+{
+  "checked_at": "2026-08-08T18:35:34Z",
+  "passed": 20,
+  "failed": 0,
+  "items": [
+    {
+      "slug": "aracsi-szepitok-balatonfured",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aracsi-szepitok-balatonfured/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "euphoria-beauty-med-balatonfured",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/euphoria-beauty-med-balatonfured/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "pure-white-beauty-balatonfured",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pure-white-beauty-balatonfured/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "agi-kozmetika-balatonfured",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/agi-kozmetika-balatonfured/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "minnie-fodraszat-balatonfured",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/minnie-fodraszat-balatonfured/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "balassa-szalon-siofok",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/balassa-szalon-siofok/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "fellai-barber-shop-siofok",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fellai-barber-shop-siofok/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "loreal-professionnel-siofok",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/loreal-professionnel-siofok/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "barbershop-by-balassa-siofok",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barbershop-by-balassa-siofok/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "edina-fodraszat-siofok",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/edina-fodraszat-siofok/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "selfie-fodraszat-siofok",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/selfie-fodraszat-siofok/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "szalonskicc-fodraszat-siofok",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szalonskicc-fodraszat-siofok/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "sd-beauty-project-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/sd-beauty-project-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "qubee-barbershop-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/qubee-barbershop-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "dreamhair-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dreamhair-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "pure-studio-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pure-studio-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "szipi-barbershop-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szipi-barbershop-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "gold-hajstudio-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gold-hajstudio-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "borbely-cafe-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/borbely-cafe-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    },
+    {
+      "slug": "dorka-fodrasza-keszthely",
+      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dorka-fodrasza-keszthely/preview-mobile.png",
+      "status": 200,
+      "content_type": "image/png",
+      "error": "",
+      "ok": true
+    }
+  ]
+}
