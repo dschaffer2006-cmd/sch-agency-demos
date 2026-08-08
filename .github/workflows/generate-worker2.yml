@@ -1,0 +1,32 @@
+name: Generate Worker 2 demos
+
+on:
+  push:
+    paths:
+      - 'tools/worker2_generate.py'
+      - '.github/workflows/generate-worker2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate Worker 2 demo sites
+        run: python3 tools/worker2_generate.py
+      - name: Commit generated sites safely
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add aracsi-szepitok-balatonfured euphoria-beauty-med-balatonfured pure-white-beauty-balatonfured agi-kozmetika-balatonfured minnie-fodraszat-balatonfured balassa-szalon-siofok fellai-barber-shop-siofok loreal-professionnel-siofok barbershop-by-balassa-siofok edina-fodraszat-siofok selfie-fodraszat-siofok szalonskicc-fodraszat-siofok sd-beauty-project-keszthely qubee-barbershop-keszthely dreamhair-keszthely pure-studio-keszthely szipi-barbershop-keszthely gold-hajstudio-keszthely borbely-cafe-keszthely dorka-fodrasza-keszthely
+          if git diff --cached --quiet; then
+            echo 'Worker 2 demos unchanged.'
+          else
+            git commit -m 'Generate Worker 2 demo sites'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
