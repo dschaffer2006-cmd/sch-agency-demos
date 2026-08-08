@@ -6,6 +6,11 @@ on:
     paths:
       - 'tools/worker5_generate.py'
       - '.github/workflows/worker5-batch.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/worker5_generate.py'
+      - '.github/workflows/worker5-batch.yml'
   workflow_dispatch:
 
 permissions:
@@ -16,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Generate Worker 5 sites
         run: python3 tools/worker5_generate.py
       - name: Install Playwright Chromium
@@ -40,10 +47,11 @@ jobs:
                 const page=await browser.newPage({viewport:{width:vp.width,height:vp.height}}), ce=[], pe=[], rf=[];
                 page.on('console',m=>{if(m.type()==='error')ce.push(m.text())}); page.on('pageerror',e=>pe.push(String(e))); page.on('requestfailed',r=>rf.push(r.url()));
                 let res=null; try{res=await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'networkidle',timeout:30000})}catch(e){row.critical.push(`${vp.name}: navigation ${e.message}`)}
-                const m=await page.evaluate(()=>{const h=document.querySelector('h1')?.getBoundingClientRect(), text=document.body.innerText.toLowerCase(); return {viewport:!!document.querySelector('meta[name="viewport"]'),sw:document.documentElement.scrollWidth,iw:innerWidth,h:h?{l:h.left,r:h.right}:null,sections:[...document.querySelectorAll('main section')].map(x=>{let r=x.getBoundingClientRect();return [r.width,r.height]}),forbidden:['lorem ipsum','todo','placeholder'].filter(x=>text.includes(x)),tel:document.querySelectorAll('a[href^="tel:"]').length}});
+                const m=await page.evaluate(()=>{const h=document.querySelector('h1')?.getBoundingClientRect(), header=document.querySelector('header')?.getBoundingClientRect(), text=document.body.innerText.toLowerCase(); return {viewport:!!document.querySelector('meta[name="viewport"]'),sw:document.documentElement.scrollWidth,iw:innerWidth,h:h?{l:h.left,r:h.right}:null,headerH:header?.height||0,sections:[...document.querySelectorAll('main section')].map(x=>{let r=x.getBoundingClientRect();return [r.width,r.height]}),forbidden:['lorem ipsum','todo','placeholder'].filter(x=>text.includes(x)),tel:document.querySelectorAll('a[href^="tel:"]').length}});
                 if(!res||res.status()<200||res.status()>299)row.critical.push(`${vp.name}: HTTP ${res?.status()||'none'}`); if(ce.length)row.critical.push(`${vp.name}: console ${ce.join(' | ')}`); if(pe.length)row.critical.push(`${vp.name}: pageerror ${pe.join(' | ')}`); if(rf.length)row.critical.push(`${vp.name}: failed requests ${rf.join(' | ')}`); if(!m.viewport)row.critical.push(`${vp.name}: viewport missing`); if(m.sw>m.iw+1)row.critical.push(`${vp.name}: overflow ${m.sw}>${m.iw}`); if(!m.h||m.h.l<0||m.h.r>m.iw+1)row.critical.push(`${vp.name}: h1 outside viewport`); if(m.sections.some(s=>s[0]<=0||s[1]<=0))row.critical.push(`${vp.name}: zero-size section`); if(m.forbidden.length)row.critical.push(`${vp.name}: forbidden ${m.forbidden.join(',')}`); if(m.tel<1)row.critical.push(`${vp.name}: no phone CTA`);
-                if(vp.name==='mobile'){const menu=page.locator('#menu'),nav=page.locator('#nav'); await menu.click(); if(!(await nav.evaluate(el=>el.classList.contains('open')&&getComputedStyle(el).display!=='none')))row.critical.push('mobile: menu open failed'); await nav.locator('a').first().click(); if(await nav.evaluate(el=>el.classList.contains('open')))row.critical.push('mobile: menu close failed')}
-                await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'}); await page.screenshot({path:path.join(slug,`preview-${vp.name}.png`),fullPage:false}); row[vp.name]={status:res?.status()||null,metrics:m}; await page.close();
+                for(const id of ['szolg','kapcsolat']){await page.locator(`#${id}`).scrollIntoViewIfNeeded(); await page.waitForTimeout(80); const y=await page.locator(`#${id}`).evaluate(el=>el.getBoundingClientRect().top); if(y<m.headerH-4)row.critical.push(`${vp.name}: header overlap #${id}`)}
+                if(vp.name==='mobile'){const menu=page.locator('#menu'),nav=page.locator('#nav'); await page.evaluate(()=>scrollTo(0,0)); await menu.click(); if(!(await nav.evaluate(el=>el.classList.contains('open')&&getComputedStyle(el).display!=='none')))row.critical.push('mobile: menu open failed'); await nav.locator('a').first().click(); if(await nav.evaluate(el=>el.classList.contains('open')))row.critical.push('mobile: menu close failed')}
+                await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'}); await page.screenshot({path:path.join(slug,`preview-${vp.name}.png`),fullPage:false}); await page.screenshot({path:path.join(slug,`${vp.name}-full.png`),fullPage:true}); row[vp.name]={status:res?.status()||null,metrics:m}; await page.close();
               }
               row.result=row.critical.length?'FAIL':'PASS'; report.push(row); console.log(`WORKER5_QA ${slug} ${row.result}${row.critical.length?' :: '+row.critical.join(' || '):''}`);
             }
@@ -62,4 +70,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add viki-hair-zalaegerszeg dorka-fodrasza-egerszeg orchidea-szepsegszalon-zalaegerszeg ls-hair-studio-zalaegerszeg hairstyles-by-mimi gabi-mesterfodrasz-hajorvos-nagykanizsa kreativ-hajstudio-nagykanizsa prestige-szepsegszalon-nagykanizsa bella-fodraszcikk-nagykanizsa torok-laura-hairdresser-nagykanizsa barber-boys-hair-salon-nagykanizsa pimpike-szepsegkucko-nagykanizsa eva-fodraszata-tapolca stilus-kozmetika-tapolca varga-andras-fodrasz-tapolca luxury-szalon-tapolca pipere-box-tapolca shiny-hair-nail-tapolca
-          git diff --cached --quiet || (git commit -m 'Build Worker 5 website batch 81-100' && git push)
+          git diff --cached --quiet || (git commit -m 'Build Worker 5 website batch 81-100' && git push origin HEAD:${{ github.head_ref || github.ref_name }})
