@@ -1,0 +1,53 @@
+name: Worker 4 isolated final QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/worker4-final-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-qa-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - name: Generate isolated Worker 4 sites
+        run: |
+          python3 tools/worker4_generate.py
+          for d in stilus-kozmetika-tapolca loreal-by-andras-tapolca luxury-szalon-tapolca pipere-box-tapolca shiny-hair-nail-tapolca charm-fodrasz-ajka hidegheti-judit-ajka classic-vibe-barber-ajka tesco-ajka-hipermarket infinity-hairstudio-papa icon-barber-shop-papa barber-gang-papa suvi-the-barber-papa anflor-fodraszat-papa hajvarazs-fodrasz-papa spirit-hair-zalaegerszeg figaro-fodraszat-barber-zalaegerszeg hairclub-borondi-levente-zalaegerszeg bibor-hajszalon-zalaegerszeg hajhosszabbitas-fodraszat-zalaegerszeg; do
+            rm -rf "w4-$d"
+            cp -R "$d" "w4-$d"
+          done
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local HTTP server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w4-final-server.log 2>&1 &
+          sleep 2
+      - name: Chromium regression QA
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),path=require('path'),{chromium}=require('playwright');
+          const base=['stilus-kozmetika-tapolca','loreal-by-andras-tapolca','luxury-szalon-tapolca','pipere-box-tapolca','shiny-hair-nail-tapolca','charm-fodrasz-ajka','hidegheti-judit-ajka','classic-vibe-barber-ajka','tesco-ajka-hipermarket','infinity-hairstudio-papa','icon-barber-shop-papa','barber-gang-papa','suvi-the-barber-papa','anflor-fodraszat-papa','hajvarazs-fodrasz-papa','spirit-hair-zalaegerszeg','figaro-fodraszat-barber-zalaegerszeg','hairclub-borondi-levente-zalaegerszeg','bibor-hajszalon-zalaegerszeg','hajhosszabbitas-fodraszat-zalaegerszeg']; const slugs=base.map(x=>'w4-'+x);
+          (async()=>{const browser=await chromium.launch({headless:true}),report=[];
+          for(const slug of slugs){const row={slug,critical:[],desktop:{},mobile:{}};
+            for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844}]){const page=await browser.newPage({viewport:{width:vp.width,height:vp.height}}),ce=[],pe=[],rf=[],he=[];page.on('console',m=>m.type()==='error'&&ce.push(m.text()));page.on('pageerror',e=>pe.push(String(e)));page.on('requestfailed',r=>rf.push(r.url()));page.on('response',r=>r.status()>=400&&he.push(`${r.status()} ${r.url()}`));let res=null;try{res=await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'networkidle',timeout:30000})}catch(e){row.critical.push(`${vp.name}: navigation ${e.message}`)};await page.waitForTimeout(200);
+              const m=await page.evaluate(()=>{const h=document.querySelector('h1')?.getBoundingClientRect(),txt=document.body.innerText.toLowerCase();return{viewport:!!document.querySelector('meta[name="viewport"]'),sw:document.documentElement.scrollWidth,iw:innerWidth,h:h?{l:h.left,r:h.right}:null,sections:[...document.querySelectorAll('main section')].map(x=>{const r=x.getBoundingClientRect();return[r.width,r.height]}),forbidden:['lorem ipsum','todo','placeholder'].filter(x=>txt.includes(x)),tel:document.querySelectorAll('a[href^="tel:"]').length}});if(!res||res.status()<200||res.status()>299)row.critical.push(`${vp.name}: HTTP ${res?.status()||'none'}`);if(ce.length)row.critical.push(`${vp.name}: console ${ce.join('|')}`);if(pe.length)row.critical.push(`${vp.name}: pageerror ${pe.join('|')}`);if(rf.length)row.critical.push(`${vp.name}: failed ${rf.join('|')}`);if(he.length)row.critical.push(`${vp.name}: http error ${he.join('|')}`);if(!m.viewport)row.critical.push(`${vp.name}: viewport missing`);if(m.sw>m.iw+1)row.critical.push(`${vp.name}: overflow ${m.sw}>${m.iw}`);if(!m.h||m.h.l<0||m.h.r>m.iw+1)row.critical.push(`${vp.name}: h1 overflow`);if(m.sections.some(s=>s[0]<=0||s[1]<=0))row.critical.push(`${vp.name}: zero section`);if(m.forbidden.length)row.critical.push(`${vp.name}: forbidden ${m.forbidden.join(',')}`);if(m.tel<1)row.critical.push(`${vp.name}: no tel CTA`);
+              const headerH=await page.locator('header').evaluate(el=>el.getBoundingClientRect().height);for(const id of ['rolunk','szolg','kapcsolat']){await page.evaluate(id=>location.hash=id,id);await page.waitForTimeout(120);const y=await page.locator(`#${id} h2`).first().evaluate(el=>el.getBoundingClientRect().top);if(y<headerH-4)row.critical.push(`${vp.name}: header covers #${id} heading`)}
+              if(vp.name==='mobile'){await page.evaluate(()=>{location.hash='';scrollTo(0,0)});const menu=page.locator('#menu'),nav=page.locator('#nav');await menu.click();if(!(await nav.evaluate(el=>el.classList.contains('open')&&getComputedStyle(el).display!=='none')))row.critical.push('mobile: menu open failed');await page.screenshot({path:path.join(slug,'mobile-menu-open.png')});await nav.locator('a').first().click();if(await nav.evaluate(el=>el.classList.contains('open')))row.critical.push('mobile: menu close failed')}
+              await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'});await page.screenshot({path:path.join(slug,`preview-${vp.name}.png`)});await page.screenshot({path:path.join(slug,`${vp.name}-full.png`),fullPage:true});row[vp.name]={status:res?.status()||null,metrics:m};await page.close()}
+            row.result=row.critical.length?'FAIL':'PASS';report.push(row);console.log(`WORKER4_FINAL_QA ${slug} ${row.result}${row.critical.length?' :: '+row.critical.join(' || '):''}`)}await browser.close();fs.writeFileSync('worker4-final-qa-report.json',JSON.stringify(report,null,2));const bad=report.filter(x=>x.result==='FAIL');console.log(`WORKER4_FINAL_QA_SUMMARY total=${report.length} pass=${report.length-bad.length} fail=${bad.length}`);if(bad.length)process.exitCode=1})();
+          NODE
+      - name: Commit passing isolated batch
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add w4-* worker4-final-qa-report.json
+          git diff --cached --quiet || (git commit -m 'Publish isolated Worker 4 batch 61-80' && git push origin HEAD:${{ github.head_ref || github.ref_name }})
