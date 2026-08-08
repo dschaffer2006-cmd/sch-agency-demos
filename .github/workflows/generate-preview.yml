@@ -1,10 +1,6 @@
 name: Generate demo previews
 
 on:
-  push:
-    paths:
-      - '**/index.html'
-      - '.github/workflows/generate-preview.yml'
   workflow_dispatch:
 
 permissions:
@@ -57,14 +53,10 @@ jobs:
                 console.log(`Network idle timeout for ${folder}; capturing current render.`);
               }
               await page.waitForTimeout(3500);
-              await page.screenshot({
-                path: path.join(folder, 'preview-mobile.png'),
-                fullPage: false
-              });
+              await page.screenshot({ path: path.join(folder, 'preview-mobile.png'), fullPage: false });
               await page.close();
               console.log(`Preview generated: ${folder}`);
             }
-
             await browser.close();
           })();
           NODE
