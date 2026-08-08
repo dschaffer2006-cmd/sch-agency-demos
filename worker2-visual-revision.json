@@ -1,0 +1,106 @@
+{
+  "passed": 20,
+  "failed": 0,
+  "items": [
+    {
+      "slug": "aracsi-szepitok-balatonfured",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "euphoria-beauty-med-balatonfured",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "pure-white-beauty-balatonfured",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "agi-kozmetika-balatonfured",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "minnie-fodraszat-balatonfured",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "balassa-szalon-siofok",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "fellai-barber-shop-siofok",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "loreal-professionnel-siofok",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "barbershop-by-balassa-siofok",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "edina-fodraszat-siofok",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "selfie-fodraszat-siofok",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "szalonskicc-fodraszat-siofok",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "sd-beauty-project-keszthely",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "qubee-barbershop-keszthely",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "dreamhair-keszthely",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "pure-studio-keszthely",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "szipi-barbershop-keszthely",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "gold-hajstudio-keszthely",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "borbely-cafe-keszthely",
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "dorka-fodrasza-keszthely",
+      "errors": [],
+      "pass": true
+    }
+  ]
+}
