@@ -1,0 +1,85 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hajpresszó Borbély Szalon — Paks</title><!--
+Interaction patterns adapted from robonuggets/cinematic-site-components
+Copyright (c) 2026 Jay from RoboLabs — MIT License
+https://github.com/robonuggets/cinematic-site-components
+Patterns used across this prototype batch: Text Mask Reveal, Sticky Card Stack, Horizontal Scroll Hijack, Kinetic Marquee.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171311;--paper:#f1eadf;--red:#a73326;--tan:#c6a77c;--line:rgba(241,234,223,.16)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ink);color:var(--paper);font-family:Inter,sans-serif}a{color:inherit;text-decoration:none}.nav{position:fixed;z-index:30;left:20px;right:20px;top:18px;display:flex;justify-content:space-between;align-items:center;padding:12px 14px 12px 18px;background:rgba(23,19,17,.83);border:1px solid var(--line);backdrop-filter:blur(14px)}.logo{font-family:'Archivo Black';text-transform:uppercase;letter-spacing:-.03em}.nav-links{display:flex;gap:20px;align-items:center;font-size:13px}.book{background:var(--red);padding:10px 14px;font-weight:700}.nav-toggle{display:none;border:0;background:none;color:white;font-size:22px}.hero{min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;position:relative;overflow:hidden}.hero-copy{padding:140px 6vw 70px;display:flex;flex-direction:column;justify-content:center}.eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tan);margin-bottom:22px}h1,h2,h3,p{margin-top:0}h1{font-family:'Archivo Black';font-size:clamp(62px,9vw,138px);line-height:.82;letter-spacing:-.07em;text-transform:uppercase;margin-bottom:28px}h1 span{color:var(--red)}.hero-copy p{max-width:620px;font-size:18px;line-height:1.7;color:#c7bbb0}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{padding:13px 17px;border:1px solid #65594f;font-weight:700}.btn.primary{background:var(--red);border-color:var(--red)}.hero-media{position:relative;min-height:100svh}.hero-media:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--ink),transparent 38%),linear-gradient(0deg,rgba(23,19,17,.5),transparent 45%)}.hero-media img{width:100%;height:100%;object-fit:cover;filter:sepia(.25) saturate(.8) contrast(1.05)}.stamp{position:absolute;z-index:2;right:28px;bottom:28px;border:2px solid var(--paper);width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:'IBM Plex Mono';font-size:12px;transform:rotate(8deg)}.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 0;background:#211b18}.marquee-track{display:flex;width:max-content;white-space:nowrap;gap:38px;font-family:'Archivo Black';font-size:21px;text-transform:uppercase;color:var(--tan)}.section{padding:110px 6vw}.story{display:grid;grid-template-columns:.65fr 1.35fr;gap:60px}.story h2,.services h2,.quote h2{font-family:'Archivo Black';font-size:clamp(44px,6vw,90px);line-height:.9;text-transform:uppercase;letter-spacing:-.05em}.story p{font-size:19px;line-height:1.8;color:#bdb2a9;max-width:800px}.services{background:var(--paper);color:var(--ink)}.services-head{display:flex;justify-content:space-between;gap:30px;align-items:end}.services-head p{max-width:470px;line-height:1.7;color:#655c55}.sticky-card{position:sticky;top:92px;min-height:290px;background:var(--paper);border-top:1px solid rgba(23,19,17,.18);display:grid;grid-template-columns:100px 1fr 1fr;gap:34px;padding:42px 0}.sticky-card .num{font-family:'IBM Plex Mono';color:var(--red)}.sticky-card h3{font-family:'Archivo Black';font-size:clamp(34px,4vw,60px);text-transform:uppercase;letter-spacing:-.04em}.sticky-card p{line-height:1.7;color:#625952}.visual{background:#211b18;padding:86px max(18px,5vw);overflow:hidden}.visual-shell{position:relative;max-width:1180px;margin:auto}.visual-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:30px}.visual-head h2{font-family:'Archivo Black';font-size:clamp(38px,5vw,72px);line-height:.92;text-transform:uppercase;margin:0}.visual-head p{max-width:430px;color:#bcaea3;line-height:1.65}.visual-stage{height:720px;position:relative}.visual-item{position:absolute;overflow:hidden;border:1px solid rgba(241,222,196,.18);background:#181310;cursor:pointer;box-shadow:0 24px 60px rgba(0,0,0,.28);will-change:left,top,width,height,transform}.visual-item img{width:100%;height:100%;object-fit:cover;transition:filter .35s ease}.visual-item:hover img{filter:contrast(1.07) saturate(1.08)}.visual-caption{position:absolute;left:14px;bottom:14px;background:rgba(23,19,17,.82);backdrop-filter:blur(8px);padding:8px 10px;font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;letter-spacing:.08em}.visual-arrow{position:absolute;z-index:30;top:50%;transform:translateY(-50%);width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(23,19,17,.92);color:var(--paper);font-size:28px;cursor:pointer;display:grid;place-items:center}.visual-arrow.prev{left:-26px}.visual-arrow.next{right:-26px}.visual-arrow:hover{background:var(--red)}.quote{text-align:center;padding:140px 7vw;background:var(--red)}.quote h2{max-width:1100px;margin:0 auto 25px}.quote p{font-family:'IBM Plex Mono';text-transform:uppercase;letter-spacing:.12em}.contact{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end}.contact-card{border:1px solid var(--line);padding:34px}.contact-card p{line-height:1.9;color:#c9bdb3}@media(max-width:760px){.nav{left:10px;right:10px;top:10px}.nav-toggle{display:block}.nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:#1b1715;padding:18px;flex-direction:column;align-items:stretch}.nav-links.open{display:flex}.hero{grid-template-columns:1fr}.hero-copy{min-height:78svh;padding:120px 22px 45px}h1{font-size:61px}.hero-media{min-height:62svh}.section{padding:80px 20px}.story,.contact{grid-template-columns:1fr;gap:22px}.services-head{display:block}.sticky-card{grid-template-columns:50px 1fr;gap:14px}.sticky-card p{grid-column:2}.visual{padding:70px 12px}.visual-head{display:block}.visual-stage{height:610px}.visual-arrow{width:48px;height:48px;font-size:24px}.visual-arrow.prev{left:2px}.visual-arrow.next{right:2px}.quote{padding:100px 22px}}
+</style></head><body>
+<nav class="nav"><div class="logo">Hajpresszó</div><button class="nav-toggle">☰</button><div class="nav-links"><a href="#sztori">A szalon</a><a href="#szolgaltatas">Szolgáltatások</a><a href="#kapcsolat">Kapcsolat</a><a class="book" href="tel:+36707019312">Időpont</a></div></nav>
+<header class="hero"><div class="hero-copy"><div class="eyebrow">Paks • Akác utca 5.</div><h1>Haj<span>presszó</span></h1><p>Dági Brigitta Szofia borbélyszalonja: személyes figyelem, precíz munka és egy olyan hely, ahová a vendégek nem csak egy hajvágás miatt térnek vissza.</p><div class="hero-actions"><a class="btn primary" href="tel:+36707019312">Hívás / időpont</a><a class="btn" href="#szolgaltatas">Szolgáltatások</a></div></div><div class="hero-media"><img src="https://6688219a48.cbaul-cdnwnd.com/42352bc32a871a05046e5c8a0025991d/200000007-1a2ef1b29a/barbershop.jpg?ph=6688219a48" alt="Hajpresszó Borbély Szalon"><div class="stamp">PAKS<br>BARBER<br>AKÁC U. 5.</div></div></header>
+<div class="marquee"><div class="marquee-track"><span>férfi hajvágás</span><span>•</span><span>szakáll</span><span>•</span><span>haj + szakáll</span><span>•</span><span>fejmasszázs</span><span>•</span><span>női hajvágás</span><span>•</span></div></div>
+<section id="sztori" class="section story"><div class="eyebrow">A szalon mögött</div><div><h2 data-reveal>Gyerekkori tervből saját szalon.</h2><p data-reveal>Dági Brigitta Szofia már fiatalon a fodrász szakma felé indult. Saját vendégkört épített, évekig dolgozott Dunaharasztin, majd Pakson is gyorsan kialakult egy stabil, visszatérő közönség.</p><p data-reveal>Az időpontok előzetes egyeztetéssel működnek — a szalon nem a gyors „beugrós” rendszerre, hanem a személyes vendégidőre épít.</p></div></section>
+<section id="szolgaltatas" class="section services"><div class="services-head"><h2 data-reveal>Klasszikus alapok. Saját karakter.</h2><p data-reveal>A jelenlegi kínálat férfi és női hajszolgáltatásokat, szakállkezelést és kiegészítő élményeket is tartalmaz.</p></div><div class="sticky-card"><div class="num">01</div><h3>Férfi hajvágás</h3><p>Precíz forma, személyre szabott fazon és olyan végeredmény, ami a következő hetekben is működik.</p></div><div class="sticky-card"><div class="num">02</div><h3>Szakáll</h3><p>Igazítás, formázás és szakállfestési lehetőség az összképhez igazítva.</p></div><div class="sticky-card"><div class="num">03</div><h3>Haj + szakáll</h3><p>Komplett frissítés egy alkalommal — azoknak, akik egységes, rendezett megjelenést szeretnének.</p></div><div class="sticky-card"><div class="num">04</div><h3>Női haj</h3><p>Vágás, szárítás és formázás több hajhosszra, előzetes időpont-egyeztetéssel.</p></div></section>
+<section class="visual"><div class="visual-shell" data-scatter-gallery><div class="visual-head"><div><div class="eyebrow">Galéria</div><h2>Nem sorban. Karakterben.</h2></div><p>A képek egy lazább, egymásra épülő galériában mozognak. Vidd föléjük az egeret, vagy lapozz a nyilakkal.</p></div><button class="visual-arrow prev" aria-label="Előző kép">←</button><div class="visual-stage"><figure class="visual-item"><img src="https://6688219a48.cbaul-cdnwnd.com/42352bc32a871a05046e5c8a0025991d/200000001-aec8aafbe6/csini.jpg?ph=6688219a48" alt="Hajpresszó munka"><figcaption class="visual-caption">01 / munka</figcaption></figure><figure class="visual-item"><img src="https://duyn491kcolsw.cloudfront.net/files/2z/2zd/2zd58o.jpg?ph=6688219a48" alt="Borbély szalon"><figcaption class="visual-caption">02 / szalon</figcaption></figure><figure class="visual-item"><img src="https://6688219a48.cbaul-cdnwnd.com/42352bc32a871a05046e5c8a0025991d/200000008-e0cf9e1cc2/pirosbarber.jpg?ph=6688219a48" alt="Hajpresszó"><figcaption class="visual-caption">03 / részlet</figcaption></figure><figure class="visual-item"><img src="https://6688219a48.cbaul-cdnwnd.com/42352bc32a871a05046e5c8a0025991d/200000007-1a2ef1b29a/barbershop.jpg?ph=6688219a48" alt="Hajpresszó Borbély Szalon"><figcaption class="visual-caption">04 / barber</figcaption></figure></div><button class="visual-arrow next" aria-label="Következő kép">→</button></div></section>
+<section class="quote"><div class="eyebrow" style="color:#f1d2aa">A tükör a végén</div><h2 data-reveal>„Azt lásd benne, amit kifundáltál.”</h2><p>Hajpresszó Borbély Szalon</p></section>
+<section id="kapcsolat" class="section contact"><div><div class="eyebrow">Kapcsolat</div><h2 style="font-family:'Archivo Black';font-size:clamp(44px,6vw,88px);line-height:.9;text-transform:uppercase">Egyeztess időpontot.</h2></div><div class="contact-card"><p><b>Hajpresszó Borbély Szalon</b><br>7030 Paks, Akác utca 5.<br><br><b>Dági Brigitta Szofia</b><br><a href="tel:+36707019312">+36 70 701 9312</a><br><br>Ha telefonon nem éred el, a jelenlegi oldal alapján Messenger/Viber üzenet is javasolt.</p><a class="btn primary" href="tel:+36707019312">Hívás most</a></div></section>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll('[data-reveal]').forEach((el)=>{
+    gsap.fromTo(el,{y:34,opacity:0},{y:0,opacity:1,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}})
+  });
+  document.querySelectorAll('.sticky-card').forEach((card,i)=>{
+    gsap.to(card,{scale:1-Math.min(i*.012,.05),scrollTrigger:{trigger:card,start:'top 18%',end:'bottom top',scrub:true}})
+  });
+  document.querySelectorAll('.marquee-track').forEach(track=>{
+    track.innerHTML += track.innerHTML;
+    let x=0, speed=.45;
+    function tick(){x-=speed;if(Math.abs(x)>track.scrollWidth/2)x=0;track.style.transform=`translate3d(${x}px,0,0)`;requestAnimationFrame(tick)}tick();
+    ScrollTrigger.create({trigger:track,start:'top bottom',end:'bottom top',onUpdate:s=>speed=.4+Math.min(Math.abs(s.getVelocity())/1600,2.2)});
+  });
+  document.querySelectorAll('.h-section').forEach(section=>{
+    const track=section.querySelector('.h-track');
+    if(!track)return;
+    const mm=gsap.matchMedia();
+    mm.add('(min-width: 761px)',()=>{
+      const getX=()=>Math.max(0,track.scrollWidth-window.innerWidth);
+      gsap.to(track,{x:()=>-getX(),ease:'none',scrollTrigger:{trigger:section,start:'top top',end:()=>'+='+getX(),pin:true,scrub:1,invalidateOnRefresh:true}})
+    });
+  });
+
+  document.querySelectorAll('[data-scatter-gallery]').forEach((gallery)=>{
+    const stage=gallery.querySelector('.visual-stage');
+    const items=[...gallery.querySelectorAll('.visual-item')];
+    let active=0, busy=false;
+    const desktopSlots=[
+      {left:'2%',top:'10%',width:'57%',height:'78%',rotation:-1,zIndex:6},
+      {left:'63%',top:'0%',width:'34%',height:'44%',rotation:2,zIndex:4},
+      {left:'66%',top:'55%',width:'31%',height:'39%',rotation:-2,zIndex:3},
+      {left:'40%',top:'32%',width:'31%',height:'49%',rotation:3,zIndex:2}
+    ];
+    const mobileSlots=[
+      {left:'5%',top:'7%',width:'82%',height:'66%',rotation:-1,zIndex:6},
+      {left:'58%',top:'0%',width:'38%',height:'31%',rotation:2,zIndex:4},
+      {left:'57%',top:'68%',width:'38%',height:'29%',rotation:-2,zIndex:3},
+      {left:'3%',top:'73%',width:'46%',height:'24%',rotation:2,zIndex:2}
+    ];
+    const slots=()=>innerWidth<=760?mobileSlots:desktopSlots;
+    function layout(animate=true,dir=1){
+      const sl=slots();
+      items.forEach((item,i)=>{
+        const pos=sl[(i-active+items.length)%items.length];
+        gsap.to(item,{...pos,scale:1,xPercent:0,opacity:1,duration:animate?.72:0,ease:'power3.inOut',overwrite:true});
+      });
+      const focus=items[active];
+      if(animate) gsap.fromTo(focus,{xPercent:dir>0?22:-22},{xPercent:0,duration:.72,ease:'power3.out'});
+    }
+    function go(dir){if(busy)return;busy=true;active=(active+dir+items.length)%items.length;layout(true,dir);setTimeout(()=>busy=false,760)}
+    gallery.querySelector('.visual-arrow.prev')?.addEventListener('click',()=>go(-1));
+    gallery.querySelector('.visual-arrow.next')?.addEventListener('click',()=>go(1));
+    items.forEach((item,i)=>{
+      item.addEventListener('mouseenter',()=>gsap.to(item,{scale:1.055,zIndex:20,duration:.28,ease:'power2.out'}));
+      item.addEventListener('mouseleave',()=>layout(true,1));
+      item.addEventListener('click',()=>{if(i!==active){const dir=i>active?1:-1;active=i;layout(true,dir)}});
+    });
+    addEventListener('resize',()=>layout(false));
+    layout(false);
+  });
+  const navBtn=document.querySelector('.nav-toggle'), nav=document.querySelector('.nav-links');
+  if(navBtn&&nav){navBtn.addEventListener('click',()=>nav.classList.toggle('open')); nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')))}
+</script>
+</body></html>
