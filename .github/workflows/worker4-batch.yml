@@ -1,0 +1,62 @@
+name: Worker 4 build and browser QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/worker4_generate.py'
+      - '.github/workflows/worker4-batch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-qa-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate Worker 4 sites
+        run: python3 tools/worker4_generate.py
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local HTTP server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/worker4-server.log 2>&1 &
+          sleep 2
+      - name: Technical interaction render QA
+        run: |
+          node <<'NODE'
+          const fs=require('fs'), path=require('path'); const {chromium}=require('playwright');
+          const slugs=['stilus-kozmetika-tapolca','loreal-by-andras-tapolca','luxury-szalon-tapolca','pipere-box-tapolca','shiny-hair-nail-tapolca','charm-fodrasz-ajka','hidegheti-judit-ajka','classic-vibe-barber-ajka','tesco-ajka-hipermarket','infinity-hairstudio-papa','icon-barber-shop-papa','barber-gang-papa','suvi-the-barber-papa','anflor-fodraszat-papa','hajvarazs-fodrasz-papa','spirit-hair-zalaegerszeg','figaro-fodraszat-barber-zalaegerszeg','hairclub-borondi-levente-zalaegerszeg','bibor-hajszalon-zalaegerszeg','hajhosszabbitas-fodraszat-zalaegerszeg'];
+          (async()=>{const browser=await chromium.launch({headless:true});const report=[];
+          for(const slug of slugs){const row={slug,critical:[],desktop:{},mobile:{},result:'FAIL'};
+            for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844}]){const page=await browser.newPage({viewport:{width:vp.width,height:vp.height}});const ce=[],pe=[],rf=[],he=[];
+              page.on('console',m=>{if(m.type()==='error')ce.push(m.text())});page.on('pageerror',e=>pe.push(String(e)));page.on('requestfailed',r=>rf.push(r.url()));page.on('response',r=>{if(r.status()>=400)he.push(`${r.status()} ${r.url()}`)});
+              let res=null;try{res=await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'networkidle',timeout:30000})}catch(e){row.critical.push(`${vp.name}: navigation ${e.message}`)};await page.waitForTimeout(250);
+              const m=await page.evaluate(()=>{const h=document.querySelector('h1')?.getBoundingClientRect(),header=document.querySelector('header')?.getBoundingClientRect(),txt=document.body.innerText.toLowerCase();return {viewport:!!document.querySelector('meta[name="viewport"]'),sw:document.documentElement.scrollWidth,iw:innerWidth,h:h?{l:h.left,r:h.right,t:h.top,b:h.bottom}:null,headerH:header?.height||0,sections:[...document.querySelectorAll('main section')].map(x=>{let r=x.getBoundingClientRect();return [r.width,r.height]}),forbidden:['lorem ipsum','todo','placeholder'].filter(x=>txt.includes(x)),tel:document.querySelectorAll('a[href^="tel:"]').length,bodyH:document.body.scrollHeight}});
+              if(!res||res.status()<200||res.status()>299)row.critical.push(`${vp.name}: HTTP ${res?.status()||'none'}`);if(ce.length)row.critical.push(`${vp.name}: console ${ce.join(' | ')}`);if(pe.length)row.critical.push(`${vp.name}: pageerror ${pe.join(' | ')}`);if(rf.length)row.critical.push(`${vp.name}: failed ${rf.join(' | ')}`);if(he.length)row.critical.push(`${vp.name}: http error ${he.join(' | ')}`);if(!m.viewport)row.critical.push(`${vp.name}: viewport missing`);if(m.sw>m.iw+1)row.critical.push(`${vp.name}: overflow ${m.sw}>${m.iw}`);if(!m.h||m.h.l<0||m.h.r>m.iw+1)row.critical.push(`${vp.name}: h1 overflow`);if(m.sections.some(s=>s[0]<=0||s[1]<=0))row.critical.push(`${vp.name}: zero section`);if(m.forbidden.length)row.critical.push(`${vp.name}: forbidden ${m.forbidden.join(',')}`);if(m.tel<1)row.critical.push(`${vp.name}: no tel CTA`);
+              for(const id of ['rolunk','szolg','kapcsolat']){const loc=page.locator(`#${id}`);await loc.scrollIntoViewIfNeeded();await page.waitForTimeout(80);const y=await loc.evaluate(el=>el.getBoundingClientRect().top);if(y<m.headerH-5)row.critical.push(`${vp.name}: header overlap #${id}`)}
+              if(vp.name==='mobile'){await page.evaluate(()=>scrollTo(0,0));const menu=page.locator('#menu'),nav=page.locator('#nav');await menu.click();if(!(await nav.evaluate(el=>el.classList.contains('open')&&getComputedStyle(el).display!=='none')))row.critical.push('mobile: menu open failed');await page.screenshot({path:path.join(slug,'mobile-menu-open.png'),fullPage:false});await nav.locator('a').first().click();if(await nav.evaluate(el=>el.classList.contains('open')))row.critical.push('mobile: menu close failed')}
+              await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'});await page.screenshot({path:path.join(slug,`preview-${vp.name}.png`),fullPage:false});await page.screenshot({path:path.join(slug,`${vp.name}-full.png`),fullPage:true});row[vp.name]={status:res?.status()||null,metrics:m};await page.close();}
+            row.result=row.critical.length?'FAIL':'PASS';report.push(row);console.log(`WORKER4_QA ${slug} ${row.result}${row.critical.length?' :: '+row.critical.join(' || '):''}`)}
+          await browser.close();fs.writeFileSync('worker4-qa-report.json',JSON.stringify(report,null,2));const bad=report.filter(x=>x.result==='FAIL');console.log(`WORKER4_QA_SUMMARY total=${report.length} pass=${report.length-bad.length} fail=${bad.length}`);if(bad.length)process.exitCode=1;})();
+          NODE
+      - name: Upload QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: worker4-qa-report
+          path: worker4-qa-report.json
+          retention-days: 14
+      - name: Commit passing Worker 4 batch
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add stilus-kozmetika-tapolca loreal-by-andras-tapolca luxury-szalon-tapolca pipere-box-tapolca shiny-hair-nail-tapolca charm-fodrasz-ajka hidegheti-judit-ajka classic-vibe-barber-ajka tesco-ajka-hipermarket infinity-hairstudio-papa icon-barber-shop-papa barber-gang-papa suvi-the-barber-papa anflor-fodraszat-papa hajvarazs-fodrasz-papa spirit-hair-zalaegerszeg figaro-fodraszat-barber-zalaegerszeg hairclub-borondi-levente-zalaegerszeg bibor-hajszalon-zalaegerszeg hajhosszabbitas-fodraszat-zalaegerszeg
+          git add worker4-qa-report.json
+          if git diff --cached --quiet; then echo 'Worker 4 batch unchanged.'; else git commit -m 'Build Worker 4 website batch 61-80'; git push; fi
