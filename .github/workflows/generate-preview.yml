@@ -1,0 +1,57 @@
+name: Generate demo preview
+
+on:
+  push:
+    paths:
+      - 'macsai-anita/index.html'
+      - '.github/workflows/generate-preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local demo server
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/demo-server.log 2>&1 &
+          echo $! > /tmp/demo-server.pid
+          sleep 2
+
+      - name: Capture mobile preview
+        run: |
+          node <<'NODE'
+          const { chromium, devices } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const context = await browser.newContext({ ...devices['iPhone 13'] });
+            const page = await context.newPage();
+            await page.goto('http://127.0.0.1:8000/macsai-anita/', { waitUntil: 'networkidle', timeout: 60000 });
+            await page.waitForTimeout(3500);
+            await page.screenshot({ path: 'macsai-anita/preview-mobile.png', fullPage: false });
+            await browser.close();
+          })();
+          NODE
+
+      - name: Save preview to repository
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add macsai-anita/preview-mobile.png
+          if git diff --cached --quiet; then
+            echo 'Preview unchanged.'
+          else
+            git commit -m 'Generate Mácsai Anita mobile preview'
+            git push
+          fi
