@@ -1,0 +1,63 @@
+name: Worker 4 read batch 171-190
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker4-read-171-190.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  read-batch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read authoritative Sheet snapshot
+        run: |
+          python3 - <<'PY'
+          import csv, io, json, urllib.request, unicodedata, pathlib
+          url='https://docs.google.com/spreadsheets/d/10h3Wz2S_2lsnoVtsT8lJy7bFlWas8eV43yM5cugeYKs/export?format=csv&gid=255039092'
+          raw=urllib.request.urlopen(url, timeout=30).read().decode('utf-8-sig')
+          rows=list(csv.reader(io.StringIO(raw)))
+          headers=rows[0]
+          def norm(s):
+              s=unicodedata.normalize('NFKD',s or '').encode('ascii','ignore').decode().lower().strip()
+              return ' '.join(s.split())
+          hmap={norm(h):i for i,h in enumerate(headers)}
+          wanted=[
+            'szám','hely','szakma','státus','telefon','weboldal','email','vállalkozás neve',
+            'Google Maps link','Facebook','Instagram','booking link','melyik chatgtp nézi át?'
+          ]
+          def pick(row, label):
+              key=norm(label)
+              if key in hmap and hmap[key] < len(row): return row[hmap[key]]
+              return ''
+          out=[]
+          # Google Sheet row numbers 172..191 correspond to Python indexes 171..190.
+          for sheet_row in range(172,192):
+              row=rows[sheet_row-1]
+              worker=pick(row,'melyik chatgtp nézi át?')
+              if worker=='Munkás 4':
+                  item={'sheet_row':sheet_row}
+                  for label in wanted:
+                      item[label]=pick(row,label)
+                  out.append(item)
+          payload={'count':len(out),'rows':out}
+          pathlib.Path('worker4-171-190-leads.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(payload,ensure_ascii=False,indent=2))
+          if len(out)!=20:
+              raise SystemExit(f'Expected 20 rows assigned to Munkás 4, got {len(out)}')
+          PY
+      - name: Commit verified batch manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add worker4-171-190-leads.json
+          if git diff --cached --quiet; then
+            echo 'Manifest unchanged.'
+          else
+            git commit -m 'Verify Worker 4 assignments 171-190'
+            git push
+          fi
