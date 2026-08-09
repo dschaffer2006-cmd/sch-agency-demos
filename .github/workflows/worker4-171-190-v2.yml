@@ -1,0 +1,213 @@
+name: Worker 4 batch 171-190 QA v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'worker4-171-190-trigger-v2.txt'
+      - '.github/workflows/worker4-171-190-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-qa-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract exact Worker 4 payload
+        run: |
+          python3 <<'PY'
+          import base64, io, tarfile, pathlib, json
+          raw=base64.b64decode(pathlib.Path('.github/worker4_171_190_payload.txt').read_text().strip())
+          with tarfile.open(fileobj=io.BytesIO(raw),mode='r:gz') as tf:
+              tf.extractall('.')
+          m=json.loads(pathlib.Path('worker4-batch-manifest.json').read_text())
+          assert len(m)==20
+          assert [x['id'] for x in m]==list(range(171,191))
+          for x in m:
+              p=pathlib.Path(x['slug'])/'index.html'
+              assert p.is_file() and p.stat().st_size>10000, p
+          print('PAYLOAD_OK 20')
+          PY
+
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Start local HTTP
+        run: |
+          nohup python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w4v2-http.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/w4v2-http.log
+          exit 1
+
+      - name: Playwright technical interaction reduced-motion QA
+        run: |
+          cat > /tmp/w4v2qa.py <<'PY'
+          import json, pathlib, time
+          from playwright.sync_api import sync_playwright
+          root=pathlib.Path('.')
+          manifest=json.loads((root/'worker4-batch-manifest.json').read_text())
+          report=[]
+          forbidden=('lorem ipsum','todo','image here','photo here','placeholder text')
+          def fits(page,width):
+              b=page.locator('h1').first.bounding_box()
+              return bool(b and b['width']>0 and b['height']>0 and b['x']>=-2 and b['x']+b['width']<=width+2)
+          def effect_checks(page,t):
+              fx={}
+              if t=='clean-minimal':
+                  page.wait_for_timeout(1800)
+                  fx['text_mask']=page.locator('body').evaluate("e=>e.classList.contains('ready')")
+                  fx['svg_draw']=float(page.locator('.svgdraw path').evaluate("e=>getComputedStyle(e).strokeDashoffset"))<80
+                  fx['circular_text']=page.locator('.circlebadge').evaluate("e=>getComputedStyle(e).animationName")=='spin'
+              elif t=='soft-luxury':
+                  fx['curtain']=page.locator('body').evaluate("e=>e.classList.contains('ready')")
+                  fx['mesh']=page.locator('.meshfx').evaluate("e=>getComputedStyle(e).animationName")=='meshmove'
+                  fx['gradient_stroke']=page.locator('h1 em').evaluate("e=>getComputedStyle(e).webkitTextStrokeWidth")!='0px'
+              elif t=='editorial-serif':
+                  g=page.locator('#serviceGrid'); a=g.evaluate('e=>e.scrollLeft'); g.evaluate('e=>e.scrollLeft=150'); b=g.evaluate('e=>e.scrollLeft')
+                  fx['horizontal_scroll']=b>a
+                  m=page.locator('.marquee-track'); a=m.evaluate('e=>getComputedStyle(e).transform'); page.wait_for_timeout(180); b=m.evaluate('e=>getComputedStyle(e).transform'); fx['kinetic_marquee']=a!=b
+                  fx['drag_pan']=page.locator('#dragCanvas').count()==1
+              elif t=='nordic-calm':
+                  c=page.locator('.service-card').first; c.click(); fx['accordion']=c.evaluate("e=>e.classList.contains('open')")
+                  page.locator('#services').scroll_into_view_if_needed(); page.wait_for_timeout(160); fx['color_shift']=page.locator('body').evaluate("e=>e.classList.contains('color-shifted')")
+                  fx['typewriter']=len(page.locator('#eyebrow').inner_text())>3
+              elif t=='monochrome-chic':
+                  c=page.locator('.service-card').first; c.click(); fx['flip']=c.evaluate("e=>e.classList.contains('flipped')")
+                  c.hover(position={'x':30,'y':30}); fx['spotlight']=bool(c.evaluate("e=>e.style.getPropertyValue('--mx')"))
+                  page.locator('h1').hover(); fx['glitch']=page.locator('h1').evaluate("e=>getComputedStyle(e,'::after').content") not in ('none','normal','')
+              elif t=='bold-conversion':
+                  page.locator('#odo').scroll_into_view_if_needed(); page.wait_for_timeout(900); fx['odometer']=page.locator('#odo').inner_text()=='03'
+                  page.locator('#island').click(); fx['dynamic_island']=page.locator('#island').evaluate("e=>e.classList.contains('expanded')")
+                  page.locator('#burst').click(); fx['particle_button']=page.locator('.particle').count()>0
+              elif t=='split-business':
+                  page.evaluate('scrollTo(0,600)'); page.wait_for_timeout(180)
+                  fx['split_scroll']=page.locator('.hero .copy').evaluate("e=>getComputedStyle(e).transform")!='none'
+                  fx['parallax']=page.locator('.orb').first.evaluate("e=>getComputedStyle(e).transform")!='none'
+                  v=page.locator('#visual'); v.hover(position={'x':100,'y':100}); fx['cursor_reactive']=v.evaluate("e=>getComputedStyle(e).transform")!='none'
+              elif t=='modern-grid':
+                  v=page.locator('#visual'); bb=v.bounding_box(); page.mouse.move(bb['x']+50,bb['y']+50); page.mouse.move(bb['x']+140,bb['y']+140); page.wait_for_timeout(80); fx['image_trail']=page.locator('.trail-dot').count()>0
+                  mg=page.locator('#magGrid'); mg.hover(position={'x':30,'y':30}); fx['magnetic_grid']=mg.locator('i').first.evaluate("e=>getComputedStyle(e).transform")!='none'
+                  mg.click(); fx['morph']=page.locator('#morph').evaluate("e=>e.classList.contains('open')"); page.locator('#morphClose').click()
+              elif t=='card-stack':
+                  fx['sticky_stack']=page.locator('.service-card').first.evaluate("e=>getComputedStyle(e).position")=='sticky'
+                  c=page.locator('.service-card').first; c.click(); fx['coverflow']=c.evaluate("e=>e.classList.contains('active')")
+                  page.locator('.dock a').first.click(); fx['dock']=page.locator('.dock').evaluate("e=>e.dataset.clicked==='1'")
+              elif t=='sticky-story':
+                  fx['sticky_story']=page.locator('.story-panel').evaluate("e=>getComputedStyle(e).position")=='sticky'
+                  r=page.locator('#range'); r.evaluate("e=>{e.value=75;e.dispatchEvent(new Event('input',{bubbles:true}))}"); fx['before_after']=page.locator('#shade').evaluate("e=>e.style.right")=='25%'
+                  page.evaluate('scrollTo(0,600)'); page.wait_for_timeout(120); fx['scramble_scroll']=page.locator('#scrambleChip').evaluate("e=>e.classList.contains('active')")
+              return fx
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              for lead in manifest:
+                  problems=[]; fx={}; slug=lead['slug']; url=f'http://127.0.0.1:8765/{slug}/'; out=root/slug
+                  page=browser.new_page(viewport={'width':1440,'height':900})
+                  ce=[]; pe=[]; rf=[]
+                  page.on('console',lambda m,a=ce:a.append(m.text) if m.type=='error' else None)
+                  page.on('pageerror',lambda e,a=pe:a.append(str(e)))
+                  page.on('requestfailed',lambda r,a=rf:a.append(r.url))
+                  resp=page.goto(url,wait_until='networkidle',timeout=30000)
+                  if not resp or not 200<=resp.status<300: problems.append('desktop.http')
+                  if ce: problems.append('desktop.console')
+                  if pe: problems.append('desktop.pageerror')
+                  if rf: problems.append('desktop.requestfailed')
+                  if page.locator('meta[name="viewport"]').count()!=1: problems.append('viewport.meta')
+                  if not page.evaluate('document.documentElement.scrollWidth <= innerWidth'): problems.append('desktop.overflow')
+                  if not fits(page,1440): problems.append('desktop.headline')
+                  if not page.evaluate("[...document.querySelectorAll('main section')].every(s=>{let r=s.getBoundingClientRect();return r.width>0&&r.height>0})"): problems.append('desktop.zero-section')
+                  txt=page.locator('body').inner_text().lower()
+                  if any(x in txt for x in forbidden): problems.append('placeholder')
+                  try: fx=effect_checks(page,lead['template'])
+                  except Exception as e: problems.append('effects.exception:'+repr(e))
+                  if sum(v is True for v in fx.values())<3: problems.append('effects.less-than-3')
+                  page.screenshot(path=str(out/'desktop-viewport.png'))
+                  page.screenshot(path=str(out/'desktop-full.png'),full_page=True)
+                  page.locator('#contact').scroll_into_view_if_needed(); page.screenshot(path=str(out/'desktop-contact.png'))
+                  page.close()
+                  mp=browser.new_page(viewport={'width':390,'height':844})
+                  mpe=[]; mp.on('pageerror',lambda e,a=mpe:a.append(str(e)))
+                  mr=mp.goto(url,wait_until='networkidle',timeout=30000)
+                  if not mr or not 200<=mr.status<300: problems.append('mobile.http')
+                  if mpe: problems.append('mobile.pageerror')
+                  if not mp.evaluate('document.documentElement.scrollWidth <= innerWidth'): problems.append('mobile.overflow')
+                  if not fits(mp,390): problems.append('mobile.headline')
+                  mp.locator('#menu').click()
+                  if not mp.locator('#nav').evaluate("e=>e.classList.contains('open')"): problems.append('mobile.menu-open')
+                  mp.screenshot(path=str(out/'mobile-menu-open.png'))
+                  mp.locator('#nav a[href="#services"]').click()
+                  if mp.locator('#nav').evaluate("e=>e.classList.contains('open')"): problems.append('mobile.menu-close')
+                  mp.goto(url,wait_until='networkidle'); mp.screenshot(path=str(out/'preview-mobile.png')); mp.screenshot(path=str(out/'mobile-full.png'),full_page=True)
+                  mp.locator('#contact').scroll_into_view_if_needed(); mp.screenshot(path=str(out/'mobile-contact.png')); mp.close()
+                  rm=browser.new_page(viewport={'width':390,'height':844},reduced_motion='reduce'); rm.goto(url,wait_until='networkidle')
+                  readable=rm.evaluate("[...document.querySelectorAll('main h1,main h2,main p,.service-card')].every(e=>{let s=getComputedStyle(e),r=e.getBoundingClientRect();return s.visibility!='hidden'&&+s.opacity>0&&r.height>0})")
+                  if not readable: problems.append('reduced-motion.readability')
+                  rm.close()
+                  result='PASS' if not problems else 'FAIL'
+                  report.append({'id':lead['id'],'name':lead['name'],'slug':slug,'template':lead['template'],'effects':fx,'problems':problems,'result':result})
+                  print('WORKER4',lead['id'],result,problems,fx)
+              browser.close()
+          pathlib.Path('worker4-171-190-qa-v2.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          failed=[r for r in report if r['result']=='FAIL']
+          print('SUMMARY',len(report),len(report)-len(failed),len(failed))
+          if failed: raise SystemExit('QA_FAIL '+','.join(str(x['id']) for x in failed))
+          PY
+          python3 /tmp/w4v2qa.py
+
+      - name: Publish passed batch to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add worker4-batch-manifest.json worker4-171-190-qa-v2.json
+          python3 - <<'PY'
+          import json,subprocess
+          for x in json.load(open('worker4-batch-manifest.json')): subprocess.run(['git','add',x['slug']],check=True)
+          PY
+          git commit -m 'Worker 4 publish leads 171-190 after Chromium QA'
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((i*3))
+          done
+          exit 1
+
+      - name: Verify public demo and preview URLs
+        run: |
+          python3 <<'PY'
+          import json,subprocess,time,pathlib
+          m=json.load(open('worker4-batch-manifest.json')); base='https://dschaffer2006-cmd.github.io/sch-agency-demos/'
+          pending={}
+          for x in m:
+              pending[f"page:{x['id']}"]=base+x['slug']+'/'
+              pending[f"preview:{x['id']}"]=base+x['slug']+'/preview-mobile.png'
+          final={}
+          for roundno in range(36):
+              for key,url in list(pending.items()):
+                  r=subprocess.run(['curl','-L','-s','-o','/dev/null','-w','%{http_code}',url],capture_output=True,text=True)
+                  code=(r.stdout or '000').strip()
+                  if code=='200': final[key]=(code,url); del pending[key]
+              if not pending: break
+              print('pending',roundno+1,len(pending)); time.sleep(5)
+          for key,url in pending.items(): final[key]=('FAIL',url)
+          lines=[f'{k} {final[k][0]} {final[k][1]}' for k in sorted(final,key=lambda z:(int(z.split(':')[1]),z.split(':')[0]))]
+          pathlib.Path('worker4-171-190-public-v2.txt').write_text('\n'.join(lines)+'\n')
+          print('\n'.join(lines))
+          if pending: raise SystemExit('PUBLIC_FAIL '+','.join(pending))
+          PY
+
+      - name: Commit public URL report
+        run: |
+          git add worker4-171-190-public-v2.txt
+          git commit -m 'Worker 4 verify public pages and previews 171-190'
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((i*3))
+          done
+          exit 1
