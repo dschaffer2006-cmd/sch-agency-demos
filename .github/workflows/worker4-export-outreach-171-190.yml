@@ -1,0 +1,65 @@
+name: Worker 4 export outreach 171-190
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker4-export-outreach-171-190.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Wait for completed Worker 4 build payload
+        run: |
+          for i in $(seq 1 40); do
+            git pull --rebase origin main || true
+            if test -s worker4-171-190-outreach.json && test -s worker4-171-190-pages-status.txt; then
+              echo 'Build + public Pages payload present.'
+              exit 0
+            fi
+            echo "Waiting for build payload ($i/40)"
+            sleep 15
+          done
+          echo 'Timed out waiting for Worker 4 build payload' >&2
+          exit 1
+      - name: Verify public status then create exact A-U outreach TSV
+        run: |
+          python3 - <<'PY'
+          import csv, io, json, pathlib
+          statuses=pathlib.Path('worker4-171-190-pages-status.txt').read_text(encoding='utf-8').strip().splitlines()
+          if len(statuses)!=20 or any(not line.startswith('200 ') for line in statuses):
+              raise SystemExit('Public Pages status is not 20/20 HTTP 200')
+          data=json.loads(pathlib.Path('worker4-171-190-outreach.json').read_text(encoding='utf-8'))
+          if len(data)!=20: raise SystemExit(f'Expected 20 outreach rows, got {len(data)}')
+          rows=[]
+          for x in data:
+              has_channel=bool(x.get('instagram') or x.get('facebook') or x.get('email'))
+              rows.append([
+                x.get('number',''),x.get('place',''),x.get('profession',''),('kiküldendő' if has_channel else ''),'',x.get('phone',''),x.get('website',''),
+                x.get('demo_url',''),x.get('preview_url',''),x.get('instagram',''),x.get('instagram_message',''),x.get('facebook',''),x.get('facebook_message',''),
+                x.get('email',''),x.get('email_subject',''),x.get('email_message',''),x.get('name',''),x.get('maps',''),x.get('followup1','') if has_channel else '',x.get('followup2','') if has_channel else '',x.get('followup3','') if has_channel else ''
+              ])
+          buf=io.StringIO(newline=''); w=csv.writer(buf,delimiter='\t',lineterminator='\n',quoting=csv.QUOTE_MINIMAL); w.writerows(rows)
+          pathlib.Path('worker4-171-190-outreach.tsv').write_text(buf.getvalue(),encoding='utf-8')
+          print('TSV rows:',len(rows),'with channel:',sum(bool(r[3]) for r in rows))
+          PY
+      - name: Commit outreach export
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
+          git add worker4-171-190-outreach.tsv
+          if git diff --cached --quiet; then
+            echo 'Outreach export unchanged.'
+          else
+            git commit -m 'Prepare Worker 4 outreach 171-190'
+            git push origin HEAD:main
+          fi
