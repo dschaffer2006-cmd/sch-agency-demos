@@ -1,0 +1,3 @@
+trigger=2026-08-09T10:48:00+02:00
+worker=Munkás 4
+batch=171-190
