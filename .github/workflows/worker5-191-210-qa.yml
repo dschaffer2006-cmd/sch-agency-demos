@@ -13,7 +13,9 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref_name }}
       - name: Generate and apply targeted fixes
-        run: python3 tools/worker5_191_210_generate_fixed.py
+        run: |
+          python3 tools/worker5_191_210_generate_fixed.py
+          python3 tools/worker5_191_210_mobile_fix.py
       - name: Install Playwright Chromium
         run: |
           npm init -y >/dev/null 2>&1
