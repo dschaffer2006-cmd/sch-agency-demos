@@ -55,8 +55,8 @@ jobs:
           }
           (async()=>{
             const browser=await chromium.launch({headless:true}), report=[];
-            for(let si=0;si<slugs.length;si++){
-              const slug=slugs[si], row={slug,critical:[],viewports:{},effects:[]};
+            for(const slug of slugs){
+              const row={slug,critical:[],viewports:{},effects:[]};
               for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844}]){
                 const page=await browser.newPage({viewport:{width:vp.width,height:vp.height}}), ce=[],pe=[],rf=[];
                 page.on('console',m=>{if(m.type()==='error')ce.push(m.text())}); page.on('pageerror',e=>pe.push(String(e))); page.on('requestfailed',r=>rf.push(r.url()));
@@ -110,3 +110,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add the-eden-hair-salon-pecs ani-fodraszszalon-pecs clarity-hajstudio-pecs hair-and-nails-club-pecs nowa-salon-pecs hair-by-flora-onodi-pecs pacek-barbershop-pecs hajnalfeny-szepsegkozpont-pecs lefti-hajstudio-dunaujvaros wellness-hajstudio-zellei-erzsebet-dunaujvaros lk-royal-barber-dunaujvaros masculine-barber-shop-dunaujvaros gurubi-szalon-dunaujvaros farosz-szepsegszalon-dunaujvaros gentlemens-barbershop-dunaujvaros hajlabor-dunaujvaros beke-barbershop-dunaujvaros mens-room-dunaujvaros barbi-hair-clinic-tatabanya bella-signora-tatabanya
           git diff --cached --quiet || (git commit -m 'Build Worker 5 websites 191-210' && git push origin HEAD:${{ github.head_ref || github.ref_name }})
+# trigger synchronize
