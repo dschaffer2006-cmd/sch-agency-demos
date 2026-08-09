@@ -1,0 +1,112 @@
+name: Worker 5 QA 191-210
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-qa-publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - name: Generate Worker 5 sites
+        run: python3 tools/worker5_191_210_generate.py
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w5-server.log 2>&1 &
+          sleep 2
+      - name: Chromium technical QA
+        run: |
+          node <<'NODE'
+          const fs=require('fs'), path=require('path'), {chromium}=require('playwright');
+          const slugs=["the-eden-hair-salon-pecs","ani-fodraszszalon-pecs","clarity-hajstudio-pecs","hair-and-nails-club-pecs","nowa-salon-pecs","hair-by-flora-onodi-pecs","pacek-barbershop-pecs","hajnalfeny-szepsegkozpont-pecs","lefti-hajstudio-dunaujvaros","wellness-hajstudio-zellei-erzsebet-dunaujvaros","lk-royal-barber-dunaujvaros","masculine-barber-shop-dunaujvaros","gurubi-szalon-dunaujvaros","farosz-szepsegszalon-dunaujvaros","gentlemens-barbershop-dunaujvaros","hajlabor-dunaujvaros","beke-barbershop-dunaujvaros","mens-room-dunaujvaros","barbi-hair-clinic-tatabanya","bella-signora-tatabanya"];
+          const forbidden=['lorem ipsum','todo','image here','photo here','placeholder'];
+          async function interact(page, effect) {
+            const e=page.locator(`[data-effect="${effect}"]`).first();
+            if(!await e.count()) return;
+            await e.scrollIntoViewIfNeeded(); await page.waitForTimeout(250);
+            if(effect==='drag-pan') {
+              const b=await e.boundingBox(); if(b){await page.mouse.move(b.x+b.width*.5,b.y+b.height*.5);await page.mouse.down();await page.mouse.move(b.x+b.width*.25,b.y+b.height*.3,{steps:5});await page.mouse.up();}
+            } else if(effect==='accordion') {
+              await e.locator('button').nth(1).click();
+            } else if(effect==='flip-card'||effect==='particle-button'||effect==='dynamic-island'||effect==='morph') {
+              await e.click();
+            } else if(['spotlight','glitch','cursor-reactive','image-trail','magnetic-grid','dock-nav'].includes(effect)) {
+              const b=await e.boundingBox(); if(b) await page.mouse.move(b.x+b.width*.55,b.y+b.height*.45);
+              if(effect==='glitch') await e.focus();
+            } else if(effect==='coverflow') {
+              await e.locator('.next').click();
+            } else if(effect==='cursor-reveal') {
+              await e.locator('input').evaluate(el=>{el.value='70';el.dispatchEvent(new Event('input',{bubbles:true}))});
+            } else if(effect==='sticky-cards'||effect==='sticky-story') {
+              await e.evaluate(el=>window.scrollTo(0,el.offsetTop+300)); await page.waitForTimeout(180);
+            }
+            await page.waitForTimeout(effect==='typewriter'||effect==='text-scramble'||effect==='odometer'?700:220);
+          }
+          (async()=>{
+            const browser=await chromium.launch({headless:true}), report=[];
+            for(let si=0;si<slugs.length;si++){
+              const slug=slugs[si], row={slug,critical:[],viewports:{},effects:[]};
+              for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844}]){
+                const page=await browser.newPage({viewport:{width:vp.width,height:vp.height}}), ce=[],pe=[],rf=[];
+                page.on('console',m=>{if(m.type()==='error')ce.push(m.text())}); page.on('pageerror',e=>pe.push(String(e))); page.on('requestfailed',r=>rf.push(r.url()));
+                let res; try{res=await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'networkidle',timeout:30000})}catch(e){row.critical.push(`${vp.name} navigation: ${e.message}`)}
+                const m=await page.evaluate((forbidden)=>{
+                  const h=document.querySelector('h1')?.getBoundingClientRect(),header=document.querySelector('header')?.getBoundingClientRect();
+                  const text=document.body.innerText.toLowerCase(), effects=[...document.querySelectorAll('[data-effect]')].map(x=>[x.dataset.effect,x.dataset.state]);
+                  return {sw:document.documentElement.scrollWidth,iw:innerWidth,viewport:!!document.querySelector('meta[name="viewport"]'),h:h?{l:h.left,r:h.right,w:h.width}:null,headerH:header?.height||0,sections:[...document.querySelectorAll('main section')].map(x=>{const r=x.getBoundingClientRect();return [r.width,r.height]}),forbidden:forbidden.filter(x=>text.includes(x)),effects,cta:[...document.querySelectorAll('a.pill')].map(a=>a.getAttribute('href'))};
+                },forbidden);
+                if(!res||res.status()<200||res.status()>299)row.critical.push(`${vp.name} HTTP ${res?.status()||'none'}`);
+                if(ce.length)row.critical.push(`${vp.name} console ${ce.join(' | ')}`); if(pe.length)row.critical.push(`${vp.name} pageerror ${pe.join(' | ')}`); if(rf.length)row.critical.push(`${vp.name} failed request ${rf.join(' | ')}`);
+                if(!m.viewport)row.critical.push(`${vp.name} viewport missing`); if(m.sw>m.iw+1)row.critical.push(`${vp.name} overflow ${m.sw}>${m.iw}`);
+                if(!m.h||m.h.l<0||m.h.r>m.iw+1)row.critical.push(`${vp.name} h1 outside viewport`);
+                if(m.sections.some(s=>s[0]<=0||s[1]<=0))row.critical.push(`${vp.name} zero-size section`);
+                if(m.forbidden.length)row.critical.push(`${vp.name} forbidden ${m.forbidden.join(',')}`);
+                if(!m.cta.length||m.cta.some(x=>!x||x==='#'))row.critical.push(`${vp.name} invalid primary CTA`);
+                if(m.effects.length!==3)row.critical.push(`${vp.name} expected 3 effects got ${m.effects.length}`);
+                for(const id of ['szolg','motion','kapcsolat']){await page.evaluate(id=>document.getElementById(id).scrollIntoView({block:'start',behavior:'instant'}),id);await page.waitForTimeout(60);const top=await page.locator(`#${id}`).evaluate(el=>el.getBoundingClientRect().top);if(top<m.headerH-4)row.critical.push(`${vp.name} header overlap #${id}`)}
+                if(vp.name==='mobile'){await page.evaluate(()=>scrollTo(0,0));const menu=page.locator('#menu'),nav=page.locator('#nav');await menu.click();if(!(await nav.evaluate(el=>el.classList.contains('open')&&getComputedStyle(el).display!=='none')))row.critical.push('mobile menu open failed');await nav.locator('a').first().click();if(await nav.evaluate(el=>el.classList.contains('open')))row.critical.push('mobile menu close failed')}
+                const initial=new Map(m.effects);
+                for(const [effect] of m.effects) await interact(page,effect);
+                const after=await page.evaluate(()=>[...document.querySelectorAll('[data-effect]')].map(x=>[x.dataset.effect,x.dataset.state]));
+                if(vp.name==='desktop'){row.effects=after; for(const [effect,state] of after){if(state===initial.get(effect))row.critical.push(`effect no state change: ${effect} (${state})`)}}
+                await page.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'});
+                await page.screenshot({path:path.join(slug,`preview-${vp.name}.png`),fullPage:false});
+                await page.screenshot({path:path.join(slug,`${vp.name}-full.png`),fullPage:true});
+                row.viewports[vp.name]=m; await page.close();
+              }
+              const rpage=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'}); await rpage.goto(`http://127.0.0.1:8765/${slug}/`,{waitUntil:'domcontentloaded'});
+              const reduced=await rpage.evaluate(()=>({hidden:[...document.querySelectorAll('main section')].filter(x=>{const s=getComputedStyle(x),r=x.getBoundingClientRect();return s.display==='none'||s.visibility==='hidden'||r.width<=0||r.height<=0}).length,sw:document.documentElement.scrollWidth,iw:innerWidth}));if(reduced.hidden)row.critical.push('reduced-motion hidden content');if(reduced.sw>reduced.iw+1)row.critical.push('reduced-motion overflow');await rpage.close();
+              row.result=row.critical.length?'FAIL':'PASS';report.push(row);console.log(`WORKER5_191_210_QA ${slug} ${row.result}${row.critical.length?' :: '+row.critical.join(' || '):''}`);
+            }
+            await browser.close();fs.writeFileSync('worker5-191-210-qa-report.json',JSON.stringify(report,null,2));const bad=report.filter(x=>x.result==='FAIL');console.log(`WORKER5_191_210_SUMMARY total=${report.length} pass=${report.length-bad.length} fail=${bad.length}`);if(bad.length)process.exitCode=1;
+          })();
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: worker5-191-210-qa
+          path: |
+            worker5-191-210-qa-report.json
+            */preview-desktop.png
+            */preview-mobile.png
+            */desktop-full.png
+            */mobile-full.png
+          retention-days: 14
+      - name: Commit generated sites after PASS
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add the-eden-hair-salon-pecs ani-fodraszszalon-pecs clarity-hajstudio-pecs hair-and-nails-club-pecs nowa-salon-pecs hair-by-flora-onodi-pecs pacek-barbershop-pecs hajnalfeny-szepsegkozpont-pecs lefti-hajstudio-dunaujvaros wellness-hajstudio-zellei-erzsebet-dunaujvaros lk-royal-barber-dunaujvaros masculine-barber-shop-dunaujvaros gurubi-szalon-dunaujvaros farosz-szepsegszalon-dunaujvaros gentlemens-barbershop-dunaujvaros hajlabor-dunaujvaros beke-barbershop-dunaujvaros mens-room-dunaujvaros barbi-hair-clinic-tatabanya bella-signora-tatabanya
+          git diff --cached --quiet || (git commit -m 'Build Worker 5 websites 191-210' && git push origin HEAD:${{ github.head_ref || github.ref_name }})
