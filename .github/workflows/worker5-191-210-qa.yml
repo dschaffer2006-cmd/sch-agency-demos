@@ -1,0 +1,45 @@
+name: Worker 5 QA 191-210
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-qa-publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - name: Generate and apply targeted fixes
+        run: python3 tools/worker5_191_210_generate_fixed.py
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local HTTP server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w5-server.log 2>&1 &
+          sleep 2
+      - name: Run Chromium QA
+        run: node tools/worker5_191_210_qa.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: worker5-191-210-qa
+          path: |
+            worker5-191-210-qa-report.json
+            */preview-desktop.png
+            */preview-mobile.png
+            */desktop-full.png
+            */mobile-full.png
+          retention-days: 14
+      - name: Commit generated sites after PASS
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add the-eden-hair-salon-pecs ani-fodraszszalon-pecs clarity-hajstudio-pecs hair-and-nails-club-pecs nowa-salon-pecs hair-by-flora-onodi-pecs pacek-barbershop-pecs hajnalfeny-szepsegkozpont-pecs lefti-hajstudio-dunaujvaros wellness-hajstudio-zellei-erzsebet-dunaujvaros lk-royal-barber-dunaujvaros masculine-barber-shop-dunaujvaros gurubi-szalon-dunaujvaros farosz-szepsegszalon-dunaujvaros gentlemens-barbershop-dunaujvaros hajlabor-dunaujvaros beke-barbershop-dunaujvaros mens-room-dunaujvaros barbi-hair-clinic-tatabanya bella-signora-tatabanya
+          git diff --cached --quiet || (git commit -m 'Build Worker 5 websites 191-210' && git push origin HEAD:${{ github.head_ref || github.ref_name }})
