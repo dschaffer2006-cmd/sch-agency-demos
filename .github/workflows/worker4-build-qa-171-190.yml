@@ -1,0 +1,217 @@
+name: Worker 4 build and QA 171-190
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker4-build-qa-171-190.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate assigned Worker 4 pages
+        run: python3 .github/worker4_build_171_190.py
+      - name: Verify assignment and generated count
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          m=json.loads(pathlib.Path('worker4-171-190-manifest.json').read_text())
+          assert len(m)==20, len(m)
+          assert all(x['worker']=='Munkás 4' for x in m)
+          assert len({x['number'] for x in m})==20
+          assert len({x['slug'] for x in m})==20
+          assert all(pathlib.Path(x['slug'],'index.html').stat().st_size>3000 for x in m)
+          print('Assignment + 20 unique generated pages verified')
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.54.2 >/dev/null
+          npx playwright install --with-deps chromium
+      - name: Start localhost server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w4-http.log 2>&1 &
+          echo $! >/tmp/w4-http.pid
+          sleep 2
+          curl -fsS http://127.0.0.1:8765/ >/dev/null
+      - name: Chromium technical + interaction + geometry QA
+        run: |
+          cat > /tmp/w4qa.mjs <<'JS'
+          import fs from 'fs';
+          import path from 'path';
+          import { chromium } from 'playwright';
+          const manifest=JSON.parse(fs.readFileSync('worker4-171-190-manifest.json','utf8'));
+          const out=[];
+          const browser=await chromium.launch({headless:true});
+          for(const item of manifest){
+            const errors=[]; const warnings=[];
+            const base=`http://127.0.0.1:8765/${item.slug}/`;
+            const qaDir=path.join('/tmp/worker4-qa',item.slug); fs.mkdirSync(qaDir,{recursive:true});
+            const context=await browser.newContext({viewport:{width:1440,height:900}});
+            const page=await context.newPage();
+            const consoleErrors=[]; const pageErrors=[]; const failed=[];
+            page.on('console',m=>{if(m.type()==='error') consoleErrors.push(m.text())});
+            page.on('pageerror',e=>pageErrors.push(String(e)));
+            page.on('requestfailed',r=>failed.push(`${r.method()} ${r.url()} ${r.failure()?.errorText||''}`));
+            let response;
+            try{response=await page.goto(base,{waitUntil:'networkidle',timeout:20000})}catch(e){errors.push('navigation:'+e.message)}
+            if(!response || response.status()<200 || response.status()>=300) errors.push('document_http_status');
+            if(consoleErrors.length) errors.push('console_error:'+consoleErrors.join(' | '));
+            if(pageErrors.length) errors.push('pageerror:'+pageErrors.join(' | '));
+            if(failed.length) errors.push('failed_request:'+failed.join(' | '));
+            const tech=await page.evaluate(()=>{
+              const h=document.querySelector('h1')?.getBoundingClientRect();
+              const sections=[...document.querySelectorAll('main section')].map(s=>{const r=s.getBoundingClientRect();return {w:r.width,h:r.height}});
+              const cta=document.querySelector('.hero .btn')?.getBoundingClientRect();
+              const header=document.querySelector('header')?.getBoundingClientRect();
+              const text=document.body.innerText;
+              return {
+                viewportMeta:!!document.querySelector('meta[name="viewport"]'),
+                overflow:document.documentElement.scrollWidth-window.innerWidth,
+                h1:h?{left:h.left,right:h.right,top:h.top,bottom:h.bottom,width:h.width,height:h.height,font:parseFloat(getComputedStyle(document.querySelector('h1')).fontSize)}:null,
+                sections,cta:cta?{top:cta.top,bottom:cta.bottom,width:cta.width,height:cta.height}:null,
+                header:header?{height:header.height}:null,
+                prohibited:/lorem ipsum|\bTODO\b|IMAGE HERE|PHOTO HERE/i.test(text),
+                textLength:text.trim().length
+              }
+            });
+            if(!tech.viewportMeta) errors.push('missing_viewport_meta');
+            if(tech.overflow>1) errors.push('desktop_horizontal_overflow:'+tech.overflow);
+            if(!tech.h1 || tech.h1.left<-2 || tech.h1.right>1442) errors.push('desktop_h1_overflow');
+            if(tech.h1?.font<48) warnings.push('desktop_h1_visual_weight_low');
+            if(tech.sections.some(s=>s.w<1||s.h<1)) errors.push('zero_size_section');
+            if(!tech.cta || tech.cta.width<44 || tech.cta.height<44) errors.push('primary_cta_target_too_small');
+            if(tech.prohibited) errors.push('placeholder_or_todo');
+            if(tech.textLength<250) errors.push('insufficient_readable_content');
+            const before=await page.evaluate(()=>({...window.__qaEffects}));
+            await page.evaluate(()=>window.scrollTo(0,Math.max(600,document.documentElement.scrollHeight*.55)));
+            await page.waitForTimeout(220);
+            await page.locator('#effectAction').click();
+            await page.locator('#pointerZone').hover({position:{x:100,y:100}});
+            await page.mouse.move(180,180); await page.waitForTimeout(80);
+            const after=await page.evaluate(()=>({...window.__qaEffects}));
+            if(!(after.scroll>before.scroll)) errors.push('scroll_effect_no_state_change');
+            if(!(after.click>before.click)) errors.push('click_effect_no_state_change');
+            if(!(after.pointer>before.pointer)) errors.push('pointer_effect_no_state_change');
+            await page.screenshot({path:path.join(qaDir,'desktop-viewport.png'),fullPage:false});
+            await page.screenshot({path:path.join(qaDir,'desktop-full.png'),fullPage:true});
+            await context.close();
+
+            const mobile=await browser.newContext({viewport:{width:390,height:844}}); const mp=await mobile.newPage();
+            const mConsole=[]; const mErrors=[]; const mFailed=[];
+            mp.on('console',m=>{if(m.type()==='error')mConsole.push(m.text())}); mp.on('pageerror',e=>mErrors.push(String(e))); mp.on('requestfailed',r=>mFailed.push(r.url()));
+            const mr=await mp.goto(base,{waitUntil:'networkidle',timeout:20000});
+            if(!mr || mr.status()<200 || mr.status()>=300) errors.push('mobile_http_status');
+            const m0=await mp.evaluate(()=>({overflow:document.documentElement.scrollWidth-window.innerWidth,h1:(()=>{const r=document.querySelector('h1')?.getBoundingClientRect();return r?{left:r.left,right:r.right}:null})()}));
+            if(m0.overflow>1) errors.push('mobile_horizontal_overflow:'+m0.overflow);
+            if(!m0.h1 || m0.h1.left<-2 || m0.h1.right>392) errors.push('mobile_h1_overflow');
+            await mp.locator('#menu').click();
+            if(!(await mp.locator('#nav').evaluate(el=>el.classList.contains('open')))) errors.push('mobile_menu_did_not_open');
+            await mp.screenshot({path:path.join(qaDir,'mobile-menu-open.png'),fullPage:false});
+            await mp.locator('#nav a[href="#informacio"]').click(); await mp.waitForTimeout(100);
+            if(await mp.locator('#nav').evaluate(el=>el.classList.contains('open'))) errors.push('mobile_menu_did_not_close_after_link');
+            await mp.screenshot({path:path.join(item.slug,'preview-mobile.png'),fullPage:false});
+            await mp.screenshot({path:path.join(qaDir,'mobile-full.png'),fullPage:true});
+            await mp.emulateMedia({reducedMotion:'reduce'}); await mp.reload({waitUntil:'networkidle'});
+            const reduced=await mp.evaluate(()=>({text:document.body.innerText.trim().length,hidden:[...document.querySelectorAll('main h1,main h2,main p')].filter(el=>{const s=getComputedStyle(el);return s.opacity==='0'||s.visibility==='hidden'||s.display==='none'}).length,overflow:document.documentElement.scrollWidth-window.innerWidth}));
+            if(reduced.text<250 || reduced.hidden>0 || reduced.overflow>1) errors.push('reduced_motion_readability');
+            if(mConsole.length) errors.push('mobile_console_error:'+mConsole.join(' | ')); if(mErrors.length) errors.push('mobile_pageerror:'+mErrors.join(' | ')); if(mFailed.length) errors.push('mobile_failed_request:'+mFailed.join(' | '));
+            await mobile.close();
+            // Geometry/hierarchy preflight is deterministic; it is not a fabricated human visual review.
+            const geometryScore=Math.max(0,100-errors.length*25-warnings.length*2);
+            out.push({lead:item.number,name:item.name,slug:item.slug,template:item.template,effects:item.effects,technical_result:errors.length?'FAIL':'PASS',geometry_preflight_score:geometryScore,errors,warnings});
+            console.log(item.number,item.name,errors.length?'FAIL':'PASS','score',geometryScore,errors.join('; '));
+          }
+          await browser.close();
+          fs.writeFileSync('worker4-171-190-qa.json',JSON.stringify(out,null,2));
+          const failed=out.filter(x=>x.technical_result!=='PASS');
+          console.log(`WORKER4 QA: ${out.length-failed.length}/${out.length} PASS`);
+          if(failed.length) process.exit(2);
+          JS
+          node /tmp/w4qa.mjs
+      - name: Create outreach preparation payload
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          m=json.loads(pathlib.Path('worker4-171-190-manifest.json').read_text())
+          out=[]
+          for x in m:
+            name=x['name']; demo=x['demo_url']; preview=x['preview_url']
+            base=f"Megnéztem az online megjelenéseteket, és készítettem egy személyre szabott, modernebb weboldal-bemutatót. Demo: {demo}"
+            row={**x,'outreach_status':'kiküldendő' if (x['instagram'] or x['facebook'] or x['email']) else '',
+              'instagram_message':(f"Szia! {base} Ha tetszik az irány, szívesen egyeztetek róla röviden." if x['instagram'] else ''),
+              'facebook_message':(f"Szia! {base} Készítettem hozzá mobil előnézetet is: {preview} Ha tetszik az irány, szívesen egyeztetek a végleges verzióról." if x['facebook'] else ''),
+              'email_subject':(f"Weboldal-bemutató – {name}" if x['email'] else ''),
+              'email_message':(f"Jó napot kívánok!\n\nKészítettem a {name} számára egy személyre szabott, mobilbarát weboldal-bemutatót.\n\nMegtekintés: {demo}\nMobil előnézet: {preview}\n\nHa tetszik az irány, szívesen egyeztetek a részletekről.\n\nÜdvözlettel,\nSchäffer Dániel\nSCH Agency" if x['email'] else ''),
+              'followup1':f"Szia! Sikerült megnézni a {name} számára készített demót? {demo}",
+              'followup2':f"Szia! Újra elküldöm a bemutatót: {demo} Mobilra is optimalizáltam.",
+              'followup3':f"Szia! Ezzel lezárom a megkeresést. Ha később aktuális lesz egy modernebb weboldal, a demo itt marad: {demo}"}
+            out.append(row)
+          pathlib.Path('worker4-171-190-outreach.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+      - name: Refresh main immediately before commit
+        run: |
+          git fetch origin main
+          git rebase origin/main
+          python3 .github/worker4_build_171_190.py
+          node /tmp/w4qa.mjs
+      - name: Commit pages, previews and QA artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add worker4-171-190-manifest.json worker4-171-190-qa.json worker4-171-190-outreach.json
+          python3 - <<'PY' >/tmp/w4paths.txt
+          import json
+          for x in json.load(open('worker4-171-190-manifest.json')):
+              print(x['slug']+'/index.html')
+              print(x['slug']+'/preview-mobile.png')
+          PY
+          while IFS= read -r p; do git add "$p"; done </tmp/w4paths.txt
+          git commit -m 'Build Worker 4 demos 171-190 with Chromium QA'
+          git push origin HEAD:main
+      - name: Wait for GitHub Pages and verify all public routes
+        run: |
+          python3 - <<'PY'
+          import json,time,urllib.request,pathlib
+          m=json.loads(pathlib.Path('worker4-171-190-manifest.json').read_text())
+          lines=[]; failed=[]
+          time.sleep(15)
+          for x in m:
+              url=x['demo_url']
+              code=None
+              for attempt in range(18):
+                  try:
+                      req=urllib.request.Request(url,headers={'User-Agent':'SCH-Worker4-QA'})
+                      with urllib.request.urlopen(req,timeout=15) as r: code=r.status
+                  except Exception: code=None
+                  if code==200: break
+                  time.sleep(5)
+              lines.append(f"{code or 0} {url}")
+              if code!=200: failed.append(url)
+              print(lines[-1])
+          pathlib.Path('worker4-171-190-pages-status.txt').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+          if failed: raise SystemExit('Pages verification failed: '+', '.join(failed))
+          PY
+      - name: Commit public Pages verification
+        run: |
+          git pull --rebase origin main
+          git add worker4-171-190-pages-status.txt
+          git commit -m 'Verify Worker 4 public Pages 171-190 20 of 20'
+          git push origin HEAD:main
+      - name: Upload screenshot QA package
+        uses: actions/upload-artifact@v4
+        with:
+          name: worker4-171-190-browser-qa
+          path: /tmp/worker4-qa
+          retention-days: 30
