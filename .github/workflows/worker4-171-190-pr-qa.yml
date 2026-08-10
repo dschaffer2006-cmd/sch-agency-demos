@@ -1,0 +1,74 @@
+name: Worker 4 171-190 PR Chromium QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'worker4-171-190-pr-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract payload
+        run: |
+          python3 <<'PY'
+          import base64,io,tarfile,pathlib,json
+          raw=base64.b64decode(pathlib.Path('.github/worker4_171_190_payload.txt').read_text().strip())
+          with tarfile.open(fileobj=io.BytesIO(raw),mode='r:gz') as tf: tf.extractall('.')
+          m=json.loads(pathlib.Path('worker4-batch-manifest.json').read_text())
+          assert len(m)==20 and [x['id'] for x in m]==list(range(171,191))
+          for x in m:
+            p=pathlib.Path(x['slug'])/'index.html'; assert p.is_file() and p.stat().st_size>10000,p
+          print('PAYLOAD_OK',len(m))
+          PY
+      - name: Install Playwright Chromium
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Start localhost
+        run: |
+          nohup python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w4-http.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/w4-http.log; exit 1
+      - name: Run technical interaction mobile reduced-motion QA
+        run: python3 .github/worker4_171_190_qa_runner.py
+      - name: Upload QA package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: worker4-171-190-qa-package
+          if-no-files-found: error
+          path: |
+            worker4-batch-manifest.json
+            worker4-171-190-qa.json
+            w4-171-*/index.html
+            w4-171-*/desktop-viewport.png
+            w4-171-*/desktop-full.png
+            w4-171-*/desktop-contact.png
+            w4-171-*/mobile-menu-open.png
+            w4-171-*/preview-mobile.png
+            w4-171-*/mobile-full.png
+            w4-171-*/mobile-contact.png
+            w4-172-*/**
+            w4-173-*/**
+            w4-174-*/**
+            w4-175-*/**
+            w4-176-*/**
+            w4-177-*/**
+            w4-178-*/**
+            w4-179-*/**
+            w4-180-*/**
+            w4-181-*/**
+            w4-182-*/**
+            w4-183-*/**
+            w4-184-*/**
+            w4-185-*/**
+            w4-186-*/**
+            w4-187-*/**
+            w4-188-*/**
+            w4-189-*/**
+            w4-190-*/**
