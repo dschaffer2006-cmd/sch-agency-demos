@@ -1,0 +1,49 @@
+name: FB Worker2 Bing RSS discovery
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/rss-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Query Bing RSS
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/rss-test
+          python3 - <<'PY'
+          import urllib.parse, subprocess, pathlib, re, html, xml.etree.ElementTree as ET, time
+          gid='883708115725466'
+          terms=['appointment','client','salon','price','booking','rent','chair','marketing','instagram','facebook','website','business','color','cut','hair','stylist','help','advice','product','bleach','toner','balayage','foil','shampoo','extension','wedding','bride','cancel','no show','reminder','software','fresha','vagaro','glossgenius','new clients','slow','busy','schedule','payment','deposit','policy','social media','advertising','tax','booth','commission','suite','owner','manager']
+          urls=[]
+          for i,term in enumerate(terms,1):
+              q=f'site:facebook.com/groups/{gid}/posts {term}'
+              u='https://www.bing.com/search?format=rss&q='+urllib.parse.quote_plus(q)+'&count=50&setlang=en-US'
+              r=subprocess.run(['curl','-L','-sS','--compressed','--connect-timeout','20','--max-time','60','-A','Mozilla/5.0',u],capture_output=True,text=True)
+              pathlib.Path(f'research/fb-worker2/rss-test/q{i}.xml').write_text(r.stdout[:200000],encoding='utf-8')
+              for m in re.findall(r'https?://(?:www\.)?facebook\.com/groups/'+gid+r'/(?:posts|permalink)/\d+/?',html.unescape(r.stdout)):
+                  urls.append(m.replace('/permalink/','/posts/'))
+              time.sleep(.5)
+          uniq=list(dict.fromkeys(urls))
+          pathlib.Path('research/fb-worker2/rss-test/urls.txt').write_text('\n'.join(uniq)+'\n',encoding='utf-8')
+          pathlib.Path('research/fb-worker2/rss-test/count.txt').write_text(str(len(uniq))+'\n',encoding='utf-8')
+          print('unique',len(uniq))
+          PY
+      - name: Commit output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/rss-test
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 Bing RSS discovery output'
+          git push origin HEAD:fb-research-worker2
