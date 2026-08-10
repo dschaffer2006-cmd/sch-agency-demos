@@ -2,239 +2,10 @@
   "mode": "audit",
   "base_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos",
   "total_routes": 159,
-  "passed": 147,
-  "failed": 12,
-  "all_ok": false,
-  "failed_routes": [
-    {
-      "slug": "aranyhid-szepsegszalon-balatonfured",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aranyhid-szepsegszalon-balatonfured/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aranyhid-szepsegszalon-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "bella-vital-szepsegszalon-balatonalmadi",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-vital-szepsegszalon-balatonalmadi/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-vital-szepsegszalon-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "black-forest-barbershop-balatonfured",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-forest-barbershop-balatonfured/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-forest-barbershop-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "fodraszat-kossuth-lajos-utca-balatonfured",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszat-kossuth-lajos-utca-balatonfured/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszat-kossuth-lajos-utca-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "fodraszkellek-shop-balatonfuzfo",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszkellek-shop-balatonfuzfo/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszkellek-shop-balatonfuzfo/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "frixhairdesign-frics-balatonalmadi",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frixhairdesign-frics-balatonalmadi/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frixhairdesign-frics-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "haircontrast-kila-edina-balatonalmadi",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircontrast-kila-edina-balatonalmadi/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircontrast-kila-edina-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "krfodraszat-balatonfured",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/krfodraszat-balatonfured/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/krfodraszat-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "livia-fodraszat-balatonfured",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/livia-fodraszat-balatonfured/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/livia-fodraszat-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "rendes-rahel-balatonalmadi",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rendes-rahel-balatonalmadi/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rendes-rahel-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "rogers-barber-balatonfured",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rogers-barber-balatonfured/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rogers-barber-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    },
-    {
-      "slug": "szin-varazsmuhely-balatonalmadi",
-      "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szin-varazsmuhely-balatonalmadi/",
-      "ok": false,
-      "page": {
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szin-varazsmuhely-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
-      },
-      "attempt": 6
-    }
-  ],
+  "passed": 159,
+  "failed": 0,
+  "all_ok": true,
+  "failed_routes": [],
   "items": [
     {
       "slug": "a-szalon-gyor",
@@ -372,21 +143,21 @@
     {
       "slug": "aranyhid-szepsegszalon-balatonfured",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aranyhid-szepsegszalon-balatonfured/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aranyhid-szepsegszalon-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aranyhid-szepsegszalon-balatonfured/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "balassa-szalon-siofok",
@@ -600,21 +371,21 @@
     {
       "slug": "bella-vital-szepsegszalon-balatonalmadi",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-vital-szepsegszalon-balatonalmadi/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-vital-szepsegszalon-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-vital-szepsegszalon-balatonalmadi/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "bellissima-szepsegszalon-veszprem",
@@ -676,21 +447,21 @@
     {
       "slug": "black-forest-barbershop-balatonfured",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-forest-barbershop-balatonfured/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-forest-barbershop-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-forest-barbershop-balatonfured/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "black-velvet-hair-gyor",
@@ -1151,40 +922,40 @@
     {
       "slug": "fodraszat-kossuth-lajos-utca-balatonfured",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszat-kossuth-lajos-utca-balatonfured/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszat-kossuth-lajos-utca-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszat-kossuth-lajos-utca-balatonfured/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "fodraszkellek-shop-balatonfuzfo",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszkellek-shop-balatonfuzfo/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszkellek-shop-balatonfuzfo/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszkellek-shop-balatonfuzfo/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "frix-hair-design-veszprem",
@@ -1208,21 +979,21 @@
     {
       "slug": "frixhairdesign-frics-balatonalmadi",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frixhairdesign-frics-balatonalmadi/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frixhairdesign-frics-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frixhairdesign-frics-balatonalmadi/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "gabi-mesterfodrasz-hajorvos-nagykanizsa",
@@ -1417,21 +1188,21 @@
     {
       "slug": "haircontrast-kila-edina-balatonalmadi",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircontrast-kila-edina-balatonalmadi/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircontrast-kila-edina-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircontrast-kila-edina-balatonalmadi/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "haircutandmore-gyor",
@@ -1892,21 +1663,21 @@
     {
       "slug": "krfodraszat-balatonfured",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/krfodraszat-balatonfured/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/krfodraszat-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/krfodraszat-balatonfured/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "lang-es-fozo-szepsegszalon-sopron",
@@ -1949,21 +1720,21 @@
     {
       "slug": "livia-fodraszat-balatonfured",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/livia-fodraszat-balatonfured/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/livia-fodraszat-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/livia-fodraszat-balatonfured/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "lk-royal-barber-dunaujvaros",
@@ -2424,40 +2195,40 @@
     {
       "slug": "rendes-rahel-balatonalmadi",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rendes-rahel-balatonalmadi/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rendes-rahel-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rendes-rahel-balatonalmadi/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "rogers-barber-balatonfured",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rogers-barber-balatonfured/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rogers-barber-balatonfured/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rogers-barber-balatonfured/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "sd-beauty-project-keszthely",
@@ -2652,21 +2423,21 @@
     {
       "slug": "szin-varazsmuhely-balatonalmadi",
       "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szin-varazsmuhely-balatonalmadi/",
-      "ok": false,
+      "ok": true,
       "page": {
-        "status": 404,
+        "status": 200,
         "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "github_pages_404": false,
+        "error": ""
       },
       "preview": {
-        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szin-varazsmuhely-balatonalmadi/preview-mobile.png",
-        "status": 404,
-        "content_type": "text/html; charset=utf-8",
-        "github_pages_404": true,
-        "error": "HTTP Error 404: Not Found"
+        "url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szin-varazsmuhely-balatonalmadi/preview-mobile.svg",
+        "status": 200,
+        "content_type": "image/svg+xml",
+        "github_pages_404": false,
+        "error": ""
       },
-      "attempt": 6
+      "attempt": 1
     },
     {
       "slug": "szipi-barbershop-keszthely",
