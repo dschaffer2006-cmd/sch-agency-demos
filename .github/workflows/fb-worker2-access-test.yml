@@ -1,0 +1,49 @@
+name: FB Worker2 access diagnostic
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  test-public-access:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Probe public-only routes
+        shell: bash
+        run: |
+          set -u
+          mkdir -p research/fb-worker2/diagnostic
+          urls=(
+            'https://r.jina.ai/https://www.facebook.com/groups/883708115725466/posts/1938403610255906/'
+            'https://r.jina.ai/https://www.facebook.com/groups/883708115725466/'
+            'https://r.jina.ai/https://www.facebook.com/groups/154895471821754/'
+            'https://r.jina.ai/https://www.facebook.com/groups/salonownersmarketing/'
+            'https://mbasic.facebook.com/groups/883708115725466/posts/1938403610255906/'
+            'https://www.facebook.com/groups/883708115725466/posts/1938403610255906/'
+          )
+          : > research/fb-worker2/diagnostic/summary.txt
+          i=0
+          for url in "${urls[@]}"; do
+            i=$((i+1))
+            out="research/fb-worker2/diagnostic/$i.txt"
+            code=$(curl -L -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/137 Safari/537.36' --connect-timeout 20 --max-time 90 -sS -o "$out" -w '%{http_code}' "$url" || true)
+            size=$(wc -c < "$out" 2>/dev/null || echo 0)
+            printf '%s\t%s\t%s\n' "$code" "$size" "$url" >> research/fb-worker2/diagnostic/summary.txt
+            head -c 80000 "$out" > "$out.tmp" && mv "$out.tmp" "$out"
+          done
+      - name: Commit diagnostic output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/diagnostic
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 access diagnostic output'
+          git push origin HEAD:fb-research-worker2
