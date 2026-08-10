@@ -1,0 +1,59 @@
+name: FB Worker2 multi-engine discovery
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/multisearch-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Search multiple public engines
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/multisearch
+          python3 - <<'PY'
+          import urllib.parse, subprocess, pathlib, re, html, time, json
+          gid='883708115725466'
+          terms=['hair','salon','stylist','color','colour','cut','client','clients','price','pricing','appointment','booking','cancel','no show','reminder','fresha','vagaro','marketing','instagram','facebook','website','business','chair','booth','rent','commission','suite','owner','manager','staff','employee','product','bleach','toner','balayage','foil','shampoo','extension','wedding','bride','slow','busy','schedule','payment','deposit','policy','advertising','tax','help','advice','recommend']
+          engines={
+            'google': lambda q:'https://www.google.com/search?num=100&filter=0&hl=en&q='+urllib.parse.quote_plus(q),
+            'ddg': lambda q:'https://html.duckduckgo.com/html/?q='+urllib.parse.quote_plus(q),
+            'mojeek': lambda q:'https://www.mojeek.com/search?q='+urllib.parse.quote_plus(q),
+          }
+          pat=re.compile(r'https?(?::|%3A)(?:/|%2F){2}(?:www\.)?facebook\.com(?:/|%2F)groups(?:/|%2F)'+gid+r'(?:/|%2F)(?:posts|permalink)(?:/|%2F)(\d+)',re.I)
+          found={k:[] for k in engines}; all_urls=[]
+          for ei,(eng,make) in enumerate(engines.items()):
+            for i,term in enumerate(terms):
+              q=f'site:facebook.com/groups/{gid}/posts {term}'
+              u=make(q)
+              r=subprocess.run(['curl','-L','-sS','--compressed','--connect-timeout','15','--max-time','45','-A','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/137 Safari/537.36',u],capture_output=True,text=True)
+              body=html.unescape(urllib.parse.unquote(r.stdout))
+              ids=pat.findall(body)
+              for pid in ids:
+                url=f'https://www.facebook.com/groups/{gid}/posts/{pid}/'
+                found[eng].append(url); all_urls.append(url)
+              if i<3: pathlib.Path(f'research/fb-worker2/multisearch/{eng}-{i+1}.html').write_text(r.stdout[:250000],encoding='utf-8')
+              time.sleep(.35)
+          found={k:list(dict.fromkeys(v)) for k,v in found.items()}
+          uniq=list(dict.fromkeys(all_urls))
+          pathlib.Path('research/fb-worker2/multisearch/urls.txt').write_text('\n'.join(uniq)+'\n',encoding='utf-8')
+          pathlib.Path('research/fb-worker2/multisearch/summary.json').write_text(json.dumps({'total_unique':len(uniq),'by_engine':{k:len(v) for k,v in found.items()}},indent=2),encoding='utf-8')
+          print('total unique',len(uniq),{k:len(v) for k,v in found.items()})
+          PY
+      - name: Commit output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/multisearch
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 multi-engine discovery output'
+          git push origin HEAD:fb-research-worker2
