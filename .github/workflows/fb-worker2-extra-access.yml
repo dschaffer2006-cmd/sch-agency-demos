@@ -1,0 +1,44 @@
+name: FB Worker2 extra group access validation
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/extra-trigger.txt'
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Fetch public posts and comments
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/extra-access
+          cat > /tmp/t.tsv <<'EOF'
+          brow	https://www.facebook.com/groups/3517648831601491/posts/24137590309180708/
+          lashlift	https://www.facebook.com/groups/1597425280305446/posts/10013943085320248/
+          EOF
+          : > research/fb-worker2/extra-access/summary.tsv
+          while IFS=$'\t' read -r name url; do
+            out="research/fb-worker2/extra-access/$name.md"
+            code=$(curl -L -sS --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' -o "$out" -w '%{http_code}' "https://r.jina.ai/$url" || true)
+            size=$(wc -c < "$out" 2>/dev/null || echo 0)
+            title=$(grep -m1 '^Title:' "$out" | sed 's/^Title: //' || true)
+            comments=$(grep -Eio '[0-9,.Kk]+ comments' "$out" | head -1 || true)
+            ai=$(grep -c 'Summarized by AI' "$out" || true)
+            anon=$(grep -c 'Anonymous participant' "$out" || true)
+            printf '%s\t%s\t%s\t%s\tai=%s\tanon=%s\t%s\t%s\n' "$name" "$code" "$size" "$comments" "$ai" "$anon" "$title" "$url" >> research/fb-worker2/extra-access/summary.tsv
+            sleep 2
+          done < /tmp/t.tsv
+      - name: Commit output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/extra-access
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 extra access validation output'
+          git push origin HEAD:fb-research-worker2
