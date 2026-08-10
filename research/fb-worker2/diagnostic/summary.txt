@@ -1,0 +1,6 @@
+200	3763	https://r.jina.ai/https://www.facebook.com/groups/883708115725466/posts/1938403610255906/
+200	3998	https://r.jina.ai/https://www.facebook.com/groups/883708115725466/
+200	3937	https://r.jina.ai/https://www.facebook.com/groups/154895471821754/
+200	3987	https://r.jina.ai/https://www.facebook.com/groups/salonownersmarketing/
+200	5841	https://mbasic.facebook.com/groups/883708115725466/posts/1938403610255906/
+400	1542	https://www.facebook.com/groups/883708115725466/posts/1938403610255906/
