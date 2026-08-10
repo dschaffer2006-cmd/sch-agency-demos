@@ -1,0 +1,78 @@
+name: Repair all missing mobile previews and strict audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/repair-all-mobile-previews.yml'
+      - 'tools/ensure_all_mobile_previews.js'
+      - 'tools/audit_all_pages_and_previews.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sch-all-mobile-preview-repair
+  cancel-in-progress: false
+
+jobs:
+  repair-previews:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/all-preview-server.log 2>&1 &
+          sleep 2
+
+      - name: Generate real mobile screenshots for every missing preview
+        run: node tools/ensure_all_mobile_previews.js
+
+      - name: Commit all generated preview-mobile.png files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*/preview-mobile.png' all-preview-generation-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m '[preview-repair] generate every missing mobile preview'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Wait for Pages deployment
+        run: sleep 75
+
+      - name: Strict live audit - page and PNG preview must both be 2xx
+        id: strict
+        continue-on-error: true
+        run: python3 tools/audit_all_pages_and_previews.py
+
+      - name: Commit strict audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add all-pages-and-previews-audit.json
+          if ! git diff --cached --quiet; then
+            git commit -m '[strict-404-audit] verify every page and preview'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Require zero page or preview 404s
+        if: steps.strict.outcome == 'failure'
+        run: |
+          echo 'At least one page or preview is still failing. See all-pages-and-previews-audit.json.'
+          exit 1
