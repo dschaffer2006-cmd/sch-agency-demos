@@ -1,0 +1,46 @@
+name: FB Worker2 Headspa access validation
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/headspa-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Fetch representative public posts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/headspa-access
+          cat > /tmp/targets.tsv <<'EOF'
+          01	https://www.facebook.com/groups/1009094707502364/posts/1125682182510282/
+          02	https://www.facebook.com/groups/1009094707502364/posts/1228161935595639/
+          03	https://www.facebook.com/groups/1009094707502364/posts/1121694199575747/
+          EOF
+          : > research/fb-worker2/headspa-access/summary.tsv
+          while IFS=$'\t' read -r name url; do
+            out="research/fb-worker2/headspa-access/${name}.md"
+            code=$(curl -L -sS --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' -o "$out" -w '%{http_code}' "https://r.jina.ai/$url" || true)
+            size=$(wc -c < "$out" 2>/dev/null || echo 0)
+            title=$(grep -m1 '^Title:' "$out" | sed 's/^Title: //' || true)
+            comments=$(grep -Eio '[0-9,.Kk]+ comments' "$out" | head -1 || true)
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$name" "$code" "$size" "$comments" "$title" "$url" >> research/fb-worker2/headspa-access/summary.tsv
+            sleep 2
+          done < /tmp/targets.tsv
+      - name: Commit validation output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/headspa-access
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 Headspa public access validation output'
+          git push origin HEAD:fb-research-worker2
