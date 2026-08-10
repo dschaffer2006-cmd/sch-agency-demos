@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'worker4-171-190-diagnose-trigger.txt'
       - '.github/workflows/worker4-171-190-diagnose.yml'
   workflow_dispatch:
 permissions:
@@ -16,7 +17,7 @@ jobs:
       - name: Inspect payload markers
         run: |
           python3 <<'PY'
-          import base64,io,tarfile,pathlib,json,re
+          import base64,io,tarfile,pathlib,json
           raw=base64.b64decode(pathlib.Path('.github/worker4_171_190_payload.txt').read_text().strip())
           with tarfile.open(fileobj=io.BytesIO(raw),mode='r:gz') as tf: tf.extractall('.')
           m=json.loads(pathlib.Path('worker4-batch-manifest.json').read_text())
