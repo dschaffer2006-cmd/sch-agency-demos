@@ -1,0 +1,49 @@
+name: FB Worker2 Bing discovery test
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/bing-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Query public search result pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/bing-test
+          python3 - <<'PY'
+          import urllib.parse, subprocess, pathlib, re, time
+          base='site:facebook.com/groups/883708115725466/posts "Hairdressing Advice, Tips & Education"'
+          all_urls=[]
+          for idx,first in enumerate(range(1,202,10),1):
+              q=urllib.parse.quote_plus(base)
+              u=f'https://www.bing.com/search?q={q}&count=50&first={first}&setlang=en-US'
+              r=subprocess.run(['curl','-L','-sS','--compressed','--connect-timeout','20','--max-time','90','-A','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/137 Safari/537.36',u],capture_output=True,text=True)
+              body=r.stdout
+              pathlib.Path(f'research/fb-worker2/bing-test/page{idx}.html').write_text(body[:300000],encoding='utf-8')
+              urls=re.findall(r'https?://(?:www\.)?facebook\.com/groups/883708115725466/posts/\d+/?',body)
+              all_urls += urls
+              time.sleep(1.5)
+          uniq=list(dict.fromkeys(all_urls))
+          pathlib.Path('research/fb-worker2/bing-test/urls.txt').write_text('\n'.join(uniq)+'\n',encoding='utf-8')
+          pathlib.Path('research/fb-worker2/bing-test/count.txt').write_text(str(len(uniq))+'\n',encoding='utf-8')
+          print('unique',len(uniq))
+          PY
+      - name: Commit discovery output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/bing-test
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 Bing discovery output'
+          git push origin HEAD:fb-research-worker2
