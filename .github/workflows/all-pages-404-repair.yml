@@ -1,0 +1,70 @@
+name: Repair all historical GitHub Pages demo routes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/all-pages-404-repair.yml'
+      - 'tools/all_pages_404_repair.py'
+      - 'expected-pages-routes.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sch-all-pages-404-repair
+  cancel-in-progress: false
+
+jobs:
+  restore-and-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout complete repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore every historical demo route missing from main
+        run: python3 tools/all_pages_404_repair.py restore
+
+      - name: Commit and push restored routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m '[404-repair] restore all historical demo routes'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo 'No repository routes needed restoration.'
+          fi
+
+      - name: Wait for GitHub Pages propagation
+        run: sleep 75
+
+      - name: Live audit every generated and referenced public route
+        id: audit
+        continue-on-error: true
+        run: python3 tools/all_pages_404_repair.py audit
+
+      - name: Commit machine-readable audit reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add all-pages-404-audit.json all-pages-404-restore-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m '[404-audit] audit every historical demo route'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Fail workflow if any public route still returns an error
+        if: steps.audit.outcome == 'failure'
+        run: |
+          echo 'One or more public demo routes still fail. See all-pages-404-audit.json.'
+          exit 1
