@@ -1,0 +1,3349 @@
+{
+  "base_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos",
+  "total_routes": 159,
+  "passed": 159,
+  "failed": 0,
+  "all_ok": true,
+  "failed_routes": [],
+  "items": [
+    {
+      "slug": "a-szalon-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/a-szalon-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/a-szalon-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "agi-kozmetika-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/agi-kozmetika-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/agi-kozmetika-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "aloe-szalon-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aloe-szalon-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aloe-szalon-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "anflor-fodraszat-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/anflor-fodraszat-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/anflor-fodraszat-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "ani-fodraszszalon-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ani-fodraszszalon-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ani-fodraszszalon-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "aphrodite-fodraszat-adri-tatabanya",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aphrodite-fodraszat-adri-tatabanya/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aphrodite-fodraszat-adri-tatabanya/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "aracsi-szepitok-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aracsi-szepitok-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aracsi-szepitok-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "aranyhid-szepsegszalon-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aranyhid-szepsegszalon-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/aranyhid-szepsegszalon-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "balassa-szalon-siofok",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/balassa-szalon-siofok/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/balassa-szalon-siofok/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "baranyai-szalon-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/baranyai-szalon-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/baranyai-szalon-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "barber-boys-hair-salon-nagykanizsa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barber-boys-hair-salon-nagykanizsa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barber-boys-hair-salon-nagykanizsa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "barber-gang-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barber-gang-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barber-gang-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "barber-studio-veszprem-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barber-studio-veszprem-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barber-studio-veszprem-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "barbershop-by-balassa-siofok",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barbershop-by-balassa-siofok/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barbershop-by-balassa-siofok/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "barbi-hair-clinic-tatabanya",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barbi-hair-clinic-tatabanya/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/barbi-hair-clinic-tatabanya/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "beke-barbershop-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/beke-barbershop-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/beke-barbershop-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "bella-figura-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-figura-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-figura-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "bella-fodraszcikk-nagykanizsa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-fodraszcikk-nagykanizsa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-fodraszcikk-nagykanizsa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "bella-signora-tatabanya",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-signora-tatabanya/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-signora-tatabanya/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "bella-vital-szepsegszalon-balatonalmadi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-vital-szepsegszalon-balatonalmadi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bella-vital-szepsegszalon-balatonalmadi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "bellissima-szepsegszalon-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bellissima-szepsegszalon-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bellissima-szepsegszalon-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "bhair-szekszard",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bhair-szekszard/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bhair-szekszard/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "bibor-hajszalon-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bibor-hajszalon-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/bibor-hajszalon-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "black-forest-barbershop-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-forest-barbershop-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-forest-barbershop-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "black-velvet-hair-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-velvet-hair-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/black-velvet-hair-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "borbely-cafe-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/borbely-cafe-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/borbely-cafe-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "braid-and-beauty-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/braid-and-beauty-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/braid-and-beauty-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "charm-fodrasz-ajka",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/charm-fodrasz-ajka/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/charm-fodrasz-ajka/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "clarity-hajstudio-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/clarity-hajstudio-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/clarity-hajstudio-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "classic-vibe-barber-ajka",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/classic-vibe-barber-ajka/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/classic-vibe-barber-ajka/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "darazsdi-fodraszat-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/darazsdi-fodraszat-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/darazsdi-fodraszat-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "dettus-fodraszat-veszprem-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dettus-fodraszat-veszprem-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dettus-fodraszat-veszprem-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "diva-szepsegszalon-balatonlelle",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/diva-szepsegszalon-balatonlelle/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/diva-szepsegszalon-balatonlelle/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "dorka-fodrasza-egerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dorka-fodrasza-egerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dorka-fodrasza-egerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "dorka-fodrasza-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dorka-fodrasza-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dorka-fodrasza-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "dreamhair-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dreamhair-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/dreamhair-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "edina-fodraszat-siofok",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/edina-fodraszat-siofok/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/edina-fodraszat-siofok/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "ekkert-zsuzsa-paks",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ekkert-zsuzsa-paks/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ekkert-zsuzsa-paks/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "essential-skincare-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/essential-skincare-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/essential-skincare-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "eszlinger-agnes-hair-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/eszlinger-agnes-hair-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/eszlinger-agnes-hair-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "esztetika-szigetvar",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/esztetika-szigetvar/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/esztetika-szigetvar/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "euphoria-beauty-med-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/euphoria-beauty-med-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/euphoria-beauty-med-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "eva-fodraszata-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/eva-fodraszata-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/eva-fodraszata-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "farosz-szepsegszalon-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/farosz-szepsegszalon-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/farosz-szepsegszalon-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "fellai-barber-shop-siofok",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fellai-barber-shop-siofok/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fellai-barber-shop-siofok/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "ferfi-fodraszat-veszprem-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ferfi-fodraszat-veszprem-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ferfi-fodraszat-veszprem-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "figaro-fodraszat-barber-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/figaro-fodraszat-barber-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/figaro-fodraszat-barber-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "fodrasz-es-szallaskiadas-balatonlelle",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodrasz-es-szallaskiadas-balatonlelle/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodrasz-es-szallaskiadas-balatonlelle/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "fodraszat-kossuth-lajos-utca-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszat-kossuth-lajos-utca-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszat-kossuth-lajos-utca-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "fodraszkellek-shop-balatonfuzfo",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszkellek-shop-balatonfuzfo/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/fodraszkellek-shop-balatonfuzfo/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "frix-hair-design-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frix-hair-design-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frix-hair-design-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "frixhairdesign-frics-balatonalmadi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frixhairdesign-frics-balatonalmadi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/frixhairdesign-frics-balatonalmadi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "gabi-mesterfodrasz-hajorvos-nagykanizsa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gabi-mesterfodrasz-hajorvos-nagykanizsa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gabi-mesterfodrasz-hajorvos-nagykanizsa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "gentlemens-barbershop-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gentlemens-barbershop-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gentlemens-barbershop-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "gold-hajstudio-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gold-hajstudio-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gold-hajstudio-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "gurubi-szalon-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gurubi-szalon-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/gurubi-szalon-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hair-and-nails-club-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-and-nails-club-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-and-nails-club-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hair-beauty-eniko",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-beauty-eniko/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-beauty-eniko/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hair-by-flora-onodi-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-by-flora-onodi-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-by-flora-onodi-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hair-by-kitty-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-by-kitty-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-by-kitty-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hair-port-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-port-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hair-port-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hairclub-borondi-levente-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hairclub-borondi-levente-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hairclub-borondi-levente-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "haircontrast-kila-edina-balatonalmadi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircontrast-kila-edina-balatonalmadi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircontrast-kila-edina-balatonalmadi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "haircutandmore-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircutandmore-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/haircutandmore-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hairstyles-by-mimi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hairstyles-by-mimi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hairstyles-by-mimi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hairvision-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hairvision-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hairvision-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hajasz-fodraszszalon-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajasz-fodraszszalon-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajasz-fodraszszalon-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hajcsapda-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajcsapda-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajcsapda-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hajhosszabbitas-fodraszat-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajhosszabbitas-fodraszat-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajhosszabbitas-fodraszat-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hajlabor-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajlabor-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajlabor-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hajnalfeny-szepsegkozpont-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajnalfeny-szepsegkozpont-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajnalfeny-szepsegkozpont-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hajpresszo-paks",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajpresszo-paks/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajpresszo-paks/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hajvarazs-fodrasz-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajvarazs-fodrasz-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hajvarazs-fodrasz-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "harmonia-szepsegszalon-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/harmonia-szepsegszalon-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/harmonia-szepsegszalon-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "heni-kozmetikai-studio-balatonlelle",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/heni-kozmetikai-studio-balatonlelle/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/heni-kozmetikai-studio-balatonlelle/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "hidegheti-judit-ajka",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hidegheti-judit-ajka/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/hidegheti-judit-ajka/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "home-of-beauty-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/home-of-beauty-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/home-of-beauty-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "icon-barber-shop-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/icon-barber-shop-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/icon-barber-shop-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "infinity-hairstudio-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/infinity-hairstudio-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/infinity-hairstudio-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "jerevan-fodraszat-sopron",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/jerevan-fodraszat-sopron/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/jerevan-fodraszat-sopron/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "karakter-studio-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/karakter-studio-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/karakter-studio-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "kl-hair-and-barber-balatonalmadi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kl-hair-and-barber-balatonalmadi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kl-hair-and-barber-balatonalmadi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "korody-barber-shop-balaton-plaza-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/korody-barber-shop-balaton-plaza-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/korody-barber-shop-balaton-plaza-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "kovacs-eszter-veszprem-fodraszat-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kovacs-eszter-veszprem-fodraszat-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kovacs-eszter-veszprem-fodraszat-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "kozma-dorina-aranyhid-hajstudio-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kozma-dorina-aranyhid-hajstudio-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kozma-dorina-aranyhid-hajstudio-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "kozmetika-veszprem-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kozmetika-veszprem-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kozmetika-veszprem-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "kreativ-hajstudio-nagykanizsa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kreativ-hajstudio-nagykanizsa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/kreativ-hajstudio-nagykanizsa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "krfodraszat-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/krfodraszat-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/krfodraszat-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "lang-es-fozo-szepsegszalon-sopron",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lang-es-fozo-szepsegszalon-sopron/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lang-es-fozo-szepsegszalon-sopron/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "lefti-hajstudio-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lefti-hajstudio-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lefti-hajstudio-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "livia-fodraszat-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/livia-fodraszat-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/livia-fodraszat-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "lk-royal-barber-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lk-royal-barber-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lk-royal-barber-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "loreal-by-andras-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/loreal-by-andras-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/loreal-by-andras-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "loreal-professionnel-siofok",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/loreal-professionnel-siofok/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/loreal-professionnel-siofok/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "ls-hair-studio-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ls-hair-studio-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/ls-hair-studio-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "lux-barber-shop-veszprem-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lux-barber-shop-veszprem-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/lux-barber-shop-veszprem-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "luxury-szalon-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/luxury-szalon-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/luxury-szalon-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "macsai-anita",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/macsai-anita/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/macsai-anita/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "marco-barber-balatonlelle",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/marco-barber-balatonlelle/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/marco-barber-balatonlelle/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "masculine-barber-shop-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/masculine-barber-shop-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/masculine-barber-shop-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "mens-room-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/mens-room-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/mens-room-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "minnie-fodraszat-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/minnie-fodraszat-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/minnie-fodraszat-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "montazs-szepsegstudio-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/montazs-szepsegstudio-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/montazs-szepsegstudio-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "nova-skin-studio-balatonlelle",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/nova-skin-studio-balatonlelle/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/nova-skin-studio-balatonlelle/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "nowa-salon-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/nowa-salon-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/nowa-salon-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "orchidea-szepsegszalon-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/orchidea-szepsegszalon-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/orchidea-szepsegszalon-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "orising-szepsegszalon-balatonalmadi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/orising-szepsegszalon-balatonalmadi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/orising-szepsegszalon-balatonalmadi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "pacek-barbershop-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pacek-barbershop-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pacek-barbershop-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "pimpike-szepsegkucko-nagykanizsa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pimpike-szepsegkucko-nagykanizsa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pimpike-szepsegkucko-nagykanizsa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "pipere-box-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pipere-box-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pipere-box-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "prestige-szepsegszalon-nagykanizsa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/prestige-szepsegszalon-nagykanizsa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/prestige-szepsegszalon-nagykanizsa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "professzionalis-hajhosszabbitas-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/professzionalis-hajhosszabbitas-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/professzionalis-hajhosszabbitas-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "pure-studio-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pure-studio-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pure-studio-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "pure-white-beauty-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pure-white-beauty-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/pure-white-beauty-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "qubee-barbershop-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/qubee-barbershop-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/qubee-barbershop-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "rendes-rahel-balatonalmadi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rendes-rahel-balatonalmadi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rendes-rahel-balatonalmadi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "rogers-barber-balatonfured",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rogers-barber-balatonfured/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/rogers-barber-balatonfured/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "sd-beauty-project-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/sd-beauty-project-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/sd-beauty-project-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "selfie-fodraszat-siofok",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/selfie-fodraszat-siofok/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/selfie-fodraszat-siofok/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "shiny-hair-nail-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/shiny-hair-nail-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/shiny-hair-nail-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "spirit-hair-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/spirit-hair-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/spirit-hair-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "still-the-salon-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/still-the-salon-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/still-the-salon-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "stilus-kozmetika-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/stilus-kozmetika-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/stilus-kozmetika-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "suvi-the-barber-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/suvi-the-barber-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/suvi-the-barber-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "szabadi-szepsegszalon-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szabadi-szepsegszalon-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szabadi-szepsegszalon-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "szalonskicc-fodraszat-siofok",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szalonskicc-fodraszat-siofok/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szalonskicc-fodraszat-siofok/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "szepseg-sarok-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szepseg-sarok-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szepseg-sarok-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "szin-varazsmuhely-balatonalmadi",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szin-varazsmuhely-balatonalmadi/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szin-varazsmuhely-balatonalmadi/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "szipi-barbershop-keszthely",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szipi-barbershop-keszthely/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szipi-barbershop-keszthely/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "szlavik-hajstudio-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szlavik-hajstudio-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/szlavik-hajstudio-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "tesco-ajka-hipermarket",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/tesco-ajka-hipermarket/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/tesco-ajka-hipermarket/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "the-eden-hair-salon-pecs",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/the-eden-hair-salon-pecs/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/the-eden-hair-salon-pecs/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "torok-laura-hairdresser-nagykanizsa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/torok-laura-hairdresser-nagykanizsa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/torok-laura-hairdresser-nagykanizsa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "varga-andras-fodrasz-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/varga-andras-fodrasz-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/varga-andras-fodrasz-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "varga-hajszalon-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/varga-hajszalon-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/varga-hajszalon-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "viki-hair-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/viki-hair-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/viki-hair-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-anflor-fodraszat-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-anflor-fodraszat-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-anflor-fodraszat-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-barber-gang-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-barber-gang-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-barber-gang-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-bibor-hajszalon-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-bibor-hajszalon-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-bibor-hajszalon-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-charm-fodrasz-ajka",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-charm-fodrasz-ajka/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-charm-fodrasz-ajka/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-classic-vibe-barber-ajka",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-classic-vibe-barber-ajka/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-classic-vibe-barber-ajka/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-figaro-fodraszat-barber-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-figaro-fodraszat-barber-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-figaro-fodraszat-barber-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-hairclub-borondi-levente-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hairclub-borondi-levente-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hairclub-borondi-levente-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-hajhosszabbitas-fodraszat-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hajhosszabbitas-fodraszat-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hajhosszabbitas-fodraszat-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-hajvarazs-fodrasz-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hajvarazs-fodrasz-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hajvarazs-fodrasz-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-hidegheti-judit-ajka",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hidegheti-judit-ajka/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-hidegheti-judit-ajka/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-icon-barber-shop-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-icon-barber-shop-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-icon-barber-shop-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-infinity-hairstudio-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-infinity-hairstudio-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-infinity-hairstudio-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-loreal-by-andras-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-loreal-by-andras-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-loreal-by-andras-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-luxury-szalon-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-luxury-szalon-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-luxury-szalon-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-pipere-box-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-pipere-box-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-pipere-box-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-shiny-hair-nail-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-shiny-hair-nail-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-shiny-hair-nail-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-spirit-hair-zalaegerszeg",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-spirit-hair-zalaegerszeg/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-spirit-hair-zalaegerszeg/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-stilus-kozmetika-tapolca",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-stilus-kozmetika-tapolca/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-stilus-kozmetika-tapolca/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-suvi-the-barber-papa",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-suvi-the-barber-papa/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-suvi-the-barber-papa/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "w4-tesco-ajka-hipermarket",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-tesco-ajka-hipermarket/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/w4-tesco-ajka-hipermarket/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "wellness-hajstudio-zellei-erzsebet-dunaujvaros",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/wellness-hajstudio-zellei-erzsebet-dunaujvaros/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/wellness-hajstudio-zellei-erzsebet-dunaujvaros/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "yellow-black-szepsegszalon-gyor",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/yellow-black-szepsegszalon-gyor/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/yellow-black-szepsegszalon-gyor/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    },
+    {
+      "slug": "zsolex-barbershop-veszprem",
+      "page_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/zsolex-barbershop-veszprem/",
+      "preview_url": "https://dschaffer2006-cmd.github.io/sch-agency-demos/zsolex-barbershop-veszprem/preview-mobile.png",
+      "page_ok": true,
+      "preview_ok": true,
+      "ok": true,
+      "page": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "preview": {
+        "status": 200,
+        "content_type": "image/png",
+        "github_pages_404": false,
+        "error": ""
+      },
+      "attempt": 1
+    }
+  ]
+}
