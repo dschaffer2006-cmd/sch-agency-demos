@@ -1,0 +1,97 @@
+name: Repair final 12 broken public demo routes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-remaining-12-public-routes.yml'
+      - 'tools/fix_remaining_12_pages.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sch-final-12-route-repair
+  cancel-in-progress: false
+
+jobs:
+  repair-final-12:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate exact missing Sheet routes from verified source data
+        run: python3 tools/fix_remaining_12_pages.py
+
+      - name: Local HTTP route check
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/repair-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          python3 - <<'PY'
+          import urllib.request
+          slugs = [
+            'rendes-rahel-balatonalmadi','szin-varazsmuhely-balatonalmadi','frixhairdesign-frics-balatonalmadi',
+            'bella-vital-szepsegszalon-balatonalmadi','haircontrast-kila-edina-balatonalmadi','fodraszkellek-shop-balatonfuzfo',
+            'fodraszat-kossuth-lajos-utca-balatonfured','livia-fodraszat-balatonfured','rogers-barber-balatonfured',
+            'aranyhid-szepsegszalon-balatonfured','krfodraszat-balatonfured','black-forest-barbershop-balatonfured'
+          ]
+          for slug in slugs:
+              for suffix in ('/', '/preview-mobile.svg'):
+                  u=f'http://127.0.0.1:8765/{slug}{suffix}'
+                  with urllib.request.urlopen(u, timeout=10) as r:
+                      assert 200 <= r.status < 300, (u, r.status)
+              text=open(f'{slug}/index.html',encoding='utf-8').read().lower()
+              assert '<meta name="viewport"' in text
+              assert 'lorem ipsum' not in text and 'todo' not in text
+          print(f'LOCAL PASS: {len(slugs)} routes + previews')
+          PY
+
+      - name: Commit repaired public routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            rendes-rahel-balatonalmadi szin-varazsmuhely-balatonalmadi frixhairdesign-frics-balatonalmadi \
+            bella-vital-szepsegszalon-balatonalmadi haircontrast-kila-edina-balatonalmadi fodraszkellek-shop-balatonfuzfo \
+            fodraszat-kossuth-lajos-utca-balatonfured livia-fodraszat-balatonfured rogers-barber-balatonfured \
+            aranyhid-szepsegszalon-balatonfured krfodraszat-balatonfured black-forest-barbershop-balatonfured
+          if ! git diff --cached --quiet; then
+            git commit -m '[404-fix] repair final 12 broken outreach demo routes'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Wait for GitHub Pages deployment
+        run: sleep 75
+
+      - name: Re-audit all historical and referenced Pages routes
+        id: audit
+        continue-on-error: true
+        run: python3 tools/all_pages_404_repair.py audit
+
+      - name: Commit final audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add all-pages-404-audit.json
+          if ! git diff --cached --quiet; then
+            git commit -m '[404-audit] verify all public demo routes after final repair'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Require zero broken page routes
+        if: steps.audit.outcome == 'failure'
+        run: |
+          echo 'Public Pages audit still contains failures; see all-pages-404-audit.json.'
+          exit 1
