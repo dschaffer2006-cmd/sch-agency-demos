@@ -1,0 +1,47 @@
+name: FB Worker2 public group search access
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/group-search-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Fetch public group search pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/group-search-access
+          cat > /tmp/targets.tsv <<'EOF'
+          hair-a	https://www.facebook.com/groups/883708115725466/search/?q=salon
+          hair-b	https://www.facebook.com/groups/883708115725466/search/?q=color
+          head-a	https://www.facebook.com/groups/1009094707502364/search/?q=head%20spa
+          cos-a	https://www.facebook.com/groups/298843470774882/search/?q=salon
+          EOF
+          : > research/fb-worker2/group-search-access/summary.tsv
+          while IFS=$'\t' read -r name url; do
+            out="research/fb-worker2/group-search-access/${name}.md"
+            code=$(curl -L -sS --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' -o "$out" -w '%{http_code}' "https://r.jina.ai/$url" || true)
+            size=$(wc -c < "$out" 2>/dev/null || echo 0)
+            links=$(grep -Eo 'https://www\.facebook\.com/groups/[^ )]+/(posts|permalink)/[0-9]+' "$out" | sort -u | wc -l || true)
+            title=$(grep -m1 '^Title:' "$out" | sed 's/^Title: //' || true)
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$name" "$code" "$size" "$links" "$title" "$url" >> research/fb-worker2/group-search-access/summary.tsv
+            sleep 2
+          done < /tmp/targets.tsv
+      - name: Commit output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/group-search-access
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 public group search access output'
+          git push origin HEAD:fb-research-worker2
