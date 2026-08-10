@@ -1,0 +1,348 @@
+{
+  "mode": "restore",
+  "total_expected_routes": 159,
+  "already_present": 131,
+  "restored_path_count": 32,
+  "restored_paths": [
+    {
+      "path": "anflor-fodraszat-papa/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "anflor-fodraszat-papa/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "barber-gang-papa/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "barber-gang-papa/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "bibor-hajszalon-zalaegerszeg/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "bibor-hajszalon-zalaegerszeg/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "charm-fodrasz-ajka/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "charm-fodrasz-ajka/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "classic-vibe-barber-ajka/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "classic-vibe-barber-ajka/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "figaro-fodraszat-barber-zalaegerszeg/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "figaro-fodraszat-barber-zalaegerszeg/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hairclub-borondi-levente-zalaegerszeg/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hairclub-borondi-levente-zalaegerszeg/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hajhosszabbitas-fodraszat-zalaegerszeg/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hajhosszabbitas-fodraszat-zalaegerszeg/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hajvarazs-fodrasz-papa/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hajvarazs-fodrasz-papa/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hidegheti-judit-ajka/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "hidegheti-judit-ajka/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "icon-barber-shop-papa/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "icon-barber-shop-papa/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "infinity-hairstudio-papa/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "infinity-hairstudio-papa/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "loreal-by-andras-tapolca/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "loreal-by-andras-tapolca/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "spirit-hair-zalaegerszeg/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "spirit-hair-zalaegerszeg/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "suvi-the-barber-papa/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "suvi-the-barber-papa/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "tesco-ajka-hipermarket/index.html",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    },
+    {
+      "path": "tesco-ajka-hipermarket/preview-mobile.png",
+      "from_commit": "195bed750dbf1272a3ff7faa7211ae32d08b16d7"
+    }
+  ],
+  "unresolved_count": 12,
+  "unresolved": [
+    {
+      "slug": "aranyhid-szepsegszalon-balatonfured",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "bella-vital-szepsegszalon-balatonalmadi",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "black-forest-barbershop-balatonfured",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "fodraszat-kossuth-lajos-utca-balatonfured",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "fodraszkellek-shop-balatonfuzfo",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "frixhairdesign-frics-balatonalmadi",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "haircontrast-kila-edina-balatonalmadi",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "krfodraszat-balatonfured",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "livia-fodraszat-balatonfured",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "rendes-rahel-balatonalmadi",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "rogers-barber-balatonfured",
+      "reason": "no index.html found in git history"
+    },
+    {
+      "slug": "szin-varazsmuhely-balatonalmadi",
+      "reason": "no index.html found in git history"
+    }
+  ],
+  "slugs": [
+    "a-szalon-gyor",
+    "agi-kozmetika-balatonfured",
+    "aloe-szalon-veszprem",
+    "anflor-fodraszat-papa",
+    "ani-fodraszszalon-pecs",
+    "aphrodite-fodraszat-adri-tatabanya",
+    "aracsi-szepitok-balatonfured",
+    "aranyhid-szepsegszalon-balatonfured",
+    "balassa-szalon-siofok",
+    "baranyai-szalon-veszprem",
+    "barber-boys-hair-salon-nagykanizsa",
+    "barber-gang-papa",
+    "barber-studio-veszprem-veszprem",
+    "barbershop-by-balassa-siofok",
+    "barbi-hair-clinic-tatabanya",
+    "beke-barbershop-dunaujvaros",
+    "bella-figura-gyor",
+    "bella-fodraszcikk-nagykanizsa",
+    "bella-signora-tatabanya",
+    "bella-vital-szepsegszalon-balatonalmadi",
+    "bellissima-szepsegszalon-veszprem",
+    "bhair-szekszard",
+    "bibor-hajszalon-zalaegerszeg",
+    "black-forest-barbershop-balatonfured",
+    "black-velvet-hair-gyor",
+    "borbely-cafe-keszthely",
+    "braid-and-beauty-gyor",
+    "charm-fodrasz-ajka",
+    "clarity-hajstudio-pecs",
+    "classic-vibe-barber-ajka",
+    "darazsdi-fodraszat-gyor",
+    "dettus-fodraszat-veszprem-veszprem",
+    "diva-szepsegszalon-balatonlelle",
+    "dorka-fodrasza-egerszeg",
+    "dorka-fodrasza-keszthely",
+    "dreamhair-keszthely",
+    "edina-fodraszat-siofok",
+    "ekkert-zsuzsa-paks",
+    "essential-skincare-gyor",
+    "eszlinger-agnes-hair-veszprem",
+    "esztetika-szigetvar",
+    "euphoria-beauty-med-balatonfured",
+    "eva-fodraszata-tapolca",
+    "farosz-szepsegszalon-dunaujvaros",
+    "fellai-barber-shop-siofok",
+    "ferfi-fodraszat-veszprem-veszprem",
+    "figaro-fodraszat-barber-zalaegerszeg",
+    "fodrasz-es-szallaskiadas-balatonlelle",
+    "fodraszat-kossuth-lajos-utca-balatonfured",
+    "fodraszkellek-shop-balatonfuzfo",
+    "frix-hair-design-veszprem",
+    "frixhairdesign-frics-balatonalmadi",
+    "gabi-mesterfodrasz-hajorvos-nagykanizsa",
+    "gentlemens-barbershop-dunaujvaros",
+    "gold-hajstudio-keszthely",
+    "gurubi-szalon-dunaujvaros",
+    "hair-and-nails-club-pecs",
+    "hair-beauty-eniko",
+    "hair-by-flora-onodi-pecs",
+    "hair-by-kitty-gyor",
+    "hair-port-veszprem",
+    "hairclub-borondi-levente-zalaegerszeg",
+    "haircontrast-kila-edina-balatonalmadi",
+    "haircutandmore-gyor",
+    "hairstyles-by-mimi",
+    "hairvision-veszprem",
+    "hajasz-fodraszszalon-gyor",
+    "hajcsapda-gyor",
+    "hajhosszabbitas-fodraszat-zalaegerszeg",
+    "hajlabor-dunaujvaros",
+    "hajnalfeny-szepsegkozpont-pecs",
+    "hajpresszo-paks",
+    "hajvarazs-fodrasz-papa",
+    "harmonia-szepsegszalon-gyor",
+    "heni-kozmetikai-studio-balatonlelle",
+    "hidegheti-judit-ajka",
+    "home-of-beauty-gyor",
+    "icon-barber-shop-papa",
+    "infinity-hairstudio-papa",
+    "jerevan-fodraszat-sopron",
+    "karakter-studio-gyor",
+    "kl-hair-and-barber-balatonalmadi",
+    "korody-barber-shop-balaton-plaza-veszprem",
+    "kovacs-eszter-veszprem-fodraszat-veszprem",
+    "kozma-dorina-aranyhid-hajstudio-balatonfured",
+    "kozmetika-veszprem-veszprem",
+    "kreativ-hajstudio-nagykanizsa",
+    "krfodraszat-balatonfured",
+    "lang-es-fozo-szepsegszalon-sopron",
+    "lefti-hajstudio-dunaujvaros",
+    "livia-fodraszat-balatonfured",
+    "lk-royal-barber-dunaujvaros",
+    "loreal-by-andras-tapolca",
+    "loreal-professionnel-siofok",
+    "ls-hair-studio-zalaegerszeg",
+    "lux-barber-shop-veszprem-veszprem",
+    "luxury-szalon-tapolca",
+    "macsai-anita",
+    "marco-barber-balatonlelle",
+    "masculine-barber-shop-dunaujvaros",
+    "mens-room-dunaujvaros",
+    "minnie-fodraszat-balatonfured",
+    "montazs-szepsegstudio-gyor",
+    "nova-skin-studio-balatonlelle",
+    "nowa-salon-pecs",
+    "orchidea-szepsegszalon-zalaegerszeg",
+    "orising-szepsegszalon-balatonalmadi",
+    "pacek-barbershop-pecs",
+    "pimpike-szepsegkucko-nagykanizsa",
+    "pipere-box-tapolca",
+    "prestige-szepsegszalon-nagykanizsa",
+    "professzionalis-hajhosszabbitas-veszprem",
+    "pure-studio-keszthely",
+    "pure-white-beauty-balatonfured",
+    "qubee-barbershop-keszthely",
+    "rendes-rahel-balatonalmadi",
+    "rogers-barber-balatonfured",
+    "sd-beauty-project-keszthely",
+    "selfie-fodraszat-siofok",
+    "shiny-hair-nail-tapolca",
+    "spirit-hair-zalaegerszeg",
+    "still-the-salon-veszprem",
+    "stilus-kozmetika-tapolca",
+    "suvi-the-barber-papa",
+    "szabadi-szepsegszalon-gyor",
+    "szalonskicc-fodraszat-siofok",
+    "szepseg-sarok-keszthely",
+    "szin-varazsmuhely-balatonalmadi",
+    "szipi-barbershop-keszthely",
+    "szlavik-hajstudio-veszprem",
+    "tesco-ajka-hipermarket",
+    "the-eden-hair-salon-pecs",
+    "torok-laura-hairdresser-nagykanizsa",
+    "varga-andras-fodrasz-tapolca",
+    "varga-hajszalon-gyor",
+    "viki-hair-zalaegerszeg",
+    "w4-anflor-fodraszat-papa",
+    "w4-barber-gang-papa",
+    "w4-bibor-hajszalon-zalaegerszeg",
+    "w4-charm-fodrasz-ajka",
+    "w4-classic-vibe-barber-ajka",
+    "w4-figaro-fodraszat-barber-zalaegerszeg",
+    "w4-hairclub-borondi-levente-zalaegerszeg",
+    "w4-hajhosszabbitas-fodraszat-zalaegerszeg",
+    "w4-hajvarazs-fodrasz-papa",
+    "w4-hidegheti-judit-ajka",
+    "w4-icon-barber-shop-papa",
+    "w4-infinity-hairstudio-papa",
+    "w4-loreal-by-andras-tapolca",
+    "w4-luxury-szalon-tapolca",
+    "w4-pipere-box-tapolca",
+    "w4-shiny-hair-nail-tapolca",
+    "w4-spirit-hair-zalaegerszeg",
+    "w4-stilus-kozmetika-tapolca",
+    "w4-suvi-the-barber-papa",
+    "w4-tesco-ajka-hipermarket",
+    "wellness-hajstudio-zellei-erzsebet-dunaujvaros",
+    "yellow-black-szepsegszalon-gyor",
+    "zsolex-barbershop-veszprem"
+  ]
+}
