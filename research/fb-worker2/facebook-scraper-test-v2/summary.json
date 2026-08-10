@@ -1,0 +1,5 @@
+{
+  "posts": 0,
+  "posts_with_comments_full": 0,
+  "error": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\n  File \"/home/runner/.local/lib/python3.12/site-packages/facebook_scraper/__init__.py\", line 13, in <module>\n    from .facebook_scraper import FacebookScraper\n  File \"/home/runner/.local/lib/python3.12/site-packages/facebook_scraper/facebook_scraper.py\", line 15, in <module>\n    from requests_html import HTMLSession\n  File \"/home/runner/.local/lib/python3.12/site-packages/requests_html.py\", line 14, in <module>\n    from lxml.html.clean import Cleaner\n  File \"/home/runner/.local/lib/python3.12/site-packages/lxml/html/clean.py\", line 18, in <module>\n    raise ImportError(\nImportError: lxml.html.clean module is now a separate project lxml_html_clean.\nInstall lxml[html-clean] or lxml_html_clean directly.\n"
+}

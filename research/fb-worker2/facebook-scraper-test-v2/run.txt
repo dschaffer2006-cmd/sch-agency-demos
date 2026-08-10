@@ -1,0 +1,14 @@
+posts 0 comment_posts 0
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+  File "/home/runner/.local/lib/python3.12/site-packages/facebook_scraper/__init__.py", line 13, in <module>
+    from .facebook_scraper import FacebookScraper
+  File "/home/runner/.local/lib/python3.12/site-packages/facebook_scraper/facebook_scraper.py", line 15, in <module>
+    from requests_html import HTMLSession
+  File "/home/runner/.local/lib/python3.12/site-packages/requests_html.py", line 14, in <module>
+    from lxml.html.clean import Cleaner
+  File "/home/runner/.local/lib/python3.12/site-packages/lxml/html/clean.py", line 18, in <module>
+    raise ImportError(
+ImportError: lxml.html.clean module is now a separate project lxml_html_clean.
+Install lxml[html-clean] or lxml_html_clean directly.
+

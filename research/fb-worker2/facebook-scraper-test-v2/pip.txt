@@ -1,0 +1,106 @@
+Defaulting to user installation because normal site-packages is not writeable
+Collecting facebook-scraper
+  Downloading facebook_scraper-0.2.59-py3-none-any.whl.metadata (12 kB)
+Collecting dateparser<2.0.0,>=1.0.0 (from facebook-scraper)
+  Downloading dateparser-1.4.2-py3-none-any.whl.metadata (24 kB)
+Collecting demjson3<4.0.0,>=3.0.5 (from facebook-scraper)
+  Downloading demjson3-3.0.6.tar.gz (131 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 131.5/131.5 kB 8.3 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting requests-html<0.11.0,>=0.10.0 (from facebook-scraper)
+  Downloading requests_html-0.10.0-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: python-dateutil>=2.7.0 in /usr/lib/python3/dist-packages (from dateparser<2.0.0,>=1.0.0->facebook-scraper) (2.8.2)
+Collecting pytz>=2024.2 (from dateparser<2.0.0,>=1.0.0->facebook-scraper)
+  Downloading pytz-2026.3.post1-py2.py3-none-any.whl.metadata (22 kB)
+Collecting regex>=2024.9.11 (from dateparser<2.0.0,>=1.0.0->facebook-scraper)
+  Downloading regex-2026.7.19-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.5/40.5 kB 12.6 MB/s eta 0:00:00
+Collecting tzlocal>=0.2 (from dateparser<2.0.0,>=1.0.0->facebook-scraper)
+  Downloading tzlocal-5.4.4-py3-none-any.whl.metadata (7.7 kB)
+Requirement already satisfied: requests in /usr/lib/python3/dist-packages (from requests-html<0.11.0,>=0.10.0->facebook-scraper) (2.31.0)
+Collecting pyquery (from requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading pyquery-2.1.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting fake-useragent (from requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading fake_useragent-2.2.0-py3-none-any.whl.metadata (17 kB)
+Collecting parse (from requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading parse-1.22.1-py2.py3-none-any.whl.metadata (21 kB)
+Collecting bs4 (from requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading bs4-0.0.2-py2.py3-none-any.whl.metadata (411 bytes)
+Collecting w3lib (from requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading w3lib-2.4.1-py3-none-any.whl.metadata (2.3 kB)
+Collecting pyppeteer>=0.0.14 (from requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading pyppeteer-2.0.0-py3-none-any.whl.metadata (7.1 kB)
+Collecting appdirs<2.0.0,>=1.4.3 (from pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading appdirs-1.4.4-py2.py3-none-any.whl.metadata (9.0 kB)
+Requirement already satisfied: certifi>=2023 in /usr/lib/python3/dist-packages (from pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper) (2023.11.17)
+Collecting importlib-metadata>=1.4 (from pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading importlib_metadata-9.0.0-py3-none-any.whl.metadata (4.5 kB)
+Collecting pyee<12.0.0,>=11.0.0 (from pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading pyee-11.1.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting tqdm<5.0.0,>=4.42.1 (from pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading tqdm-4.70.0-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.3/57.3 kB 19.8 MB/s eta 0:00:00
+Collecting urllib3<2.0.0,>=1.25.8 (from pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading urllib3-1.26.20-py2.py3-none-any.whl.metadata (50 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.1/50.1 kB 16.1 MB/s eta 0:00:00
+Collecting websockets<11.0,>=10.0 (from pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading websockets-10.4.tar.gz (84 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.9/84.9 kB 28.5 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting beautifulsoup4 (from bs4->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)
+Collecting lxml>=2.1 (from pyquery->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading lxml-6.1.1-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.5 kB)
+Collecting cssselect>=1.5.0 (from pyquery->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading cssselect-1.5.0-py3-none-any.whl.metadata (2.4 kB)
+Collecting zipp>=3.20 (from importlib-metadata>=1.4->pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading zipp-4.1.0-py3-none-any.whl.metadata (3.6 kB)
+Requirement already satisfied: typing-extensions in /usr/lib/python3/dist-packages (from pyee<12.0.0,>=11.0.0->pyppeteer>=0.0.14->requests-html<0.11.0,>=0.10.0->facebook-scraper) (4.10.0)
+Collecting soupsieve>=1.6.1 (from beautifulsoup4->bs4->requests-html<0.11.0,>=0.10.0->facebook-scraper)
+  Downloading soupsieve-2.9.2-py3-none-any.whl.metadata (4.6 kB)
+Downloading facebook_scraper-0.2.59-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.5/45.5 kB 16.9 MB/s eta 0:00:00
+Downloading dateparser-1.4.2-py3-none-any.whl (316 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 316.5/316.5 kB 22.0 MB/s eta 0:00:00
+Downloading requests_html-0.10.0-py3-none-any.whl (13 kB)
+Downloading pyppeteer-2.0.0-py3-none-any.whl (82 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.9/82.9 kB 37.5 MB/s eta 0:00:00
+Downloading pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 508.3/508.3 kB 35.3 MB/s eta 0:00:00
+Downloading regex-2026.7.19-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.8/801.8 kB 64.9 MB/s eta 0:00:00
+Downloading tzlocal-5.4.4-py3-none-any.whl (18 kB)
+Downloading bs4-0.0.2-py2.py3-none-any.whl (1.2 kB)
+Downloading fake_useragent-2.2.0-py3-none-any.whl (161 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 161.7/161.7 kB 70.1 MB/s eta 0:00:00
+Downloading parse-1.22.1-py2.py3-none-any.whl (20 kB)
+Downloading pyquery-2.1.0-py3-none-any.whl (22 kB)
+Downloading w3lib-2.4.1-py3-none-any.whl (21 kB)
+Downloading appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+Downloading cssselect-1.5.0-py3-none-any.whl (20 kB)
+Downloading importlib_metadata-9.0.0-py3-none-any.whl (27 kB)
+Downloading lxml-6.1.1-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 158.3 MB/s eta 0:00:00
+Downloading pyee-11.1.1-py3-none-any.whl (15 kB)
+Downloading tqdm-4.70.0-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 39.6 MB/s eta 0:00:00
+Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 144.2/144.2 kB 49.0 MB/s eta 0:00:00
+Downloading beautifulsoup4-4.15.0-py3-none-any.whl (109 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.9/109.9 kB 44.3 MB/s eta 0:00:00
+Downloading soupsieve-2.9.2-py3-none-any.whl (37 kB)
+Downloading zipp-4.1.0-py3-none-any.whl (10 kB)
+Building wheels for collected packages: demjson3, websockets
+  Building wheel for demjson3 (setup.py): started
+  Building wheel for demjson3 (setup.py): finished with status 'done'
+  Created wheel for demjson3: filename=demjson3-3.0.6-py3-none-any.whl size=75280 sha256=ad9ef95267f098af2936296982d5bcfb4593f8a484110d3c586b82db533e2f7a
+  Stored in directory: /home/runner/.cache/pip/wheels/0d/27/2d/e7d52f5e46e36224ba954d99659fd60f76ae3452d1ee7ea3e5
+  Building wheel for websockets (setup.py): started
+  Building wheel for websockets (setup.py): finished with status 'done'
+  Created wheel for websockets: filename=websockets-10.4-cp312-cp312-linux_x86_64.whl size=106750 sha256=ca066462b72ecdd07c16d4e88a097896273a2a38886d359a51a81e23c5bbfcf5
+  Stored in directory: /home/runner/.cache/pip/wheels/80/cf/6d/5d7e4c920cb41925a178b2d2621889c520d648bab487b1d7fd
+Successfully built demjson3 websockets
+Installing collected packages: pytz, parse, demjson3, appdirs, zipp, websockets, w3lib, urllib3, tzlocal, tqdm, soupsieve, regex, pyee, lxml, fake-useragent, cssselect, pyquery, importlib-metadata, dateparser, beautifulsoup4, pyppeteer, bs4, requests-html, facebook-scraper
+Successfully installed appdirs-1.4.4 beautifulsoup4-4.15.0 bs4-0.0.2 cssselect-1.5.0 dateparser-1.4.2 demjson3-3.0.6 facebook-scraper-0.2.59 fake-useragent-2.2.0 importlib-metadata-9.0.0 lxml-6.1.1 parse-1.22.1 pyee-11.1.1 pyppeteer-2.0.0 pyquery-2.1.0 pytz-2026.3.post1 regex-2026.7.19 requests-html-0.10.0 soupsieve-2.9.2 tqdm-4.70.0 tzlocal-5.4.4 urllib3-1.26.20 w3lib-2.4.1 websockets-10.4 zipp-4.1.0
