@@ -1,0 +1,23 @@
+name: Facebook Worker 5 Public Group Probe
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Probe public Facebook groups
+        run: node tools/facebook_worker5_probe.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: facebook-worker5-probe
+          path: facebook-probe/
+          retention-days: 7
