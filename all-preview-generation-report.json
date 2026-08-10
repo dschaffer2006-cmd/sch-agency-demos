@@ -1,0 +1,331 @@
+{
+  "total_routes": 159,
+  "missing_before": 54,
+  "generated": [
+    {
+      "slug": "a-szalon-gyor",
+      "url": "http://127.0.0.1:8765/a-szalon-gyor/",
+      "path": "a-szalon-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "aloe-szalon-veszprem",
+      "url": "http://127.0.0.1:8765/aloe-szalon-veszprem/",
+      "path": "aloe-szalon-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "aphrodite-fodraszat-adri-tatabanya",
+      "url": "http://127.0.0.1:8765/aphrodite-fodraszat-adri-tatabanya/",
+      "path": "aphrodite-fodraszat-adri-tatabanya/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "aranyhid-szepsegszalon-balatonfured",
+      "url": "http://127.0.0.1:8765/aranyhid-szepsegszalon-balatonfured/",
+      "path": "aranyhid-szepsegszalon-balatonfured/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "baranyai-szalon-veszprem",
+      "url": "http://127.0.0.1:8765/baranyai-szalon-veszprem/",
+      "path": "baranyai-szalon-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "barber-studio-veszprem-veszprem",
+      "url": "http://127.0.0.1:8765/barber-studio-veszprem-veszprem/",
+      "path": "barber-studio-veszprem-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "bella-figura-gyor",
+      "url": "http://127.0.0.1:8765/bella-figura-gyor/",
+      "path": "bella-figura-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "bella-vital-szepsegszalon-balatonalmadi",
+      "url": "http://127.0.0.1:8765/bella-vital-szepsegszalon-balatonalmadi/",
+      "path": "bella-vital-szepsegszalon-balatonalmadi/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "bellissima-szepsegszalon-veszprem",
+      "url": "http://127.0.0.1:8765/bellissima-szepsegszalon-veszprem/",
+      "path": "bellissima-szepsegszalon-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "black-forest-barbershop-balatonfured",
+      "url": "http://127.0.0.1:8765/black-forest-barbershop-balatonfured/",
+      "path": "black-forest-barbershop-balatonfured/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "black-velvet-hair-gyor",
+      "url": "http://127.0.0.1:8765/black-velvet-hair-gyor/",
+      "path": "black-velvet-hair-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "braid-and-beauty-gyor",
+      "url": "http://127.0.0.1:8765/braid-and-beauty-gyor/",
+      "path": "braid-and-beauty-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "darazsdi-fodraszat-gyor",
+      "url": "http://127.0.0.1:8765/darazsdi-fodraszat-gyor/",
+      "path": "darazsdi-fodraszat-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "dettus-fodraszat-veszprem-veszprem",
+      "url": "http://127.0.0.1:8765/dettus-fodraszat-veszprem-veszprem/",
+      "path": "dettus-fodraszat-veszprem-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "essential-skincare-gyor",
+      "url": "http://127.0.0.1:8765/essential-skincare-gyor/",
+      "path": "essential-skincare-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "eszlinger-agnes-hair-veszprem",
+      "url": "http://127.0.0.1:8765/eszlinger-agnes-hair-veszprem/",
+      "path": "eszlinger-agnes-hair-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "ferfi-fodraszat-veszprem-veszprem",
+      "url": "http://127.0.0.1:8765/ferfi-fodraszat-veszprem-veszprem/",
+      "path": "ferfi-fodraszat-veszprem-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "fodraszat-kossuth-lajos-utca-balatonfured",
+      "url": "http://127.0.0.1:8765/fodraszat-kossuth-lajos-utca-balatonfured/",
+      "path": "fodraszat-kossuth-lajos-utca-balatonfured/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "fodraszkellek-shop-balatonfuzfo",
+      "url": "http://127.0.0.1:8765/fodraszkellek-shop-balatonfuzfo/",
+      "path": "fodraszkellek-shop-balatonfuzfo/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "frix-hair-design-veszprem",
+      "url": "http://127.0.0.1:8765/frix-hair-design-veszprem/",
+      "path": "frix-hair-design-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "frixhairdesign-frics-balatonalmadi",
+      "url": "http://127.0.0.1:8765/frixhairdesign-frics-balatonalmadi/",
+      "path": "frixhairdesign-frics-balatonalmadi/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "hair-by-kitty-gyor",
+      "url": "http://127.0.0.1:8765/hair-by-kitty-gyor/",
+      "path": "hair-by-kitty-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "hair-port-veszprem",
+      "url": "http://127.0.0.1:8765/hair-port-veszprem/",
+      "path": "hair-port-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "haircontrast-kila-edina-balatonalmadi",
+      "url": "http://127.0.0.1:8765/haircontrast-kila-edina-balatonalmadi/",
+      "path": "haircontrast-kila-edina-balatonalmadi/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "haircutandmore-gyor",
+      "url": "http://127.0.0.1:8765/haircutandmore-gyor/",
+      "path": "haircutandmore-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "hairvision-veszprem",
+      "url": "http://127.0.0.1:8765/hairvision-veszprem/",
+      "path": "hairvision-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "hajasz-fodraszszalon-gyor",
+      "url": "http://127.0.0.1:8765/hajasz-fodraszszalon-gyor/",
+      "path": "hajasz-fodraszszalon-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "hajcsapda-gyor",
+      "url": "http://127.0.0.1:8765/hajcsapda-gyor/",
+      "path": "hajcsapda-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "harmonia-szepsegszalon-gyor",
+      "url": "http://127.0.0.1:8765/harmonia-szepsegszalon-gyor/",
+      "path": "harmonia-szepsegszalon-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "home-of-beauty-gyor",
+      "url": "http://127.0.0.1:8765/home-of-beauty-gyor/",
+      "path": "home-of-beauty-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "jerevan-fodraszat-sopron",
+      "url": "http://127.0.0.1:8765/jerevan-fodraszat-sopron/",
+      "path": "jerevan-fodraszat-sopron/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "karakter-studio-gyor",
+      "url": "http://127.0.0.1:8765/karakter-studio-gyor/",
+      "path": "karakter-studio-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "kl-hair-and-barber-balatonalmadi",
+      "url": "http://127.0.0.1:8765/kl-hair-and-barber-balatonalmadi/",
+      "path": "kl-hair-and-barber-balatonalmadi/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "korody-barber-shop-balaton-plaza-veszprem",
+      "url": "http://127.0.0.1:8765/korody-barber-shop-balaton-plaza-veszprem/",
+      "path": "korody-barber-shop-balaton-plaza-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "kovacs-eszter-veszprem-fodraszat-veszprem",
+      "url": "http://127.0.0.1:8765/kovacs-eszter-veszprem-fodraszat-veszprem/",
+      "path": "kovacs-eszter-veszprem-fodraszat-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "kozma-dorina-aranyhid-hajstudio-balatonfured",
+      "url": "http://127.0.0.1:8765/kozma-dorina-aranyhid-hajstudio-balatonfured/",
+      "path": "kozma-dorina-aranyhid-hajstudio-balatonfured/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "kozmetika-veszprem-veszprem",
+      "url": "http://127.0.0.1:8765/kozmetika-veszprem-veszprem/",
+      "path": "kozmetika-veszprem-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "krfodraszat-balatonfured",
+      "url": "http://127.0.0.1:8765/krfodraszat-balatonfured/",
+      "path": "krfodraszat-balatonfured/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "lang-es-fozo-szepsegszalon-sopron",
+      "url": "http://127.0.0.1:8765/lang-es-fozo-szepsegszalon-sopron/",
+      "path": "lang-es-fozo-szepsegszalon-sopron/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "livia-fodraszat-balatonfured",
+      "url": "http://127.0.0.1:8765/livia-fodraszat-balatonfured/",
+      "path": "livia-fodraszat-balatonfured/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "lux-barber-shop-veszprem-veszprem",
+      "url": "http://127.0.0.1:8765/lux-barber-shop-veszprem-veszprem/",
+      "path": "lux-barber-shop-veszprem-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "montazs-szepsegstudio-gyor",
+      "url": "http://127.0.0.1:8765/montazs-szepsegstudio-gyor/",
+      "path": "montazs-szepsegstudio-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "orising-szepsegszalon-balatonalmadi",
+      "url": "http://127.0.0.1:8765/orising-szepsegszalon-balatonalmadi/",
+      "path": "orising-szepsegszalon-balatonalmadi/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "professzionalis-hajhosszabbitas-veszprem",
+      "url": "http://127.0.0.1:8765/professzionalis-hajhosszabbitas-veszprem/",
+      "path": "professzionalis-hajhosszabbitas-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "rendes-rahel-balatonalmadi",
+      "url": "http://127.0.0.1:8765/rendes-rahel-balatonalmadi/",
+      "path": "rendes-rahel-balatonalmadi/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "rogers-barber-balatonfured",
+      "url": "http://127.0.0.1:8765/rogers-barber-balatonfured/",
+      "path": "rogers-barber-balatonfured/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "still-the-salon-veszprem",
+      "url": "http://127.0.0.1:8765/still-the-salon-veszprem/",
+      "path": "still-the-salon-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "szabadi-szepsegszalon-gyor",
+      "url": "http://127.0.0.1:8765/szabadi-szepsegszalon-gyor/",
+      "path": "szabadi-szepsegszalon-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "szepseg-sarok-keszthely",
+      "url": "http://127.0.0.1:8765/szepseg-sarok-keszthely/",
+      "path": "szepseg-sarok-keszthely/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "szin-varazsmuhely-balatonalmadi",
+      "url": "http://127.0.0.1:8765/szin-varazsmuhely-balatonalmadi/",
+      "path": "szin-varazsmuhely-balatonalmadi/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "szlavik-hajstudio-veszprem",
+      "url": "http://127.0.0.1:8765/szlavik-hajstudio-veszprem/",
+      "path": "szlavik-hajstudio-veszprem/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "varga-hajszalon-gyor",
+      "url": "http://127.0.0.1:8765/varga-hajszalon-gyor/",
+      "path": "varga-hajszalon-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "yellow-black-szepsegszalon-gyor",
+      "url": "http://127.0.0.1:8765/yellow-black-szepsegszalon-gyor/",
+      "path": "yellow-black-szepsegszalon-gyor/preview-mobile.png",
+      "status": 200
+    },
+    {
+      "slug": "zsolex-barbershop-veszprem",
+      "url": "http://127.0.0.1:8765/zsolex-barbershop-veszprem/",
+      "path": "zsolex-barbershop-veszprem/preview-mobile.png",
+      "status": 200
+    }
+  ],
+  "failed": []
+}
