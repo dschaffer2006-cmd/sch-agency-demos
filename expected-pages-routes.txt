@@ -1,5 +1,6 @@
 # Public demo routes already referenced in SCH outreach data.
 # The repository-wide 404 repair tool unions this list with every historical */index.html path.
+# Full repair/audit trigger: 2026-08-10
 macsai-anita
 esztetika-szigetvar
 bhair-szekszard
