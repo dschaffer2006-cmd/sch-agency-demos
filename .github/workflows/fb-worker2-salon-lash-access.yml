@@ -1,0 +1,45 @@
+name: FB Worker2 salon lash access validation
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/salon-lash-trigger.txt'
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Fetch public posts and comments
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/salon-lash-access
+          cat > /tmp/t.tsv <<'EOF'
+          lash-help	https://www.facebook.com/groups/937034773648940/posts/1464465267572552/
+          lash-help-2	https://www.facebook.com/groups/937034773648940/posts/1618021425550268/
+          salon-owners	https://www.facebook.com/groups/537925316581415/posts/2359421747765087/
+          EOF
+          : > research/fb-worker2/salon-lash-access/summary.tsv
+          while IFS=$'\t' read -r name url; do
+            out="research/fb-worker2/salon-lash-access/$name.md"
+            code=$(curl -L -sS --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' -o "$out" -w '%{http_code}' "https://r.jina.ai/$url" || true)
+            size=$(wc -c < "$out" 2>/dev/null || echo 0)
+            title=$(grep -m1 '^Title:' "$out" | sed 's/^Title: //' || true)
+            comments=$(grep -Eio '[0-9,.Kk]+ comments' "$out" | head -1 || true)
+            ai=$(grep -c 'Summarized by AI' "$out" || true)
+            anon=$(grep -c 'Anonymous participant' "$out" || true)
+            printf '%s\t%s\t%s\t%s\tai=%s\tanon=%s\t%s\t%s\n' "$name" "$code" "$size" "$comments" "$ai" "$anon" "$title" "$url" >> research/fb-worker2/salon-lash-access/summary.tsv
+            sleep 2
+          done < /tmp/t.tsv
+      - name: Commit output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/salon-lash-access
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 salon lash access validation output'
+          git push origin HEAD:fb-research-worker2
