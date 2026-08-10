@@ -1,0 +1,50 @@
+name: FB Worker2 six-group access validation
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/six-access-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Fetch representative public posts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/six-access
+          cat > /tmp/targets.tsv <<'EOF'
+          01-hairdressing	https://www.facebook.com/groups/883708115725466/posts/1938403610255906/
+          02-professional-barbers	https://www.facebook.com/groups/ProfessionalBarbers/posts/2959799927508588/
+          03-cosmetologists-wa	https://www.facebook.com/groups/298843470774882/posts/1550023612323522/
+          04-uae-salon-owners	https://www.facebook.com/groups/281065435818062/posts/1790721381519119/
+          05-friendly-lash-tech	https://www.facebook.com/groups/231553354917329/posts/1393257332080253/
+          06-medical-spa-owners	https://www.facebook.com/groups/medicalspaowner/posts/1061802636046302/
+          EOF
+          : > research/fb-worker2/six-access/summary.tsv
+          while IFS=$'\t' read -r name url; do
+            out="research/fb-worker2/six-access/${name}.md"
+            code=$(curl -L -sS --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' -o "$out" -w '%{http_code}' "https://r.jina.ai/$url" || true)
+            size=$(wc -c < "$out" 2>/dev/null || echo 0)
+            title=$(grep -m1 '^Title:' "$out" | sed 's/^Title: //' || true)
+            comments=$(grep -Eio '[0-9,.Kk]+ comments' "$out" | head -1 || true)
+            comment_lines=$(grep -Ec '^.{1,120}$' "$out" || true)
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$name" "$code" "$size" "$comments" "$title" "$url" >> research/fb-worker2/six-access/summary.tsv
+            sleep 2
+          done < /tmp/targets.tsv
+      - name: Commit validation output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/six-access
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 six-group public access validation output'
+          git push origin HEAD:fb-research-worker2
