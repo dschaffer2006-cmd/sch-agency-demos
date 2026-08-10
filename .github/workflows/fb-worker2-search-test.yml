@@ -1,0 +1,61 @@
+name: FB Worker2 search discovery test
+
+on:
+  push:
+    branches: [fb-research-worker2]
+    paths:
+      - 'research/fb-worker2/search-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb-research-worker2
+      - name: Query Jina Search for public group posts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research/fb-worker2/search-test
+          python3 - <<'PY'
+          import urllib.parse, subprocess, pathlib, time
+          queries=[
+            'site:facebook.com/groups/883708115725466/posts Hairdressing Advice Tips Education client',
+            'site:facebook.com/groups/883708115725466/posts Hairdressing Advice Tips Education salon',
+            'site:facebook.com/groups/883708115725466/posts Hairdressing Advice Tips Education color',
+            'site:facebook.com/groups/883708115725466/posts Hairdressing Advice Tips Education price',
+            'site:facebook.com/groups/883708115725466/posts Hairdressing Advice Tips Education appointment',
+          ]
+          for i,q in enumerate(queries,1):
+              u='https://s.jina.ai/'+urllib.parse.quote(q,safe='')+'?site=facebook.com'
+              out=pathlib.Path(f'research/fb-worker2/search-test/q{i}.txt')
+              r=subprocess.run(['curl','-L','-sS','--connect-timeout','20','--max-time','120','-A','Mozilla/5.0',u],capture_output=True,text=True)
+              out.write_text(r.stdout[:200000],encoding='utf-8')
+              pathlib.Path(f'research/fb-worker2/search-test/q{i}.stderr').write_text(r.stderr,encoding='utf-8')
+              time.sleep(3)
+          PY
+      - name: Extract unique post URLs
+        run: |
+          python3 - <<'PY'
+          import re,glob,pathlib
+          urls=[]
+          for f in glob.glob('research/fb-worker2/search-test/q*.txt'):
+              txt=pathlib.Path(f).read_text(errors='ignore')
+              urls += re.findall(r'https://www\.facebook\.com/groups/883708115725466/posts/\d+/?',txt)
+          uniq=list(dict.fromkeys(urls))
+          pathlib.Path('research/fb-worker2/search-test/urls.txt').write_text('\n'.join(uniq)+'\n',encoding='utf-8')
+          pathlib.Path('research/fb-worker2/search-test/count.txt').write_text(str(len(uniq))+'\n')
+          print('unique',len(uniq))
+          PY
+      - name: Commit discovery output
+        run: |
+          git config user.name 'Worker 2 Research Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add research/fb-worker2/search-test
+          git diff --cached --quiet && exit 0
+          git commit -m 'FB Worker2 search discovery output'
+          git push origin HEAD:fb-research-worker2
