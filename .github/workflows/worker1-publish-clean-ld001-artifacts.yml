@@ -1,0 +1,64 @@
+name: Worker 1 Publish Clean LD-001 Artifacts
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-publish-clean-ld001-artifacts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Publish only Worker 1 validated artifacts onto latest main
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main worker1-ld001-more-qa-pr
+          git checkout -B worker1-clean-publish origin/main
+          git checkout origin/worker1-ld001-more-qa-pr -- \
+            outreach/LD-001-010-szereto-martina-fodrasz \
+            outreach/LD-001-013-szabo-adrienn-rose \
+            outreach/LD-001-015-marcos-barbershop \
+            outreach/LD-001-019-pipacs-szepsegsziget \
+            outreach/LD-001-020-hazuga-alexandra-fodrasz \
+            qa/worker1/LD-001-010-szereto-martina-fodrasz \
+            qa/worker1/LD-001-013-szabo-adrienn-rose \
+            qa/worker1/LD-001-015-marcos-barbershop \
+            qa/worker1/LD-001-019-pipacs-szepsegsziget \
+            qa/worker1/LD-001-020-hazuga-alexandra-fodrasz \
+            worker1-ld001-more-qa.json
+          git add \
+            outreach/LD-001-010-szereto-martina-fodrasz \
+            outreach/LD-001-013-szabo-adrienn-rose \
+            outreach/LD-001-015-marcos-barbershop \
+            outreach/LD-001-019-pipacs-szepsegsziget \
+            outreach/LD-001-020-hazuga-alexandra-fodrasz \
+            qa/worker1/LD-001-010-szereto-martina-fodrasz \
+            qa/worker1/LD-001-013-szabo-adrienn-rose \
+            qa/worker1/LD-001-015-marcos-barbershop \
+            qa/worker1/LD-001-019-pipacs-szepsegsziget \
+            qa/worker1/LD-001-020-hazuga-alexandra-fodrasz \
+            worker1-ld001-more-qa.json
+          if git diff --cached --quiet; then
+            echo 'Worker 1 artifacts already on main.'
+            exit 0
+          fi
+          git commit -m 'Publish validated Worker 1 LD-001 solution artifacts [skip ci]'
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push race on attempt $attempt; rebasing onto latest main."
+            git fetch origin main
+            git rebase origin/main
+          done
+          exit 1
