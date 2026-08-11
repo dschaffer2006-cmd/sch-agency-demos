@@ -6,6 +6,8 @@ on:
       - '.github/workflows/worker1-ld001-more-qa.yml'
       - '.github/w1_more3_payload.tar.gz.b64'
       - 'tools/worker1-ld001-more-qa.mjs'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -56,6 +58,7 @@ jobs:
         run: node tools/worker1-ld001-more-qa.mjs
 
       - name: Commit demos, screenshots and QA report
+        if: github.event_name != 'pull_request'
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
