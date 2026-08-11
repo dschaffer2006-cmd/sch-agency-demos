@@ -1,0 +1,10 @@
+{
+  "sites": [
+    {
+      "slug": "LD-001-024-barber-studio-veszprem",
+      "name": "Barber Studio Veszprém",
+      "booking_url": "https://barberstudio.salonic.hu/",
+      "min_booking_links": 3
+    }
+  ]
+}
