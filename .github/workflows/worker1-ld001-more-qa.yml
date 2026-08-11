@@ -60,9 +60,20 @@ jobs:
       - name: Commit demos, screenshots and QA report
         run: |
           set -euo pipefail
+          TARGET_BRANCH="${GITHUB_HEAD_REF:-main}"
+          tar -czf /tmp/w1-qa-artifacts.tgz \
+            outreach/LD-001-010-szereto-martina-fodrasz \
+            outreach/LD-001-013-szabo-adrienn-rose \
+            outreach/LD-001-015-marcos-barbershop \
+            outreach/LD-001-019-pipacs-szepsegsziget \
+            outreach/LD-001-020-hazuga-alexandra-fodrasz \
+            qa/worker1 \
+            worker1-ld001-more-qa.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          TARGET_BRANCH="${GITHUB_HEAD_REF:-main}"
+          git fetch origin "$TARGET_BRANCH"
+          git checkout -B "$TARGET_BRANCH" "origin/$TARGET_BRANCH"
+          tar -xzf /tmp/w1-qa-artifacts.tgz
           git add \
             outreach/LD-001-010-szereto-martina-fodrasz \
             outreach/LD-001-013-szabo-adrienn-rose \
