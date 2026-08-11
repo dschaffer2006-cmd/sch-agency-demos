@@ -13,6 +13,7 @@ PAGES = [
     ("LD-003-019", "frufru-szekesfehervar", "Frufru Székesfehérvár"),
     ("LD-003-021", "aniko-koromszalon", "Anikó Körömszalon"),
     ("LD-003-022", "pedi-care-szekesfehervar", "Pedi Care Székesfehérvár"),
+    ("LD-003-023", "ligeti-kozmetika", "Ligeti Kozmetika"),
 ]
 OUT = pathlib.Path("qa-artifacts/worker3-live")
 OUT.mkdir(parents=True, exist_ok=True)
