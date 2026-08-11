@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-08-11T13:51:32.344Z",
+  "worker": "MUNKÁS_1",
+  "passed": 4,
+  "failed": 0,
+  "results": [
+    {
+      "slug": "LD-001-006-haj-lak-fodraszat",
+      "name": "Haj-Lak Fodrászat",
+      "pass": true,
+      "viewports": {
+        "desktop": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        },
+        "mobile": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        }
+      }
+    },
+    {
+      "slug": "LD-001-011-baranyai-szalon",
+      "name": "Baranyai Szalon",
+      "pass": true,
+      "viewports": {
+        "desktop": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        },
+        "mobile": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        }
+      }
+    },
+    {
+      "slug": "LD-001-016-nagy-szilvia-fodrasz",
+      "name": "Nagy Szilvia Fodrász",
+      "pass": true,
+      "viewports": {
+        "desktop": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        },
+        "mobile": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        }
+      }
+    },
+    {
+      "slug": "LD-001-017-skin-line-kozmetika",
+      "name": "Skin Line Kozmetika Veszprém",
+      "pass": true,
+      "viewports": {
+        "desktop": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        },
+        "mobile": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "demoMarker": true,
+          "badText": false,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "pass": true
+        }
+      }
+    }
+  ]
+}
