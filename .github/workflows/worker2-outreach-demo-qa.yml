@@ -11,6 +11,14 @@ on:
       - 'outreach/assets/demo.js'
       - 'tools/worker2-outreach-demo-qa.mjs'
       - '.github/workflows/worker2-outreach-demo-qa.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'qa-trigger-worker2-outreach.txt'
+      - 'outreach/LD-001-020-hazuga-alexandra-fodrasz/**'
+      - 'outreach/LD-003-018-pedikur-manikur-szepsegszalon/**'
+      - 'outreach/LD-004-016-szalai-bettina-kozmetika-sminktetovalas/**'
+      - 'tools/worker2-outreach-demo-qa.mjs'
   workflow_dispatch:
 
 permissions:
@@ -19,6 +27,7 @@ permissions:
 jobs:
   qa:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Install Playwright Chromium
@@ -41,8 +50,8 @@ jobs:
             worker2-outreach-demo-qa.json
             qa/worker2
           retention-days: 14
-      - name: Commit QA artifacts
-        if: success()
+      - name: Commit QA artifacts on push
+        if: github.event_name == 'push' && success()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
