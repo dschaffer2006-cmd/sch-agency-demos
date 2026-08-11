@@ -1,0 +1,2 @@
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-024-barber-studio-veszprem/ | Barber Studio Veszprém — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-025-cutgun/ | Cutgun — koncepciódemó
