@@ -1,0 +1,43 @@
+name: Worker 1 publish LD-001 demos
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-publish-ld001-demos.yml'
+      - '.github/w1-ld001-demo-payload.tar.gz.b64'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Decode Worker 1 demo payload
+        run: |
+          base64 -d .github/w1-ld001-demo-payload.tar.gz.b64 > /tmp/w1-demos.tar.gz
+          test "$(sha256sum /tmp/w1-demos.tar.gz | awk '{print $1}')" = "4d8a8891bb397176ecbf64307ab290dc24263361a482df026ad0cf7d9e371c6a"
+          tar -xzf /tmp/w1-demos.tar.gz
+          test -s outreach/LD-001-011-baranyai-szalon/index.html
+          test -s outreach/LD-001-017-skin-line-kozmetika/index.html
+          test -s outreach/LD-001-016-nagy-szilvia-fodrasz/index.html
+          test -s outreach/LD-001-006-haj-lak-fodraszat/index.html
+      - name: Commit demo pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add outreach/LD-001-011-baranyai-szalon/index.html \
+                  outreach/LD-001-017-skin-line-kozmetika/index.html \
+                  outreach/LD-001-016-nagy-szilvia-fodrasz/index.html \
+                  outreach/LD-001-006-haj-lak-fodraszat/index.html
+          if git diff --cached --quiet; then
+            echo 'Worker 1 demo pages unchanged.'
+          else
+            git commit -m 'Publish Worker 1 LD-001 demo websites'
+            git push origin HEAD:main
+          fi
