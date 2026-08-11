@@ -1,0 +1,67 @@
+name: Worker 1 Verify More LD-001 Public Pages
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-verify-ld001-more-pages.yml'
+      - 'outreach/LD-001-010-szereto-martina-fodrasz/**'
+      - 'outreach/LD-001-013-szabo-adrienn-rose/**'
+      - 'outreach/LD-001-015-marcos-barbershop/**'
+      - 'outreach/LD-001-019-pipacs-szepsegsziget/**'
+      - 'outreach/LD-001-020-hazuga-alexandra-fodrasz/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify five public Pages routes
+        run: |
+          set -euo pipefail
+          urls=(
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-010-szereto-martina-fodrasz/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-013-szabo-adrienn-rose/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-015-marcos-barbershop/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-019-pipacs-szepsegsziget/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-020-hazuga-alexandra-fodrasz/'
+          )
+          : > worker1-ld001-more-pages-status.txt
+          for url in "${urls[@]}"; do
+            ok=0
+            for i in $(seq 1 36); do
+              code=$(curl -L -sS --max-time 30 -o /tmp/page.html -w '%{http_code}' "$url" || true)
+              if [ "$code" = '200' ] && grep -Eqi 'Koncepciódemó|bemutató célból' /tmp/page.html; then
+                title=$(grep -Eio '<title>[^<]*</title>' /tmp/page.html | head -1 | sed -E 's#</?title>##gI')
+                echo "LIVE_QA 200 $url | $title" | tee -a worker1-ld001-more-pages-status.txt
+                ok=1
+                break
+              fi
+              sleep 10
+            done
+            test "$ok" = '1'
+          done
+      - name: Commit verification report safely
+        run: |
+          set -euo pipefail
+          cp worker1-ld001-more-pages-status.txt /tmp/worker1-ld001-more-pages-status.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git checkout -B worker1-live-verify-publish origin/main
+          cp /tmp/worker1-ld001-more-pages-status.txt worker1-ld001-more-pages-status.txt
+          git add worker1-ld001-more-pages-status.txt
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Verify Worker 1 remaining LD-001 public demo URLs [skip ci]'
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          exit 1
