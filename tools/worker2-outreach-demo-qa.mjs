@@ -50,7 +50,8 @@ for (const [slug,name] of leads) {
     const bookingSuccess=(await page.locator('.bp.on .success').count())===1;
     await page.locator('[data-close]:visible').last().click();
     for (const y of [0,600,1200,1800,2400,3200,4200,5200]) { await page.evaluate(y=>scrollTo(0,y),y); await page.waitForTimeout(60); }
-    await page.evaluate(()=>scrollTo(0,0)); await page.waitForTimeout(120);
+    await page.goto(base+slug+'/',{waitUntil:'networkidle',timeout:30000});
+    await page.waitForTimeout(1300);
     await page.screenshot({path:path.join(qaDir,`${label}-viewport.png`),fullPage:false});
     await page.screenshot({path:path.join(qaDir,`${label}-full.png`),fullPage:true});
     if(label==='mobile') fs.copyFileSync(path.join(qaDir,'mobile-viewport.png'),path.join('outreach',slug,'preview-mobile.png'));
