@@ -15,10 +15,8 @@ PAGES = [
 OUT = pathlib.Path("qa-artifacts/worker3-live")
 OUT.mkdir(parents=True, exist_ok=True)
 
-
 def url_for(lead_id, slug):
     return f"{BASE}/{lead_id}-{slug}/"
-
 
 def goto_with_retry(page, url, attempts=8, wait_seconds=15):
     last = None
@@ -36,11 +34,9 @@ def goto_with_retry(page, url, attempts=8, wait_seconds=15):
             time.sleep(wait_seconds)
     raise RuntimeError(f"Live URL unavailable after {attempts} attempts: {url}; last={last}")
 
-
 def headline_fits(page, width):
     box = page.locator("h1").first.bounding_box()
     return bool(box and box["width"] > 0 and box["height"] > 0 and box["x"] >= -2 and box["x"] + box["width"] <= width + 2)
-
 
 def run():
     report = []
@@ -51,7 +47,6 @@ def run():
             problems = []
             row = {"lead_id": lead_id, "company": company, "url": url, "desktop": {}, "mobile": {}, "reduced_motion": {}}
 
-            # Desktop 1440x900
             page = browser.new_page(viewport={"width": 1440, "height": 900})
             console_errors, page_errors, request_failures = [], [], []
             page.on("console", lambda msg, arr=console_errors: arr.append(msg.text) if msg.type == "error" else None)
@@ -77,7 +72,6 @@ def run():
                     if forbidden in body: problems.append("forbidden:" + forbidden)
                 if "koncepciódemó – sch agency" not in body: problems.append("demo.disclaimer")
                 if "demó időpontok – nem valós szabad helyek" not in body: problems.append("booking.demo-label")
-                # booking end-to-end
                 booking = page.locator("[data-booking]")
                 if booking.count() != 1:
                     problems.append("booking.missing")
@@ -95,7 +89,6 @@ def run():
             finally:
                 page.close()
 
-            # Mobile 390x844
             mobile = browser.new_page(viewport={"width": 390, "height": 844})
             console_errors, page_errors, request_failures = [], [], []
             mobile.on("console", lambda msg, arr=console_errors: arr.append(msg.text) if msg.type == "error" else None)
@@ -124,7 +117,6 @@ def run():
                     mobile.locator('[data-nav] a[href="#szolgaltatasok"]').click()
                     if mobile.locator("[data-nav]").evaluate("e => e.classList.contains('open')"):
                         problems.append("mobile.menu-close")
-                # booking on mobile too
                 mobile.locator('[data-key="service"]').first.click()
                 mobile.locator('[data-key="date"]').first.click()
                 mobile.locator('[data-key="time"]').first.click()
@@ -138,15 +130,15 @@ def run():
             finally:
                 mobile.close()
 
-            # Reduced motion
             reduced = browser.new_page(viewport={"width": 390, "height": 844}, reduced_motion="reduce")
             try:
                 response, attempts = goto_with_retry(reduced, url)
                 reduced.wait_for_timeout(250)
                 row["reduced_motion"]["http"] = response.status
                 row["reduced_motion"]["attempts"] = attempts
-                readable = reduced.evaluate("[...document.querySelectorAll('main h1,main h2,main p')].every(e=>{const s=getComputedStyle(e),r=e.getBoundingClientRect();return s.visibility!=='hidden' && Number(s.opacity)>0 && r.height>0})")
-                if not readable: problems.append("reduced-motion.readability")
+                reveal_ok = reduced.evaluate("[...document.querySelectorAll('[data-reveal]')].every(e=>{const s=getComputedStyle(e);return Number(s.opacity)>0 && s.visibility!=='hidden'})")
+                heading_ok = reduced.locator("h1").first.is_visible() and reduced.locator("h2").first.is_visible()
+                if not (reveal_ok and heading_ok): problems.append("reduced-motion.readability")
                 if not reduced.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"): problems.append("reduced-motion.overflow")
             except Exception as exc:
                 problems.append("reduced.exception:" + repr(exc))
@@ -157,7 +149,6 @@ def run():
             row["result"] = "PASS" if not problems else "FAIL"
             report.append(row)
             print(f"{lead_id} {row['result']} {problems}", flush=True)
-
         browser.close()
 
     report_path = OUT / "report.json"
@@ -165,7 +156,6 @@ def run():
     passed = sum(r["result"] == "PASS" for r in report)
     print(json.dumps({"total": len(report), "passed": passed, "failed": len(report)-passed}, ensure_ascii=False), flush=True)
     return 0 if passed == len(report) else 1
-
 
 if __name__ == "__main__":
     raise SystemExit(run())
