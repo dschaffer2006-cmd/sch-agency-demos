@@ -1,0 +1,30 @@
+name: Worker 5 LD-005-024 QA
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w5-ld005024.log 2>&1 &
+          sleep 2
+      - run: node tools/worker5_ld005024_qa.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: worker5-ld005024-qa
+          path: |
+            worker5-ld005024-qa-report.json
+            outreach/LD-005-024-anita-szepsegszalon-zuglo/*.png
+          retention-days: 14
