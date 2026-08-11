@@ -43,11 +43,10 @@ for (const [slug,name] of leads) {
         menuOk=opened&&closed;
       }
     }
-    let formOk=true, emptyErrorOk=true, successOk=true;
+    let formOk=true, emptyValidationOk=true, successOk=true;
     const form=page.locator('[data-demo-form]');
     if(await form.count()){
-      await form.locator('button[type="submit"]').click();
-      emptyErrorOk=await form.locator('[data-error]').isVisible();
+      emptyValidationOk=!(await form.evaluate(f=>f.checkValidity()));
       const req=form.locator('[required]');
       for(let i=0;i<await req.count();i++){
         const el=req.nth(i); const tag=await el.evaluate(e=>e.tagName.toLowerCase()); const type=await el.getAttribute('type');
@@ -55,16 +54,17 @@ for (const [slug,name] of leads) {
         else if(type==='date') await el.fill('2026-08-20');
         else await el.fill(i%2===0?'QA Teszt':'qa@example.hu');
       }
+      const validAfterFill=await form.evaluate(f=>f.checkValidity());
       await form.locator('button[type="submit"]').click();
       successOk=await form.locator('[data-success]').isVisible();
-      formOk=emptyErrorOk&&successOk;
+      formOk=emptyValidationOk&&validAfterFill&&successOk;
     }
     await page.evaluate(()=>scrollTo(0,0)); await page.waitForTimeout(120);
     await page.screenshot({path:path.join(qaDir,`${label}-viewport.png`),fullPage:false});
     await page.screenshot({path:path.join(qaDir,`${label}-full.png`),fullPage:true});
     fs.copyFileSync(path.join(qaDir,`${label}-viewport.png`),path.join('outreach',slug,`preview-${label}.png`));
     const pass=status>=200&&status<300&&metrics.viewportMeta&&!metrics.overflow&&!metrics.badText&&!metrics.headingOverflow.length&&!metrics.zeroSections.length&&metrics.demoMarker&&!consoleErrors.length&&!pageErrors.length&&!failedRequests.length&&menuOk&&formOk;
-    lead.viewports[label]={status,...metrics,consoleErrors,pageErrors,failedRequests,menuOk,emptyErrorOk,successOk,pass};
+    lead.viewports[label]={status,...metrics,consoleErrors,pageErrors,failedRequests,menuOk,emptyValidationOk,successOk,pass};
     if(!pass) lead.pass=false;
     await page.close();
   }
