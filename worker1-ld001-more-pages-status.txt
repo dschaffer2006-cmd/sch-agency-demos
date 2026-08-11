@@ -1,0 +1,5 @@
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-010-szereto-martina-fodrasz/ | Szerető Martina Fodrász — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-013-szabo-adrienn-rose/ | Szabó Adrienn Fodrász — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-015-marcos-barbershop/ | Marco's Barbershop — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-019-pipacs-szepsegsziget/ | Pipacs Szépségsziget — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-020-hazuga-alexandra-fodrasz/ | Hazuga Alexandra Fodrász — koncepciódemó
