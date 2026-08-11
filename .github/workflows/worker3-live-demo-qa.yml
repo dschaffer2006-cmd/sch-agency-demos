@@ -13,6 +13,7 @@ on:
       - 'outreach/LD-003-021-aniko-koromszalon/**'
       - 'outreach/LD-003-022-pedi-care-szekesfehervar/**'
       - 'outreach/LD-003-023-ligeti-kozmetika/**'
+      - 'outreach/LD-003-025-kleopatra-kozmetika/**'
 
 permissions:
   contents: read
