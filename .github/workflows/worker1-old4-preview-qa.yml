@@ -1,0 +1,70 @@
+name: Worker 1 Old4 Preview QA
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-old4-preview-qa.yml'
+      - 'tools/worker1-old4-preview-qa.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/w1-old4-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8766/outreach/LD-001-006-haj-lak-fodraszat/ >/dev/null && exit 0
+            sleep 1
+          done
+          exit 1
+      - name: Run QA and capture preview screenshots
+        run: node tools/worker1-old4-preview-qa.mjs
+      - name: Commit only Worker 1 old4 previews safely
+        run: |
+          set -euo pipefail
+          tar -czf /tmp/w1-old4-artifacts.tgz \
+            outreach/LD-001-006-haj-lak-fodraszat/preview-desktop.png \
+            outreach/LD-001-006-haj-lak-fodraszat/preview-mobile.png \
+            outreach/LD-001-011-baranyai-szalon/preview-desktop.png \
+            outreach/LD-001-011-baranyai-szalon/preview-mobile.png \
+            outreach/LD-001-016-nagy-szilvia-fodrasz/preview-desktop.png \
+            outreach/LD-001-016-nagy-szilvia-fodrasz/preview-mobile.png \
+            outreach/LD-001-017-skin-line-kozmetika/preview-desktop.png \
+            outreach/LD-001-017-skin-line-kozmetika/preview-mobile.png \
+            worker1-old4-preview-qa.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git checkout -B worker1-old4-preview-publish origin/main
+          tar -xzf /tmp/w1-old4-artifacts.tgz
+          git add \
+            outreach/LD-001-006-haj-lak-fodraszat/preview-desktop.png \
+            outreach/LD-001-006-haj-lak-fodraszat/preview-mobile.png \
+            outreach/LD-001-011-baranyai-szalon/preview-desktop.png \
+            outreach/LD-001-011-baranyai-szalon/preview-mobile.png \
+            outreach/LD-001-016-nagy-szilvia-fodrasz/preview-desktop.png \
+            outreach/LD-001-016-nagy-szilvia-fodrasz/preview-mobile.png \
+            outreach/LD-001-017-skin-line-kozmetika/preview-desktop.png \
+            outreach/LD-001-017-skin-line-kozmetika/preview-mobile.png \
+            worker1-old4-preview-qa.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add public preview screenshots for Worker 1 approved demos [skip ci]'
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          exit 1
