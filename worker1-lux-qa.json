@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-08-11T14:24:45.914Z",
+  "worker": "MUNKÁS_1",
+  "result": {
+    "slug": "LD-001-023-lux-barber-shop",
+    "pass": true,
+    "viewports": {
+      "desktop": {
+        "status": 200,
+        "viewportMeta": true,
+        "overflow": false,
+        "badText": false,
+        "headingOverflow": [],
+        "demoMarker": true,
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "menuOk": true,
+        "bookingLinksOk": true,
+        "bookingLinkCount": 3,
+        "pass": true
+      },
+      "mobile": {
+        "status": 200,
+        "viewportMeta": true,
+        "overflow": false,
+        "badText": false,
+        "headingOverflow": [],
+        "demoMarker": true,
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "menuOk": true,
+        "bookingLinksOk": true,
+        "bookingLinkCount": 3,
+        "pass": true
+      }
+    }
+  }
+}
