@@ -1,0 +1,33 @@
+name: Worker 1 PR live QA
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  live-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify four GitHub Pages URLs
+        run: |
+          set -euo pipefail
+          urls=(
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-011-baranyai-szalon/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-017-skin-line-kozmetika/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-016-nagy-szilvia-fodrasz/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-006-haj-lak-fodraszat/'
+          )
+          for url in "${urls[@]}"; do
+            code=$(curl -L -sS --max-time 30 -o /tmp/page.html -w '%{http_code}' "$url")
+            grep -q 'Koncepciódemó' /tmp/page.html
+            title=$(python3 - <<'PY'
+import re
+s=open('/tmp/page.html',encoding='utf-8',errors='replace').read()
+m=re.search(r'<title>(.*?)</title>',s,re.I|re.S)
+print(m.group(1).strip() if m else 'NO_TITLE')
+PY
+)
+            echo "LIVE_QA $code $url | $title"
+            test "$code" = '200'
+          done
