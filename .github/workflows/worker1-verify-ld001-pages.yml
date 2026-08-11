@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/worker1-verify-ld001-pages.yml'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -20,7 +22,6 @@ jobs:
       - name: Verify four public demo URLs
         run: |
           set -euo pipefail
-          # Retry until GitHub Pages has published the latest main-branch content.
           urls=(
             'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-011-baranyai-szalon/'
             'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-017-skin-line-kozmetika/'
@@ -31,16 +32,16 @@ jobs:
           for url in "${urls[@]}"; do
             ok=0
             for i in $(seq 1 30); do
-              code=$(curl -L -sS -o /tmp/page.html -w '%{http_code}' "$url" || true)
+              code=$(curl -L -sS --max-time 30 -o /tmp/page.html -w '%{http_code}' "$url" || true)
               if [ "$code" = '200' ] && grep -q 'Koncepciódemó' /tmp/page.html; then
                 title=$(python3 - <<'PY'
 import re
-s=open('/tmp/page.html',encoding='utf-8').read()
+s=open('/tmp/page.html',encoding='utf-8',errors='replace').read()
 m=re.search(r'<title>(.*?)</title>',s,re.I|re.S)
 print((m.group(1).strip() if m else 'NO_TITLE'))
 PY
 )
-                echo "200 $url | $title" | tee -a worker1-ld001-pages-status.txt
+                echo "LIVE_QA 200 $url | $title" | tee -a worker1-ld001-pages-status.txt
                 ok=1
                 break
               fi
@@ -49,6 +50,7 @@ PY
             test "$ok" = '1'
           done
       - name: Commit public verification report
+        if: github.event_name != 'pull_request'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
