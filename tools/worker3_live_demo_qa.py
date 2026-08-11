@@ -14,6 +14,7 @@ PAGES = [
     ("LD-003-021", "aniko-koromszalon", "Anikó Körömszalon"),
     ("LD-003-022", "pedi-care-szekesfehervar", "Pedi Care Székesfehérvár"),
     ("LD-003-023", "ligeti-kozmetika", "Ligeti Kozmetika"),
+    ("LD-003-025", "kleopatra-kozmetika", "Kleopátra Kozmetika"),
 ]
 OUT = pathlib.Path("qa-artifacts/worker3-live")
 OUT.mkdir(parents=True, exist_ok=True)
@@ -53,7 +54,6 @@ def run():
             url = url_for(lead_id, slug)
             problems = []
             row = {"lead_id": lead_id, "company": company, "url": url, "desktop": {}, "mobile": {}, "reduced_motion": {}}
-
             page = browser.new_page(viewport={"width": 1440, "height": 900})
             console_errors, page_errors, request_failures = [], [], []
             page.on("console", lambda msg, arr=console_errors: arr.append(msg.text) if msg.type == "error" else None)
@@ -96,7 +96,6 @@ def run():
                 problems.append("desktop.exception:" + repr(exc))
             finally:
                 page.close()
-
             mobile = browser.new_page(viewport={"width": 390, "height": 844})
             console_errors, page_errors, request_failures = [], [], []
             mobile.on("console", lambda msg, arr=console_errors: arr.append(msg.text) if msg.type == "error" else None)
@@ -138,7 +137,6 @@ def run():
                 problems.append("mobile.exception:" + repr(exc))
             finally:
                 mobile.close()
-
             reduced = browser.new_page(viewport={"width": 390, "height": 844}, reduced_motion="reduce")
             try:
                 response, attempts = goto_with_retry(reduced, url)
@@ -153,13 +151,11 @@ def run():
                 problems.append("reduced.exception:" + repr(exc))
             finally:
                 reduced.close()
-
             row["problems"] = problems
             row["result"] = "PASS" if not problems else "FAIL"
             report.append(row)
             print(f"{lead_id} {row['result']} {problems}", flush=True)
         browser.close()
-
     report_path = OUT / "report.json"
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     passed = sum(r["result"] == "PASS" for r in report)
