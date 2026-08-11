@@ -1,0 +1,58 @@
+name: Worker 1 HAIRVISION QA
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-hairvision-qa.yml'
+      - 'tools/worker1-hairvision-qa.mjs'
+      - 'outreach/LD-001-021-hairvision-korosi-tibor/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 8767 --bind 127.0.0.1 >/tmp/hairvision-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8767/outreach/LD-001-021-hairvision-korosi-tibor/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/hairvision-http.log
+          exit 1
+      - name: Run desktop and mobile QA
+        run: node tools/worker1-hairvision-qa.mjs
+      - name: Commit validated screenshots and QA report safely
+        run: |
+          set -euo pipefail
+          tar -czf /tmp/hairvision-artifacts.tgz \
+            outreach/LD-001-021-hairvision-korosi-tibor/preview-desktop.png \
+            outreach/LD-001-021-hairvision-korosi-tibor/preview-mobile.png \
+            qa/worker1/LD-001-021-hairvision-korosi-tibor \
+            worker1-hairvision-qa.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git checkout -B worker1-hairvision-publish origin/main
+          tar -xzf /tmp/hairvision-artifacts.tgz
+          git add outreach/LD-001-021-hairvision-korosi-tibor qa/worker1/LD-001-021-hairvision-korosi-tibor worker1-hairvision-qa.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'QA HAIRVISION LD-001-021 booking demo [skip ci]'
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          exit 1
