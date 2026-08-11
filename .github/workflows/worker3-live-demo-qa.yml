@@ -11,6 +11,7 @@ on:
       - 'outreach/LD-003-017-roa-beauty/**'
       - 'outreach/LD-003-019-frufru-szekesfehervar/**'
       - 'outreach/LD-003-021-aniko-koromszalon/**'
+      - 'outreach/LD-003-022-pedi-care-szekesfehervar/**'
 
 permissions:
   contents: read
