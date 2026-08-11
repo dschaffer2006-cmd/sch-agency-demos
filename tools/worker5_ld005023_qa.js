@@ -40,7 +40,7 @@ const add = (name, pass, detail = '') => report.checks.push({ name, pass, detail
         add('mobile.menu_closes_after_link', !(await page.locator('.navlinks').evaluate(el => el.classList.contains('open'))));
       }
 
-      await page.locator('a[href="#foglalas"]').first().click();
+      await page.locator('.hero a[href="#foglalas"]').click();
       await page.locator('.step[data-step="1"] .next').click();
       add(`${vp.name}.booking_validation_service`, await page.locator('#serviceError').evaluate(el => el.classList.contains('show')));
       await page.locator('.choice').first().click();
