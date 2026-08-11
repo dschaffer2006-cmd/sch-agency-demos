@@ -5,6 +5,12 @@
       "name": "Barber Studio Veszprém",
       "booking_url": "https://barberstudio.salonic.hu/",
       "min_booking_links": 3
+    },
+    {
+      "slug": "LD-001-025-cutgun",
+      "name": "Cutgun",
+      "booking_url": "https://cutgun.salonic.hu/",
+      "min_booking_links": 3
     }
   ]
 }
