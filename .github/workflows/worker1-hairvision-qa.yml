@@ -46,6 +46,8 @@ jobs:
             worker1-hairvision-qa.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git reset --hard
+          git clean -fd
           git fetch origin main
           git checkout -B worker1-hairvision-publish origin/main
           tar -xzf /tmp/hairvision-artifacts.tgz
