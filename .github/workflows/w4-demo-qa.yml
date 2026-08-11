@@ -63,6 +63,20 @@ jobs:
           print(json.dumps(results,ensure_ascii=False,indent=2))
           assert all(x['desktop']['ok'] and x['mobile']['ok'] for x in results), 'QA FAIL'
           PY
+      - name: Verify public GitHub Pages URLs
+        run: |
+          set -e
+          for slug in LD-004-012-dorin-kozmetika LD-004-013-ikon-kozmetika LD-004-011-la-belle-kozmetika-gyor LD-004-020-xoxo-szepsegszalon-gyor; do
+            url="https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/$slug/"
+            ok=0
+            for i in $(seq 1 12); do
+              code=$(curl -L -s -o /dev/null -w '%{http_code}' "$url" || true)
+              echo "$slug attempt $i -> $code"
+              if [ "$code" = "200" ]; then ok=1; break; fi
+              sleep 10
+            done
+            test "$ok" = "1"
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
