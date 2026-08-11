@@ -20,6 +20,7 @@ jobs:
       - name: Verify four public demo URLs
         run: |
           set -euo pipefail
+          # Retry until GitHub Pages has published the latest main-branch content.
           urls=(
             'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-011-baranyai-szalon/'
             'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-017-skin-line-kozmetika/'
