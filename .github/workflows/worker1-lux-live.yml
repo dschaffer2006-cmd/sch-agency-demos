@@ -1,0 +1,56 @@
+name: Worker 1 Lux Barber Live Pages Verify
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-lux-live.yml'
+      - 'outreach/LD-001-023-lux-barber-shop/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify public Lux Barber demo
+        run: |
+          set -euo pipefail
+          url='https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-023-lux-barber-shop/'
+          ok=0
+          for i in $(seq 1 36); do
+            code=$(curl -L -sS --max-time 30 -o /tmp/page.html -w '%{http_code}' "$url" || true)
+            if [ "$code" = '200' ] && grep -Eqi 'Koncepciódemó|bemutató célból' /tmp/page.html && grep -q 'LUX BARBER SHOP' /tmp/page.html; then
+              title=$(grep -Eio '<title>[^<]*</title>' /tmp/page.html | head -1 | sed -E 's#</?title>##gI')
+              echo "LIVE_QA 200 $url | $title" > worker1-lux-pages-status.txt
+              ok=1
+              break
+            fi
+            sleep 10
+          done
+          test "$ok" = '1'
+      - name: Commit live verification report safely
+        run: |
+          set -euo pipefail
+          cp worker1-lux-pages-status.txt /tmp/worker1-lux-pages-status.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git reset --hard
+          git clean -fd
+          git fetch origin main
+          git checkout -B worker1-lux-live-publish origin/main
+          cp /tmp/worker1-lux-pages-status.txt worker1-lux-pages-status.txt
+          git add worker1-lux-pages-status.txt
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Verify Lux Barber LD-001-023 public demo URL [skip ci]'
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          exit 1
