@@ -1,0 +1,84 @@
+name: W4 Demo Chromium QA
+on:
+  pull_request:
+    branches: [ main ]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Run local server
+        run: |
+          python -m http.server 8765 >/tmp/http.log 2>&1 &
+          sleep 2
+      - name: Chromium QA
+        run: |
+          mkdir -p qa-artifacts
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json, pathlib
+          slugs=['LD-004-012-dorin-kozmetika','LD-004-013-ikon-kozmetika','LD-004-011-la-belle-kozmetika-gyor','LD-004-020-xoxo-szepsegszalon-gyor']
+          results=[]
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True)
+            for slug in slugs:
+              item={'slug':slug,'desktop':{},'mobile':{}}
+              for label,vp in [('desktop',{'width':1440,'height':900}),('mobile',{'width':390,'height':844})]:
+                page=browser.new_page(viewport=vp)
+                errs=[]; failed=[]
+                page.on('pageerror',lambda e,a=errs:a.append(str(e)))
+                page.on('console',lambda m,a=errs:a.append('console:'+m.text) if m.type=='error' else None)
+                page.on('requestfailed',lambda r,a=failed:a.append(r.url))
+                resp=page.goto(f'http://127.0.0.1:8765/outreach/{slug}/',wait_until='networkidle')
+                status=resp.status if resp else 0
+                overflow=page.evaluate('document.documentElement.scrollWidth > window.innerWidth')
+                viewport=page.locator('meta[name="viewport"]').count()==1
+                body=page.locator('body').inner_text().lower()
+                bad=any(x in body for x in ['lorem ipsum','todo','placeholder'])
+                menu=True
+                if label=='mobile':
+                  page.locator('[data-menu]').click(); menu=page.locator('.navlinks').evaluate("e=>e.classList.contains('open')")
+                  page.locator('.navlinks a').first.click(); menu=menu and not page.locator('.navlinks').evaluate("e=>e.classList.contains('open')")
+                page.locator('#booking').scroll_into_view_if_needed()
+                page.locator('[data-step="1"] [data-next]').click()
+                validation='válassz' in page.locator('[data-step="1"] [data-error]').inner_text().lower()
+                page.locator('[data-step="1"] [data-choice]').first.click(); page.locator('[data-step="1"] [data-next]').click()
+                page.locator('[data-step="2"] [data-choice]').first.click(); page.locator('[data-step="2"] [data-next]').click()
+                page.locator('input[name="name"]').fill('Teszt Vendég'); page.locator('input[name="email"]').fill('teszt@example.com'); page.locator('input[name="phone"]').fill('+361234567')
+                page.locator('button[type="submit"]').click(); success=page.locator('[data-step="4"]').evaluate("e=>e.classList.contains('active')")
+                page.screenshot(path=f'qa-artifacts/{slug}-{label}.png',full_page=True)
+                ok=status==200 and not overflow and viewport and not errs and not failed and not bad and menu and validation and success
+                item[label]={'ok':ok,'status':status,'overflow':overflow,'viewport':viewport,'errors':errs,'failed':failed,'bad':bad,'menu':menu,'validation':validation,'success':success}
+                page.close()
+              results.append(item)
+            browser.close()
+          pathlib.Path('qa-artifacts/results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(results,ensure_ascii=False,indent=2))
+          assert all(x['desktop']['ok'] and x['mobile']['ok'] for x in results), 'QA FAIL'
+          PY
+      - name: Verify public GitHub Pages URLs
+        run: |
+          set -e
+          for slug in LD-004-012-dorin-kozmetika LD-004-013-ikon-kozmetika LD-004-011-la-belle-kozmetika-gyor LD-004-020-xoxo-szepsegszalon-gyor; do
+            url="https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/$slug/"
+            ok=0
+            for i in $(seq 1 12); do
+              code=$(curl -L -s -o /dev/null -w '%{http_code}' "$url" || true)
+              echo "$slug attempt $i -> $code"
+              if [ "$code" = "200" ]; then ok=1; break; fi
+              sleep 10
+            done
+            test "$ok" = "1"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: w4-demo-qa
+          path: qa-artifacts/
