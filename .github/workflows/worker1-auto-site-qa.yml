@@ -1,0 +1,68 @@
+name: Worker 1 Autonomous Site QA
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-auto-site-qa.yml'
+      - 'tools/worker1-auto-site-qa.mjs'
+      - 'worker1-auto-site-qa-manifest.json'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 8770 --bind 127.0.0.1 >/tmp/w1-auto-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8770/worker1-auto-site-qa-manifest.json >/dev/null && exit 0
+            sleep 1
+          done
+          exit 1
+      - name: Run autonomous site QA
+        run: node tools/worker1-auto-site-qa.mjs
+      - name: Persist validated QA artifacts safely
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, pathlib, tarfile
+          m=json.load(open('worker1-auto-site-qa-manifest.json',encoding='utf-8'))
+          paths=['worker1-auto-site-qa.json']
+          for x in m['sites']:
+            s=x['slug']
+            paths += [f'outreach/{s}/preview-desktop.png',f'outreach/{s}/preview-mobile.png',f'qa/worker1/{s}']
+          with tarfile.open('/tmp/w1-auto-site-artifacts.tgz','w:gz') as t:
+            for p in paths:
+              t.add(p)
+          pathlib.Path('/tmp/w1-auto-site-paths.txt').write_text('\n'.join(paths),encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git reset --hard
+          git clean -fd
+          git fetch origin main
+          git checkout -B worker1-auto-site-publish origin/main
+          tar -xzf /tmp/w1-auto-site-artifacts.tgz
+          git add $(cat /tmp/w1-auto-site-paths.txt)
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'QA Worker 1 autonomous website demos [skip ci]'
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          exit 1
