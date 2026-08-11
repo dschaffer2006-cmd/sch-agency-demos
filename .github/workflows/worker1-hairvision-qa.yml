@@ -6,6 +6,8 @@ on:
       - '.github/workflows/worker1-hairvision-qa.yml'
       - 'tools/worker1-hairvision-qa.mjs'
       - 'outreach/LD-001-021-hairvision-korosi-tibor/**'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
