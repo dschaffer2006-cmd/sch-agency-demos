@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-08-11T14:35:24.752Z",
+  "worker": "MUNKÁS_1",
+  "passed": 1,
+  "failed": 0,
+  "results": [
+    {
+      "slug": "LD-001-024-barber-studio-veszprem",
+      "name": "Barber Studio Veszprém",
+      "pass": true,
+      "viewports": {
+        "desktop": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "badText": false,
+          "headingOverflow": [],
+          "zeroSections": [],
+          "demoMarker": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "bookingLinksOk": true,
+          "bookingLinkCount": 3,
+          "pass": true
+        },
+        "mobile": {
+          "status": 200,
+          "viewportMeta": true,
+          "overflow": false,
+          "badText": false,
+          "headingOverflow": [],
+          "zeroSections": [],
+          "demoMarker": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "menuOk": true,
+          "bookingLinksOk": true,
+          "bookingLinkCount": 3,
+          "pass": true
+        }
+      }
+    }
+  ]
+}
