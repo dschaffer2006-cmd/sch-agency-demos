@@ -1,0 +1,4 @@
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-011-baranyai-szalon/ | Baranyai Szalon — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-017-skin-line-kozmetika/ | Skin Line Kozmetika Veszprém — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-016-nagy-szilvia-fodrasz/ | Nagy Szilvia Fodrász — koncepciódemó
+LIVE_QA 200 https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-006-haj-lak-fodraszat/ | Haj-Lak Fodrászat Veszprém — koncepciódemó
