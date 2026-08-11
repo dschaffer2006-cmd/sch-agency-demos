@@ -38,6 +38,10 @@ def headline_fits(page, width):
     box = page.locator("h1").first.bounding_box()
     return bool(box and box["width"] > 0 and box["height"] > 0 and box["x"] >= -2 and box["x"] + box["width"] <= width + 2)
 
+def expose_reveals(page):
+    page.evaluate("document.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('visible'))")
+    page.wait_for_timeout(100)
+
 def run():
     report = []
     with sync_playwright() as p:
@@ -83,6 +87,7 @@ def run():
                     booking.locator('[name="contact"]').fill("qa@example.test")
                     booking.locator('button[type="submit"]').click()
                     if not booking.get_by_text("Demó foglalás sikeres", exact=True).is_visible(): problems.append("booking.flow")
+                expose_reveals(page)
                 page.screenshot(path=str(OUT / f"{lead_id}-desktop.png"), full_page=True)
             except Exception as exc:
                 problems.append("desktop.exception:" + repr(exc))
@@ -124,6 +129,7 @@ def run():
                 mobile.locator('[name="contact"]').fill("qa-mobile@example.test")
                 mobile.locator('button[type="submit"]').click()
                 if not mobile.get_by_text("Demó foglalás sikeres", exact=True).is_visible(): problems.append("mobile.booking-flow")
+                expose_reveals(mobile)
                 mobile.screenshot(path=str(OUT / f"{lead_id}-mobile.png"), full_page=True)
             except Exception as exc:
                 problems.append("mobile.exception:" + repr(exc))
