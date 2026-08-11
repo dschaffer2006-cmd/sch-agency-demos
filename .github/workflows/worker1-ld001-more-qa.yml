@@ -58,12 +58,11 @@ jobs:
         run: node tools/worker1-ld001-more-qa.mjs
 
       - name: Commit demos, screenshots and QA report
-        if: github.event_name != 'pull_request'
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git pull --rebase origin main
+          TARGET_BRANCH="${GITHUB_HEAD_REF:-main}"
           git add \
             outreach/LD-001-010-szereto-martina-fodrasz \
             outreach/LD-001-013-szabo-adrienn-rose \
@@ -76,5 +75,5 @@ jobs:
             echo 'No QA artifact changes.'
           else
             git commit -m 'Publish and QA Worker 1 remaining LD-001 demos [skip ci]'
-            git push origin HEAD:main
+            git push origin HEAD:"$TARGET_BRANCH"
           fi
