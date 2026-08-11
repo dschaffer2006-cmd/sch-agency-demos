@@ -1,0 +1,43 @@
+name: Worker 5 LD-005-021 QA
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start preview server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w5-ld005021-server.log 2>&1 &
+          sleep 2
+      - name: Run technical and interaction QA
+        run: node tools/worker5_ld005021_qa.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: worker5-ld005021-qa
+          path: |
+            worker5-ld005021-qa-report.json
+            outreach/LD-005-021-unique-salon-barbershop/preview-desktop.png
+            outreach/LD-005-021-unique-salon-barbershop/preview-mobile.png
+            outreach/LD-005-021-unique-salon-barbershop/desktop-full.png
+            outreach/LD-005-021-unique-salon-barbershop/mobile-full.png
+          retention-days: 14
+      - name: Commit screenshots after PASS
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add outreach/LD-005-021-unique-salon-barbershop/*.png
+          git diff --cached --quiet || (git commit -m 'Add LD-005-021 QA screenshots' && git push origin HEAD:${{ github.head_ref || github.ref_name }})
