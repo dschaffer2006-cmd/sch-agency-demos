@@ -1,0 +1,39 @@
+name: Worker 3 Live Demo QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'qa-trigger-worker3.txt'
+      - 'tools/worker3_live_demo_qa.py'
+      - 'outreach/LD-003-012-kolibri-szepsegszalon/**'
+      - 'outreach/LD-003-016-image-szepsegszalon/**'
+      - 'outreach/LD-003-017-roa-beauty/**'
+      - 'outreach/LD-003-019-frufru-szekesfehervar/**'
+
+permissions:
+  contents: read
+
+jobs:
+  live-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Run live desktop + mobile Chromium QA
+        run: python tools/worker3_live_demo_qa.py
+      - name: Upload QA screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: worker3-live-demo-qa
+          path: qa-artifacts/worker3-live/
+          if-no-files-found: warn
