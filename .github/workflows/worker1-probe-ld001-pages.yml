@@ -1,0 +1,52 @@
+name: Worker 1 probe LD-001 public Pages
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-probe-ld001-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Probe four public demo URLs
+        run: |
+          set +e
+          urls=(
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-011-baranyai-szalon/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-017-skin-line-kozmetika/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-016-nagy-szilvia-fodrasz/'
+            'https://dschaffer2006-cmd.github.io/sch-agency-demos/outreach/LD-001-006-haj-lak-fodraszat/'
+          )
+          : > worker1-ld001-pages-probe.txt
+          for url in "${urls[@]}"; do
+            code=$(curl -L -sS --max-time 20 -o /tmp/page.html -w '%{http_code}' "$url" || echo CURL_ERROR)
+            title=$(python3 - <<'PY'
+import re
+try:
+ s=open('/tmp/page.html',encoding='utf-8',errors='replace').read()
+ m=re.search(r'<title>(.*?)</title>',s,re.I|re.S)
+ print(m.group(1).strip() if m else 'NO_TITLE')
+except Exception:
+ print('NO_BODY')
+PY
+)
+            marker=$(grep -q 'Koncepciódemó' /tmp/page.html 2>/dev/null && echo MARKER_OK || echo MARKER_MISSING)
+            echo "$code $marker $url | $title" | tee -a worker1-ld001-pages-probe.txt
+          done
+      - name: Commit probe report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
+          git add worker1-ld001-pages-probe.txt
+          git commit -m 'Probe Worker 1 LD-001 public demo URLs [skip ci]' || true
+          git push origin HEAD:main || true
