@@ -1,0 +1,77 @@
+name: Worker 1 LD-001 More QA
+
+on:
+  push:
+    paths:
+      - '.github/workflows/worker1-ld001-more-qa.yml'
+      - '.github/w1_more3_payload.tar.gz.b64'
+      - 'tools/worker1-ld001-more-qa.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract remaining Worker 1 demos
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/w1more
+          mkdir -p /tmp/w1more outreach
+          base64 -d .github/w1_more3_payload.tar.gz.b64 > /tmp/w1-more3.tar.gz
+          tar -xzf /tmp/w1-more3.tar.gz -C /tmp/w1more
+          cp -a /tmp/w1more/LD-001-015-marcos-barbershop outreach/
+          cp -a /tmp/w1more/LD-001-019-pipacs-szepsegsziget outreach/
+          cp -a /tmp/w1more/LD-001-020-hazuga-alexandra-fodrasz outreach/
+          test -s outreach/LD-001-010-szereto-martina-fodrasz/index.html
+          test -s outreach/LD-001-013-szabo-adrienn-rose/index.html
+          test -s outreach/LD-001-015-marcos-barbershop/index.html
+          test -s outreach/LD-001-019-pipacs-szepsegsziget/index.html
+          test -s outreach/LD-001-020-hazuga-alexandra-fodrasz/index.html
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local preview server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/w1-http.log 2>&1 &
+          echo $! > /tmp/w1-http.pid
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8765/outreach/LD-001-010-szereto-martina-fodrasz/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/w1-http.log
+          exit 1
+
+      - name: Run Chromium desktop and mobile QA
+        run: node tools/worker1-ld001-more-qa.mjs
+
+      - name: Commit demos, screenshots and QA report
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
+          git add \
+            outreach/LD-001-010-szereto-martina-fodrasz \
+            outreach/LD-001-013-szabo-adrienn-rose \
+            outreach/LD-001-015-marcos-barbershop \
+            outreach/LD-001-019-pipacs-szepsegsziget \
+            outreach/LD-001-020-hazuga-alexandra-fodrasz \
+            qa/worker1 \
+            worker1-ld001-more-qa.json
+          if git diff --cached --quiet; then
+            echo 'No QA artifact changes.'
+          else
+            git commit -m 'Publish and QA Worker 1 remaining LD-001 demos [skip ci]'
+            git push origin HEAD:main
+          fi
