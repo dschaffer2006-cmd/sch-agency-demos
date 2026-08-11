@@ -10,6 +10,7 @@ on:
       - 'outreach/LD-003-016-image-szepsegszalon/**'
       - 'outreach/LD-003-017-roa-beauty/**'
       - 'outreach/LD-003-019-frufru-szekesfehervar/**'
+      - 'outreach/LD-003-021-aniko-koromszalon/**'
 
 permissions:
   contents: read
