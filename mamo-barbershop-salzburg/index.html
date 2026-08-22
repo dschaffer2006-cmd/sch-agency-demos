@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fotogalerie</title>
+  <meta name="description" content="Fotogalerie mit ausgewählten Eindrücken vor Ort.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Startseite">Galerie</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#hero">Start</a></li>
+          <li><a href="#gallery">Galerie</a></li>
+          <li><a href="#highlights">Einblicke</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Visuelle Eindrücke</p>
+          <h1>Eine klare Galerie mit echten Bildern.</h1>
+          <p class="hero-text">Diese Seite zeigt ausgewählte Aufnahmen aus dem vorhandenen Bildmaterial in einem ruhigen, responsiven Layout.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#gallery">Galerie ansehen</a>
+            <a class="btn btn-secondary" href="#highlights">Mehr entdecken</a>
+          </div>
+        </div>
+        <div class="hero-media reveal reveal-delay-1">
+          <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAKXhHMxhTboSGIHj_LS8M_oRoXds_vY1FLto93UMvdWVJggwgxGW56MVykrp0SBhe_hoUiLVeDmAN4h3sjhgZLFFYdX31puyut5c6UKnjmzPZvut_7s2-5RTx1SEIoYmkptxf0QlApqEXL=s4800-w1600-h1600" alt="Galeriebild" fetchpriority="high" loading="eager">
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Galerie</p>
+          <h2>Fünf Bilder, sauber inszeniert.</h2>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-item gallery-item-large reveal">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjC9jDlUU7pwJa6BIj99D2dfnPg5XVd8OzKBxbqZr7Y-CbaL4-guWO6i-kHfwWA3NWmduUqXWYTGkX6FvHfpHhpQxLJdtkQRCdAAknDPx0MNUBPGEF34zZ6ShKC5RZQwmD1_as9Vs_Gk0ooDOA=s4800-w1600-h1600" alt="Galerieaufnahme 2" loading="lazy">
+          </figure>
+          <figure class="gallery-item reveal reveal-delay-1">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDWnx3FsQiIbKgiEU2dArWvbewSUkfY2DHSGDPEC4isoJXTlyC7kKVe0kFPFNU59VK90v6O2VAAfOiilOmnc8v1Q-3t0H7AwIx9xTP0IdNWgUz6Ks0m50o5Iqif6OAlakBHJozSPYGebRrmqw=s4800-w1600-h1600" alt="Galerieaufnahme 3" loading="lazy">
+          </figure>
+          <figure class="gallery-item reveal reveal-delay-2">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjBZbz9Zz05qssBFNmwMGlR8ME68jIznqkTK02CtjyJIuKbPCbajIRE4eyUJJQXOVKY3jB-cCY3t0y1quCudCyCH7U-nQLgsvSVVP6peOmO_qrT6gOVJr5yq6ZEecoXURMXLNv3C_kpefTa-=s4800-w1600-h1600" alt="Galerieaufnahme 4" loading="lazy">
+          </figure>
+          <figure class="gallery-item gallery-item-wide reveal">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjBa5HMCTq9EIxNGUc25zwnVag1Rb5XePkzb9e-GKnT1yFoaiqiOTxkrzYGEifS4aHz0CVp4XeiwF41h-5W4P_iiLSPtImf3JIZg4nPve1Fsyw2-8uB_Uz95kPPNMcJzkCa92lG4KgpwhV_yXQ=s4800-w1600-h1600" alt="Galerieaufnahme 5" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlights-section" id="highlights">
+      <div class="container highlights-grid">
+        <article class="highlight-card reveal">
+          <p class="eyebrow">Format</p>
+          <h3>Responsiv aufgebaut</h3>
+          <p>Die Bildflächen passen sich großen Screens ebenso wie mobilen Geräten sauber an.</p>
+        </article>
+        <article class="highlight-card reveal reveal-delay-1">
+          <p class="eyebrow">Darstellung</p>
+          <h3>Klare Bildführung</h3>
+          <p>Große Flächen, ausgewogene Abstände und ein ruhiger Rhythmus sorgen für gute Lesbarkeit.</p>
+        </article>
+        <article class="highlight-card reveal reveal-delay-2">
+          <p class="eyebrow">Erlebnis</p>
+          <h3>Dezente Bewegung</h3>
+          <p>Sanfte Scroll-Animationen ergänzen das Layout, ohne die Inhalte zu überladen.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Galerie</p>
+      <a href="#top">Nach oben</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
