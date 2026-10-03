@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SCH Isometric Search City V1</title>
+<style>
+:root{--black:#0A0A0A;--graphite:#151515;--white:#F5F5F0;--steel:#8A8F98;--green:#39FF14}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#050505;color:var(--white);font-family:Inter,Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px}
+.viewport{width:min(420px,94vw);aspect-ratio:9/16;position:relative;overflow:hidden;border-radius:20px;background:#080808;border:1px solid rgba(245,245,240,.1);box-shadow:0 35px 90px rgba(0,0,0,.55)}
+.comp{position:absolute;inset:0 auto auto 0;width:1080px;height:1920px;transform-origin:top left;overflow:hidden;background:
+radial-gradient(circle at 50% 38%,rgba(57,255,20,.055),transparent 28%),
+linear-gradient(180deg,#0b0b0b 0%,#070707 70%,#050505 100%)}
+.kicker{position:absolute;left:72px;top:86px;font:700 20px/1 ui-monospace,Consolas,monospace;color:var(--green);letter-spacing:.13em}
+.title{position:absolute;left:72px;top:128px;font-weight:800;font-size:64px;line-height:.98;letter-spacing:-.055em;max-width:850px}
+.title span{color:var(--steel)}
+.search{position:absolute;left:86px;right:86px;top:286px;height:102px;border:1px solid rgba(245,245,240,.17);border-radius:28px;background:rgba(21,21,21,.72);box-shadow:inset 0 1px rgba(255,255,255,.1),0 22px 55px rgba(0,0,0,.28);display:flex;align-items:center;padding:0 30px;gap:22px;opacity:0;transform:translateY(22px) scale(.98);z-index:20}
+.searchIcon{width:30px;height:30px;border:4px solid var(--green);border-radius:50%;position:relative;flex:none}
+.searchIcon:after{content:"";position:absolute;width:15px;height:4px;background:var(--green);right:-12px;bottom:-7px;transform:rotate(45deg);border-radius:4px}
+.query{font:600 31px/1.1 ui-monospace,Consolas,monospace;white-space:nowrap;overflow:hidden;color:var(--white)}
+.cursor{width:5px;height:40px;background:var(--green);margin-left:-12px}
+.cityWrap{position:absolute;left:0;top:410px;width:1080px;height:1190px;overflow:visible}
+#city{width:1080px;height:1190px;overflow:visible}
+.cityBase{filter:drop-shadow(0 45px 55px rgba(0,0,0,.5))}
+.review{position:absolute;z-index:12;min-width:205px;padding:15px 17px;border-radius:20px;background:rgba(14,14,14,.88);border:1px solid rgba(245,245,240,.15);box-shadow:0 20px 45px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.08);opacity:0;transform:translate(-50%,18px) scale(.88);transform-origin:50% 100%;backdrop-filter:blur(12px)}
+.review .place{font-size:17px;font-weight:750;white-space:nowrap;margin-bottom:7px}
+.review .score{display:flex;align-items:center;gap:9px;font:800 26px/1 ui-monospace,Consolas,monospace}
+.stars{color:var(--green);font-size:16px;letter-spacing:1px}
+.review .count{color:var(--steel);font:12px ui-monospace,Consolas,monospace;margin-top:7px}
+.review.best{border-color:rgba(57,255,20,.55);box-shadow:0 22px 60px rgba(0,0,0,.45),0 0 34px rgba(57,255,20,.10),inset 0 1px rgba(255,255,255,.09)}
+.person{position:absolute;z-index:14;width:54px;height:94px;transform:translate(-50%,-88%);filter:drop-shadow(0 14px 10px rgba(0,0,0,.35));opacity:0}
+.person .head{position:absolute;left:17px;top:0;width:24px;height:24px;border-radius:50%;background:#F5F5F0}
+.person .body{position:absolute;left:15px;top:25px;width:28px;height:38px;border-radius:13px 13px 9px 9px;background:#1f1f1f;border:2px solid #3b3b3b}
+.person .arm{position:absolute;top:31px;width:9px;height:31px;border-radius:8px;background:#d9d9d3;transform-origin:50% 3px}
+.person .arm.l{left:9px}.person .arm.r{right:8px}
+.person .leg{position:absolute;top:59px;width:10px;height:34px;border-radius:8px;background:#8A8F98;transform-origin:50% 3px}
+.person .leg.l{left:15px}.person .leg.r{right:13px}
+.scan{position:absolute;width:46px;height:46px;border:3px solid rgba(57,255,20,.9);border-radius:50%;z-index:8;opacity:0;transform:translate(-50%,-50%) scale(.2);box-shadow:0 0 28px rgba(57,255,20,.25)}
+.result{position:absolute;left:86px;right:86px;bottom:138px;z-index:22;border-radius:30px;background:linear-gradient(145deg,rgba(245,245,240,.075),rgba(18,18,18,.88));border:1px solid rgba(245,245,240,.16);box-shadow:0 28px 70px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.1);padding:28px 30px;opacity:0;transform:translateY(30px) scale(.98)}
+.resultTop{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.result .eyebrow{font:700 15px ui-monospace,Consolas,monospace;color:var(--green);letter-spacing:.11em;margin-bottom:10px}.result h2{font-size:40px;line-height:1;margin:0;letter-spacing:-.045em}.pill{font:800 22px ui-monospace,Consolas,monospace;color:#071006;background:var(--green);padding:11px 15px;border-radius:14px}.resultGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}.metric{padding:15px;border-radius:17px;background:rgba(10,10,10,.52);border:1px solid rgba(245,245,240,.09)}.mk{font:11px ui-monospace,Consolas,monospace;color:var(--steel);text-transform:uppercase}.mv{font-size:21px;font-weight:760;margin-top:6px}
+.controls{width:min(720px,94vw);display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+button{border:1px solid rgba(245,245,240,.13);background:#111;color:var(--white);padding:10px 13px;border-radius:11px;font:800 11px ui-monospace,Consolas,monospace;cursor:pointer}
+button:hover,button.active{border-color:rgba(57,255,20,.55);color:var(--green)}
+#scrub{flex:1;min-width:180px;accent-color:var(--green)}.time{font:11px ui-monospace,Consolas,monospace;color:var(--steel);min-width:92px;text-align:right}
+.note{max-width:720px;text-align:center;color:#70747b;font:10px/1.45 ui-monospace,Consolas,monospace}
+</style>
+</head>
+<body>
+<div class="viewport" id="viewport">
+ <main class="comp" id="comp">
+  <div class="kicker">LOCAL SEARCH / 2.5D</div>
+  <div class="title">Search becomes a <span>place.</span></div>
+  <div class="search" id="search"><div class="searchIcon"></div><div class="query" id="query"></div><div class="cursor" id="cursor"></div></div>
+  <div class="cityWrap">
+   <svg id="city" viewBox="0 0 1080 1190" aria-label="isometric city animation"></svg>
+   <div class="person" id="person"><div class="head"></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div></div>
+   <div class="scan" id="scan"></div>
+   <div class="review" id="r0"><div class="place">North Roast</div><div class="score">4.6 <span class="stars">★★★★☆</span></div><div class="count">184 reviews</div></div>
+   <div class="review" id="r1"><div class="place">Mono Coffee</div><div class="score">4.8 <span class="stars">★★★★★</span></div><div class="count">241 reviews</div></div>
+   <div class="review best" id="r2"><div class="place">Graphite Café</div><div class="score">4.9 <span class="stars">★★★★★</span></div><div class="count">328 reviews</div></div>
+   <div class="review" id="r3"><div class="place">Studio Brew</div><div class="score">4.7 <span class="stars">★★★★★</span></div><div class="count">116 reviews</div></div>
+  </div>
+  <div class="result" id="result"><div class="resultTop"><div><div class="eyebrow">BEST MATCH</div><h2>Graphite Café</h2></div><div class="pill">4.9 ★</div></div><div class="resultGrid"><div class="metric"><div class="mk">Reviews</div><div class="mv">328</div></div><div class="metric"><div class="mk">Distance</div><div class="mv">350 m</div></div><div class="metric"><div class="mk">Status</div><div class="mv">Open</div></div></div></div>
+ </main>
+</div>
+<div class="controls">
+ <button id="play">PLAY</button>
+ <button data-jump="0">FULL</button><button data-jump="1.4">SEARCH</button><button data-jump="4.3">REVIEWS</button><button data-jump="8.0">BEST MATCH</button>
+ <input id="scrub" type="range" min="0" max="12.5" step="0.01" value="0"><div class="time" id="time">0.00 / 12.50</div>
+</div>
+<div class="note">SCH 2.5D search-city study · deterministic render(t) · no mouse/scroll dependency · direct building focus, no leader lines</div>
+<script>
+const D=12.5, viewport=document.getElementById('viewport'), comp=document.getElementById('comp'), svg=document.getElementById('city');
+const NS='http://www.w3.org/2000/svg';
+const C={green:'#39FF14',white:'#F5F5F0',steel:'#8A8F98',top:'#262626',left:'#171717',right:'#101010',road:'#1c1c1c',ground:'#202020'};
+function el(n,a={}){const e=document.createElementNS(NS,n);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));return e}
+function poly(points,fill,stroke='none',sw=1){return el('polygon',{points:points.map(p=>p.join(',')).join(' '),fill,stroke,'stroke-width':sw,'stroke-linejoin':'round'})}
+function iso(x,y,z=0){return [540+(x-y)*1.18,505+(x+y)*.58-z]}
+function boxPoints(x,y,w,d,h){
+ const A=iso(x,y,0),B=iso(x+w,y,0),C0=iso(x+w,y+d,0),D0=iso(x,y+d,0);
+ const At=iso(x,y,h),Bt=iso(x+w,y,h),Ct=iso(x+w,y+d,h),Dt=iso(x,y+d,h);
+ return {A,B,C:C0,D:D0,At,Bt,Ct,Dt}
+}
+const defs=el('defs');
+const glow=el('filter',{id:'greenGlow',x:'-80%',y:'-80%',width:'260%',height:'260%'});
+glow.append(el('feGaussianBlur',{stdDeviation:'10',result:'b'}));
+const merge=el('feMerge');merge.append(el('feMergeNode',{in:'b'}),el('feMergeNode',{in:'SourceGraphic'}));glow.append(merge);defs.append(glow);svg.append(defs);
+const base=el('g',{class:'cityBase'});
+base.append(poly([iso(-30,-20),iso(420,-20),iso(420,420),iso(-30,420)],'#171717','rgba(245,245,240,.08)',2));
+base.append(poly([iso(-18,-8),iso(408,-8),iso(408,408),iso(-18,408)],'#1d1d1d'));
+function road(x,y,w,d){const p=boxPoints(x,y,w,d,0);base.append(poly([p.A,p.B,p.C,p.D],C.road,'rgba(245,245,240,.035)',1))}
+road(0,170,390,52);road(168,0,54,390);road(0,55,390,28);road(55,0,28,390);road(305,0,26,390);road(0,305,390,26);
+svg.append(base);
+const buildings=[
+ {x:12,y:10,w:38,d:38,h:92},{x:88,y:12,w:60,d:44,h:125},{x:235,y:12,w:58,d:50,h:112},{x:338,y:14,w:42,d:42,h:78},
+ {x:10,y:92,w:40,d:58,h:68},{x:91,y:100,w:58,d:55,h:148,review:0},{x:236,y:100,w:56,d:54,h:105,review:1},{x:338,y:92,w:40,d:60,h:132},
+ {x:12,y:236,w:38,d:55,h:98},{x:92,y:238,w:56,d:54,h:115,review:3},{x:238,y:236,w:56,d:58,h:175,review:2,best:true},{x:340,y:238,w:38,d:54,h:86},
+ {x:12,y:340,w:40,d:40,h:72},{x:94,y:340,w:54,d:42,h:100},{x:240,y:342,w:52,d:40,h:88},{x:340,y:340,w:40,d:40,h:64}
+];
+const bGroups=[], reviewAnchors=[];
+function building(b,i){
+ const p=boxPoints(b.x,b.y,b.w,b.d,b.h),g=el('g',{'data-building':i});
+ const shadow=poly([[p.D[0]+10,p.D[1]+16],[p.C[0]+18,p.C[1]+16],[p.B[0]+20,p.B[1]+18],[p.A[0]+10,p.A[1]+18]],'rgba(0,0,0,.24)');
+ g.append(shadow);
+ const left=poly([p.D,p.C,p.Ct,p.Dt],b.best?'#1d291b':C.left,'rgba(245,245,240,.06)',1);
+ const right=poly([p.B,p.C,p.Ct,p.Bt],b.best?'#10200e':C.right,'rgba(245,245,240,.055)',1);
+ const top=poly([p.At,p.Bt,p.Ct,p.Dt],b.best?'#263323':C.top,b.best?'rgba(57,255,20,.65)':'rgba(245,245,240,.09)',b.best?2:1);
+ g.append(left,right,top);
+ const floors=Math.max(2,Math.floor(b.h/28));
+ for(let f=1;f<floors;f++){
+  const z=f*b.h/floors, q=boxPoints(b.x,b.y,b.w,b.d,z);
+  const line1=el('line',{x1:q.D[0],y1:q.D[1],x2:q.C[0],y2:q.C[1],stroke:'rgba(245,245,240,.08)','stroke-width':2});
+  const line2=el('line',{x1:q.B[0],y1:q.B[1],x2:q.C[0],y2:q.C[1],stroke:b.best?'rgba(57,255,20,.16)':'rgba(245,245,240,.055)','stroke-width':2});
+  g.append(line1,line2);
+ }
+ if(i%3===1||b.best){
+   const cap=el('rect',{x:p.At[0]-7,y:p.At[1]-12,width:14,height:12,rx:3,fill:b.best?C.green:'#4a4a4a'});
+   g.append(cap);
+ }
+ svg.append(g);bGroups.push(g);
+ if(b.review!==undefined){reviewAnchors[b.review]={x:(p.At[0]+p.Ct[0])/2,y:Math.min(p.At[1],p.Bt[1],p.Ct[1],p.Dt[1])-12,building:i}}
+}
+buildings.forEach(building);
+const parks=[{x:338,y:338},{x:12,y:338},{x:338,y:12}];
+parks.forEach((p,pi)=>{for(let k=0;k<4;k++){const x=p.x+8+(k%2)*17,y=p.y+8+Math.floor(k/2)*17,a=iso(x,y,0),g=el('g');g.append(el('circle',{cx:a[0],cy:a[1]-17,r:12,fill:pi===0?'#2c3c29':'#293329'}),el('rect',{x:a[0]-3,y:a[1]-7,width:6,height:14,fill:'#555'}));svg.append(g)}});
+
+const search=document.getElementById('search'),query=document.getElementById('query'),cursor=document.getElementById('cursor'),person=document.getElementById('person'),scan=document.getElementById('scan'),result=document.getElementById('result');
+const reviews=[0,1,2,3].map(i=>document.getElementById('r'+i));
+reviewAnchors.forEach((a,i)=>{reviews[i].style.left=a.x+'px';reviews[i].style.top=(a.y+410)+'px'});
+const path=[iso(-10,196,0),iso(75,196,0),iso(165,196,0),iso(215,196,0),iso(260,225,0),iso(278,255,0)];
+function clamp(v,a=0,b=1){return Math.max(a,Math.min(b,v))}
+function ease(x){x=clamp(x);return 1-Math.pow(1-x,3)}
+function smooth(x){x=clamp(x);return x*x*(3-2*x)}
+function lerp(a,b,p){return a+(b-a)*p}
+function pathPos(p){
+ p=clamp(p);const n=path.length-1,s=p*n,i=Math.min(n-1,Math.floor(s)),q=s-i;
+ return [lerp(path[i][0],path[i+1][0],q),lerp(path[i][1],path[i+1][1],q)]
+}
+function setReview(i,p,dim=1){const v=ease(p);reviews[i].style.opacity=v*dim;reviews[i].style.transform='translate(-50%,'+lerp(18,0,v)+'px) scale('+lerp(.88,1,v)+')'}
+function render(t){
+ t=clamp(t,0,D);
+ // city build
+ bGroups.forEach((g,i)=>{const p=ease((t-(.12+i*.035))/.62);g.style.opacity=p;g.setAttribute('transform','translate(0 '+lerp(46,0,p)+')')});
+ // search card + typing
+ const sp=ease((t-1.0)/.5);search.style.opacity=sp;search.style.transform='translateY('+lerp(22,0,sp)+'px) scale('+lerp(.98,1,sp)+')';
+ const full='best rated coffee near me',tp=clamp((t-1.45)/1.65),count=Math.floor(full.length*tp);query.textContent=full.slice(0,count);
+ cursor.style.opacity=(Math.floor(t/.18)%2===0||tp<1)?1:.25;
+ // first walk
+ let walkP=t<4.0?smooth((t-1.0)/2.7):1;
+ if(t>=7.7) walkP=lerp(1,1,smooth((t-7.7)/1.7));
+ const pp=t<7.7?pathPos(walkP*.58):pathPos(lerp(.58,1,smooth((t-7.7)/1.65)));
+ person.style.opacity=ease((t-.7)/.35);
+ person.style.left=pp[0]+'px';person.style.top=(pp[1]+410)+'px';
+ const step=Math.sin(t*11);
+ person.querySelector('.arm.l').style.transform='rotate('+(step*25)+'deg)';
+ person.querySelector('.arm.r').style.transform='rotate('+(-step*25)+'deg)';
+ person.querySelector('.leg.l').style.transform='rotate('+(-step*23)+'deg)';
+ person.querySelector('.leg.r').style.transform='rotate('+(step*23)+'deg)';
+ // search pulse around walker
+ const scp=clamp((t-3.25)/.85);scan.style.left=pp[0]+'px';scan.style.top=(pp[1]+410)+'px';scan.style.opacity=(1-scp)*.9;scan.style.transform='translate(-50%,-50%) scale('+lerp(.2,7,ease(scp))+')';
+ // review cards sequential
+ reviews.forEach((r,i)=>setReview(i,(t-(4.0+i*.42))/.36, t>7.0&&i!==2?lerp(1,.28,ease((t-7.0)/.7)):1));
+ // selected building focus/lift
+ const bestIndex=reviewAnchors[2].building,bp=ease((t-6.9)/.65);
+ bGroups.forEach((g,i)=>{
+   const build=ease((t-(.12+i*.035))/.62);
+   let y=lerp(46,0,build),op=build;
+   if(t>6.9){
+     if(i===bestIndex)y-=bp*28;
+     else op*=lerp(1,.34,bp);
+   }
+   g.style.opacity=op;g.setAttribute('transform','translate(0 '+y+')');
+ });
+ // best card enlarges slightly
+ if(t>6.9){const v=ease((t-6.9)/.6);reviews[2].style.transform='translate(-50%,'+lerp(0,-10,v)+'px) scale('+lerp(1,1.08,v)+')'}
+ // result panel
+ const rp=ease((t-9.0)/.5);result.style.opacity=rp;result.style.transform='translateY('+lerp(30,0,rp)+'px) scale('+lerp(.98,1,rp)+')';
+ document.getElementById('scrub').value=t;document.getElementById('time').textContent=t.toFixed(2)+' / 12.50';
+}
+function scale(){comp.style.transform='scale('+(viewport.clientWidth/1080)+')'}scale();addEventListener('resize',scale);
+let playing=false,raf=0,startStamp=0,startT=0,current=0;
+function tick(ts){if(!playing)return;if(!startStamp)startStamp=ts;current=startT+(ts-startStamp)/1000;if(current>=D){current=D;playing=false;document.getElementById('play').textContent='PLAY';render(current);return}render(current);raf=requestAnimationFrame(tick)}
+document.getElementById('play').onclick=()=>{if(playing){playing=false;cancelAnimationFrame(raf);document.getElementById('play').textContent='PLAY';return}if(current>=D)current=0;playing=true;startStamp=0;startT=current;document.getElementById('play').textContent='PAUSE';raf=requestAnimationFrame(tick)};
+document.getElementById('scrub').oninput=e=>{playing=false;cancelAnimationFrame(raf);document.getElementById('play').textContent='PLAY';current=+e.target.value;render(current)};
+document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>{playing=false;cancelAnimationFrame(raf);document.getElementById('play').textContent='PLAY';current=+b.dataset.jump;render(current)});
+window.renderAt=render;window.__duration=D;render(0);
+setTimeout(()=>document.getElementById('play').click(),350);
+</script>
+</body>
+</html>
