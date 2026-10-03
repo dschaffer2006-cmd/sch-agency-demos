@@ -3,232 +3,265 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SCH 2.5D House Motion Lab — 6 Styles</title>
+<title>SCH 2.5D House Rise — 6 Styles</title>
 <style>
 :root{
-  --bg:#090909;--panel:#141414;--panel2:#1b1b1b;--white:#F5F5F0;--steel:#8A8F98;--green:#39FF14;
+  --bg:#090909;
+  --panel:#131313;
+  --panel2:#181818;
+  --white:#F5F5F0;
+  --steel:#8A8F98;
+  --green:#39FF14;
+  --line:rgba(245,245,240,.10);
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:#050505;color:var(--white);font-family:Inter,Arial,sans-serif}
-body{display:flex;flex-direction:column;align-items:center;gap:14px;padding:16px}
-.viewport{width:min(430px,95vw);aspect-ratio:9/16;position:relative;overflow:hidden;border-radius:22px;background:#0A0A0A;border:1px solid rgba(245,245,240,.09);box-shadow:0 32px 90px rgba(0,0,0,.55)}
-.comp{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:top left;overflow:hidden;background:
-radial-gradient(circle at 50% 38%,rgba(57,255,20,.045),transparent 28%),
-linear-gradient(180deg,#0d0d0d,#090909 60%,#060606)}
-.top{position:absolute;left:72px;right:72px;top:70px;z-index:20}
-.kicker{font:700 18px/1 ui-monospace,Consolas,monospace;letter-spacing:.15em;color:var(--green)}
-h1{margin:14px 0 0;font-size:58px;line-height:.98;letter-spacing:-.05em}
-h1 span{color:var(--steel)}
-.stage{position:absolute;left:0;top:250px;width:1080px;height:1300px;perspective:1400px}
-.scene{position:absolute;left:50%;top:52%;width:760px;height:900px;transform:translate(-50%,-50%);transform-style:preserve-3d}
-.floor{position:absolute;left:50%;top:58%;width:610px;height:380px;transform:translate(-50%,-50%) rotateX(58deg) rotateZ(45deg);background:#1c1c1c;border:1px solid rgba(245,245,240,.08);box-shadow:0 50px 80px rgba(0,0,0,.55);border-radius:10px}
-.floor:before,.floor:after{content:"";position:absolute;background:rgba(245,245,240,.035)}
-.floor:before{left:50%;top:0;width:1px;height:100%}.floor:after{top:50%;left:0;height:1px;width:100%}
-.houseWrap{position:absolute;left:50%;top:53%;width:460px;height:520px;transform:translate(-50%,-50%);transform-style:preserve-3d}
-.house{position:absolute;left:50%;top:52%;width:320px;height:330px;transform:translate(-50%,-50%) rotateX(-6deg) rotateY(0deg) rotateZ(0deg);transform-style:preserve-3d}
-.body{position:absolute;left:40px;top:105px;width:240px;height:180px;background:#202020;border:2px solid rgba(245,245,240,.12);box-shadow:inset 0 1px rgba(255,255,255,.05),0 32px 60px rgba(0,0,0,.35)}
-.side{position:absolute;left:280px;top:105px;width:95px;height:180px;transform-origin:left center;transform:skewY(-28deg);background:#121212;border:2px solid rgba(245,245,240,.08)}
-.roofA{position:absolute;left:27px;top:45px;width:268px;height:95px;background:#2d2d2d;clip-path:polygon(50% 0,100% 100%,0 100%);border-bottom:2px solid rgba(245,245,240,.1)}
-.roofB{position:absolute;left:294px;top:92px;width:95px;height:73px;background:#151515;transform:skewY(-28deg);transform-origin:left top}
-.door{position:absolute;left:135px;top:205px;width:55px;height:80px;background:#0d0d0d;border:2px solid rgba(245,245,240,.1)}
-.window{position:absolute;width:48px;height:48px;background:#0f0f0f;border:2px solid rgba(245,245,240,.12)}
-.w1{left:68px;top:160px}.w2{left:204px;top:160px}
-.window:after{content:"";position:absolute;inset:8px;border:1px solid rgba(57,255,20,.22)}
-.badge{position:absolute;left:50%;top:15px;transform:translateX(-50%);padding:14px 20px;border-radius:18px;background:rgba(14,14,14,.9);border:1px solid rgba(245,245,240,.15);font:700 22px ui-monospace,Consolas,monospace;box-shadow:0 18px 45px rgba(0,0,0,.35);opacity:0}
-.badge b{color:var(--green)}
-.shadow{position:absolute;left:50%;top:76%;width:330px;height:90px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,0,0,.65),transparent 68%);filter:blur(8px)}
-.label{position:absolute;left:72px;right:72px;bottom:170px;padding:24px 26px;border-radius:24px;background:linear-gradient(145deg,rgba(245,245,240,.055),rgba(16,16,16,.88));border:1px solid rgba(245,245,240,.12);box-shadow:0 24px 60px rgba(0,0,0,.35)}
-.label .num{font:700 15px ui-monospace,Consolas,monospace;color:var(--green);letter-spacing:.13em}
-.label .name{font-size:38px;font-weight:800;letter-spacing:-.04em;margin-top:8px}
-.label .desc{font:15px/1.45 ui-monospace,Consolas,monospace;color:var(--steel);margin-top:9px}
-.controls{width:min(920px,95vw);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.controls button{border:1px solid rgba(245,245,240,.1);background:#111;color:var(--white);padding:12px 10px;border-radius:12px;font:750 11px ui-monospace,Consolas,monospace;cursor:pointer}
-.controls button:hover,.controls button.active{border-color:rgba(57,255,20,.55);color:var(--green);background:#131713}
-.playrow{width:min(920px,95vw);display:flex;align-items:center;gap:10px}
-#play{border:1px solid rgba(245,245,240,.12);background:#111;color:var(--white);padding:10px 14px;border-radius:11px;font:800 11px ui-monospace,Consolas,monospace;cursor:pointer}
-#scrub{flex:1;accent-color:var(--green)}
-.time{font:11px ui-monospace,Consolas,monospace;color:var(--steel);min-width:92px;text-align:right}
-.note{max-width:920px;text-align:center;color:#656a70;font:10px/1.45 ui-monospace,Consolas,monospace}
-.wire{position:absolute;inset:0;pointer-events:none;opacity:0}
-.wire .body,.wire .side,.wire .roofA,.wire .roofB,.wire .door,.wire .window{background:transparent!important;border-color:rgba(57,255,20,.55)!important;box-shadow:none!important}
-.wire .window:after{display:none}
-.part{transform-origin:center center}
-.ring{position:absolute;left:50%;top:54%;width:260px;height:260px;border-radius:50%;border:3px solid var(--green);transform:translate(-50%,-50%) scale(.3);opacity:0;box-shadow:0 0 30px rgba(57,255,20,.12)}
-.neighbor{position:absolute;width:180px;height:190px;opacity:.15}
-.n1{left:55px;top:550px;transform:scale(.75)}
-.n2{right:55px;top:455px;transform:scale(.85)}
-.neighbor .body{left:0;top:55px;width:145px;height:100px}.neighbor .side{left:145px;top:55px;width:48px;height:100px}.neighbor .roofA{left:-8px;top:8px;width:160px;height:62px}.neighbor .roofB{left:151px;top:45px;width:48px;height:42px}
+html,body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif}
+body{min-height:100vh;padding:24px}
+.wrap{max-width:1480px;margin:0 auto}
+header{margin-bottom:20px}
+.kicker{font:700 12px/1 ui-monospace,Consolas,monospace;letter-spacing:.14em;color:var(--green)}
+h1{margin:10px 0 8px;font-size:clamp(28px,4vw,54px);line-height:.95;letter-spacing:-.05em}
+.sub{color:var(--steel);font:12px/1.5 ui-monospace,Consolas,monospace}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{
+  position:relative;
+  min-height:360px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 50% 34%,rgba(57,255,20,.045),transparent 34%),
+    linear-gradient(180deg,#141414,#0d0d0d);
+  overflow:hidden;
+  box-shadow:0 26px 70px rgba(0,0,0,.30);
+}
+.stage{height:290px;display:grid;place-items:center;position:relative;overflow:hidden}
+.stage:after{
+  content:"";
+  position:absolute;
+  left:50%;bottom:28px;
+  width:230px;height:44px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(0,0,0,.62),transparent 70%);
+  filter:blur(6px);
+}
+svg{width:94%;height:94%;overflow:visible}
+.ground{
+  fill:#1b1b1b;
+  stroke:rgba(245,245,240,.08);
+  stroke-width:1.2;
+}
+.groundLine{stroke:rgba(245,245,240,.035);stroke-width:1}
+.house{
+  transform-box:fill-box;
+  transform-origin:center bottom;
+  opacity:0;
+}
+.card.playing .house{animation:riseHouse 1.15s cubic-bezier(.16,1,.3,1) forwards}
+.card.playing .shadowPulse{animation:shadowPulse 1.15s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes riseHouse{
+  0%{transform:translateY(110px) scale(.92);opacity:0;filter:blur(6px)}
+  58%{transform:translateY(-10px) scale(1.015);opacity:1;filter:blur(0)}
+  78%{transform:translateY(3px) scale(.998);opacity:1}
+  100%{transform:translateY(0) scale(1);opacity:1}
+}
+@keyframes shadowPulse{
+  0%{opacity:.12;transform:scale(.62)}
+  65%{opacity:.56;transform:scale(1.08)}
+  100%{opacity:.42;transform:scale(1)}
+}
+.shadowPulse{
+  transform-box:fill-box;
+  transform-origin:center;
+  opacity:.15;
+}
+.meta{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-end;
+  padding:0 18px 18px;
+}
+.num{font:700 10px ui-monospace,Consolas,monospace;color:var(--green);letter-spacing:.12em;margin-bottom:5px}
+.name{font-size:18px;font-weight:800;letter-spacing:-.025em}
+.desc{font:10px/1.45 ui-monospace,Consolas,monospace;color:var(--steel);margin-top:5px;max-width:280px}
+button{
+  flex:none;
+  border:1px solid rgba(245,245,240,.13);
+  background:#101010;
+  color:var(--white);
+  padding:9px 11px;
+  border-radius:10px;
+  cursor:pointer;
+  font:800 10px ui-monospace,Consolas,monospace;
+}
+button:hover{color:var(--green);border-color:rgba(57,255,20,.45)}
+.top{fill:#2a2a2a}.front{fill:#202020}.side{fill:#121212}.dark{fill:#0c0c0c}
+.green{fill:var(--green)}.glass{fill:#17221a;stroke:rgba(57,255,20,.3);stroke-width:1}
+.edge{stroke:rgba(245,245,240,.12);stroke-width:1.2}
+.glowEdge{stroke:rgba(57,255,20,.55);stroke-width:1.4}
+.window{fill:#0d0d0d;stroke:rgba(57,255,20,.22);stroke-width:1}
+.white{fill:#dcdcd7}.steel{fill:#777d85}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){body{padding:12px}.grid{grid-template-columns:1fr}.card{min-height:340px}}
 </style>
 </head>
 <body>
-<div class="viewport" id="viewport">
-  <div class="comp" id="comp">
-    <div class="top">
-      <div class="kicker">SCH 2.5D MOTION LAB</div>
-      <h1>6 house animation <span>directions.</span></h1>
-    </div>
-    <div class="stage">
-      <div class="scene" id="scene">
-        <div class="floor" id="floor"></div>
-        <div class="neighbor n1" id="n1"><div class="roofA"></div><div class="roofB"></div><div class="body"></div><div class="side"></div></div>
-        <div class="neighbor n2" id="n2"><div class="roofA"></div><div class="roofB"></div><div class="body"></div><div class="side"></div></div>
-        <div class="shadow" id="shadow"></div>
-        <div class="houseWrap" id="houseWrap">
-          <div class="house" id="house">
-            <div class="roofA part" id="roofA"></div>
-            <div class="roofB part" id="roofB"></div>
-            <div class="body part" id="body"></div>
-            <div class="side part" id="side"></div>
-            <div class="door part" id="door"></div>
-            <div class="window w1 part" id="w1"></div>
-            <div class="window w2 part" id="w2"></div>
-          </div>
-          <div class="house wire" id="wire">
-            <div class="roofA"></div><div class="roofB"></div><div class="body"></div><div class="side"></div><div class="door"></div><div class="window w1"></div><div class="window w2"></div>
-          </div>
-        </div>
-        <div class="ring" id="ring"></div>
-        <div class="badge" id="badge"><b>4.9 ★</b> · 328 reviews</div>
-      </div>
-    </div>
-    <div class="label">
-      <div class="num" id="num">STYLE 01</div>
-      <div class="name" id="name">Build Up</div>
-      <div class="desc" id="desc">A ház rétegenként épül fel alulról felfelé.</div>
-    </div>
-  </div>
-</div>
+<div class="wrap">
+  <header>
+    <div class="kicker">SCH 2.5D HOUSE RISE LAB</div>
+    <h1>6 különböző házstílus.<br>Ugyanaz az egyszerű feljövetel.</h1>
+    <div class="sub">Nincs teljes videó, nincs extra jelenet. Csak a ház feljön a talajból, hogy ki tudd választani a vizuális irányt.</div>
+  </header>
 
-<div class="controls">
-  <button data-style="0">01 BUILD UP</button>
-  <button data-style="1">02 EXPLODED</button>
-  <button data-style="2">03 WIREFRAME → SOLID</button>
-  <button data-style="3">04 SEARCH PULSE</button>
-  <button data-style="4">05 CAMERA ORBIT</button>
-  <button data-style="5">06 NEIGHBORHOOD FOCUS</button>
+  <section class="grid">
+
+    <article class="card playing">
+      <div class="stage">
+        <svg viewBox="0 0 420 320">
+          <polygon class="ground" points="75,235 210,165 350,235 214,304"/>
+          <line class="groundLine" x1="143" y1="200" x2="282" y2="270"/>
+          <line class="groundLine" x1="279" y1="199" x2="143" y2="269"/>
+          <ellipse class="shadowPulse" cx="215" cy="249" rx="87" ry="22" fill="#000"/>
+          <g class="house">
+            <polygon class="front edge" points="132,149 233,149 233,247 132,247"/>
+            <polygon class="side edge" points="233,149 300,183 300,247 233,247"/>
+            <polygon class="top edge" points="132,149 183,100 233,149"/>
+            <polygon class="side edge" points="233,149 183,100 250,134 300,183"/>
+            <rect class="dark edge" x="166" y="193" width="32" height="54"/>
+            <rect class="window" x="145" y="166" width="28" height="25"/>
+            <rect class="window" x="202" y="166" width="20" height="25"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><div><div class="num">STYLE 01</div><div class="name">Classic Gable</div><div class="desc">Egyszerű nyeregtetős családi ház, tiszta 2.5D formával.</div></div><button>REPLAY</button></div>
+    </article>
+
+    <article class="card playing">
+      <div class="stage">
+        <svg viewBox="0 0 420 320">
+          <polygon class="ground" points="75,235 210,165 350,235 214,304"/>
+          <ellipse class="shadowPulse" cx="215" cy="249" rx="92" ry="22" fill="#000"/>
+          <g class="house">
+            <polygon class="front edge" points="126,154 246,154 246,244 126,244"/>
+            <polygon class="side edge" points="246,154 307,185 307,244 246,244"/>
+            <polygon class="top edge" points="126,154 187,123 307,185 246,154"/>
+            <rect class="glass" x="145" y="175" width="75" height="38"/>
+            <rect class="dark edge" x="205" y="214" width="28" height="30"/>
+            <polygon class="front edge" points="179,122 250,122 250,154 179,154"/>
+            <polygon class="side edge" points="250,122 283,139 283,171 250,154"/>
+            <polygon class="top edge" points="179,122 212,105 283,139 250,122"/>
+            <rect class="green" x="136" y="145" width="52" height="5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><div><div class="num">STYLE 02</div><div class="name">Modern Cube</div><div class="desc">Lapos tetős, egymásra csúsztatott modern kockaház.</div></div><button>REPLAY</button></div>
+    </article>
+
+    <article class="card playing">
+      <div class="stage">
+        <svg viewBox="0 0 420 320">
+          <polygon class="ground" points="75,235 210,165 350,235 214,304"/>
+          <ellipse class="shadowPulse" cx="218" cy="251" rx="82" ry="20" fill="#000"/>
+          <g class="house">
+            <polygon class="front edge" points="145,112 235,112 235,250 145,250"/>
+            <polygon class="side edge" points="235,112 296,142 296,250 235,250"/>
+            <polygon class="top edge" points="145,112 206,81 296,142 235,112"/>
+            <g class="glowEdge">
+              <rect class="glass" x="156" y="129" width="67" height="25"/>
+              <rect class="glass" x="156" y="164" width="67" height="25"/>
+              <rect class="glass" x="156" y="199" width="67" height="25"/>
+              <polygon class="glass" points="247,132 285,151 285,174 247,155"/>
+              <polygon class="glass" points="247,169 285,188 285,211 247,192"/>
+            </g>
+            <rect class="green" x="159" y="236" width="23" height="4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><div><div class="num">STYLE 03</div><div class="name">Glass Office</div><div class="desc">Magasabb irodaház, sötét üvegfelületekkel és zöld akcentussal.</div></div><button>REPLAY</button></div>
+    </article>
+
+    <article class="card playing">
+      <div class="stage">
+        <svg viewBox="0 0 420 320">
+          <polygon class="ground" points="75,235 210,165 350,235 214,304"/>
+          <ellipse class="shadowPulse" cx="215" cy="251" rx="75" ry="19" fill="#000"/>
+          <g class="house">
+            <polygon class="front edge" points="150,137 225,137 225,249 150,249"/>
+            <polygon class="side edge" points="225,137 279,164 279,249 225,249"/>
+            <polygon class="top edge" points="150,137 187,101 225,137"/>
+            <polygon class="side edge" points="225,137 187,101 241,128 279,164"/>
+            <rect class="dark edge" x="175" y="202" width="25" height="47"/>
+            <rect class="window" x="160" y="157" width="21" height="27"/>
+            <rect class="window" x="194" y="157" width="21" height="27"/>
+            <rect class="white" x="145" y="131" width="85" height="5" opacity=".18"/>
+            <rect class="green" x="154" y="232" width="12" height="5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><div><div class="num">STYLE 04</div><div class="name">Urban Townhouse</div><div class="desc">Keskenyebb, városi sorházas arányok, erősebb vertikalitással.</div></div><button>REPLAY</button></div>
+    </article>
+
+    <article class="card playing">
+      <div class="stage">
+        <svg viewBox="0 0 420 320">
+          <polygon class="ground" points="70,239 210,167 354,239 214,308"/>
+          <ellipse class="shadowPulse" cx="215" cy="251" rx="105" ry="22" fill="#000"/>
+          <g class="house">
+            <polygon class="front edge" points="110,165 250,165 250,248 110,248"/>
+            <polygon class="side edge" points="250,165 318,199 318,248 250,248"/>
+            <polygon class="top edge" points="110,165 178,130 318,199 250,165"/>
+            <polygon class="top edge" points="130,153 158,126 187,153"/>
+            <polygon class="top edge" points="166,153 195,126 224,153"/>
+            <polygon class="top edge" points="202,153 231,126 260,153"/>
+            <rect class="dark edge" x="132" y="191" width="47" height="57"/>
+            <rect class="glass" x="194" y="184" width="38" height="27"/>
+            <rect class="green" x="266" y="185" width="32" height="4" transform="skewY(27)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><div><div class="num">STYLE 05</div><div class="name">Industrial Shed</div><div class="desc">Raktár / műhely jellegű épület fűrészfogas tetőritmussal.</div></div><button>REPLAY</button></div>
+    </article>
+
+    <article class="card playing">
+      <div class="stage">
+        <svg viewBox="0 0 420 320">
+          <polygon class="ground" points="66,238 210,164 356,238 214,309"/>
+          <ellipse class="shadowPulse" cx="215" cy="252" rx="112" ry="22" fill="#000"/>
+          <g class="house">
+            <polygon class="front edge" points="100,177 252,177 252,244 100,244"/>
+            <polygon class="side edge" points="252,177 320,211 320,244 252,244"/>
+            <polygon class="top edge" points="100,177 168,143 320,211 252,177"/>
+            <polygon class="front edge" points="146,134 232,134 232,177 146,177"/>
+            <polygon class="side edge" points="232,134 270,153 270,196 232,177"/>
+            <polygon class="top edge" points="146,134 184,115 270,153 232,134"/>
+            <rect class="glass" x="114" y="192" width="95" height="32"/>
+            <rect class="dark edge" x="220" y="198" width="23" height="46"/>
+            <rect class="green" x="105" y="170" width="64" height="5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><div><div class="num">STYLE 06</div><div class="name">Minimal Villa</div><div class="desc">Szélesebb, prémium villa, erős horizontális tömeggel.</div></div><button>REPLAY</button></div>
+    </article>
+
+  </section>
 </div>
-<div class="playrow"><button id="play">PAUSE</button><input id="scrub" type="range" min="0" max="5" step=".01" value="0"><div class="time" id="time">0.00 / 5.00</div></div>
-<div class="note">Ugyanaz az egyszerű ház, 6 külön mozgáslogika. Kattints egy stílusra és lejátszható külön.</div>
 
 <script>
-const D=5;
-const styles=[
- {name:'Build Up',desc:'A ház rétegenként épül fel alulról felfelé.'},
- {name:'Exploded Assembly',desc:'A tető, falak, ajtó és ablakok külön érkeznek, majd összeállnak.'},
- {name:'Wireframe → Solid',desc:'Először technikai neon kontúr, majd abból materializálódik a kész épület.'},
- {name:'Search Pulse',desc:'Keresési hullám aktiválja a házat, majd feljön fölé az értékelés.'},
- {name:'Camera Orbit',desc:'A ház körül finoman elfordul a kamera és mélységet mutat, nem csak sima flat mozgás.'},
- {name:'Neighborhood Focus',desc:'Környezetből választja ki a rendszer a releváns épületet; a többi visszahúzódik.'}
-];
-const $=id=>document.getElementById(id);
-const viewport=$('viewport'),comp=$('comp'),scene=$('scene'),house=$('house'),houseWrap=$('houseWrap'),floor=$('floor'),shadow=$('shadow'),badge=$('badge'),wire=$('wire'),ring=$('ring'),n1=$('n1'),n2=$('n2');
-const parts=['roofA','roofB','body','side','door','w1','w2'].map($);
-const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
-const ease=x=>{x=clamp(x);return 1-Math.pow(1-x,3)};
-const smooth=x=>{x=clamp(x);return x*x*(3-2*x)};
-const lerp=(a,b,p)=>a+(b-a)*p;
-
-let style=0,current=0,playing=true,startStamp=0,startT=0,raf=0;
-
-function scale(){comp.style.transform='scale('+(viewport.clientWidth/1080)+')'} scale(); addEventListener('resize',scale);
-
-function reset(){
- scene.style.transform='';
- houseWrap.style.transform='translate(-50%,-50%)';
- house.style.transform='translate(-50%,-50%)';
- house.style.opacity=1;
- floor.style.opacity=1;
- floor.style.transform='translate(-50%,-50%) rotateX(58deg) rotateZ(45deg)';
- shadow.style.opacity=1;shadow.style.transform='translateX(-50%) scale(1)';
- badge.style.opacity=0;badge.style.transform='translateX(-50%) translateY(18px) scale(.92)';
- wire.style.opacity=0;wire.style.transform='translate(-50%,-50%)';
- ring.style.opacity=0;ring.style.transform='translate(-50%,-50%) scale(.3)';
- n1.style.opacity=.12;n2.style.opacity=.12;
- n1.style.transform='scale(.75)';n2.style.transform='scale(.85)';
- parts.forEach(p=>{p.style.opacity=1;p.style.transform='';p.style.filter=''});
-}
-function render(t){
- reset();
- const p=t/D;
- if(style===0){
-   const seq=[2,3,4,5,6,0,1];
-   seq.forEach((idx,k)=>{
-     const q=ease((t-(.25+k*.32))/.55), el=parts[idx];
-     el.style.opacity=q;
-     el.style.transform='translateY('+lerp(85,0,q)+'px) scaleY('+lerp(.35,1,q)+')';
-   });
-   houseWrap.style.transform='translate(-50%,-50%) translateY('+lerp(35,0,ease(t/1.1))+'px)';
- }
- if(style===1){
-   const vec=[
-    [0,-145],[105,-100],[-150,55],[160,55],[0,140],[-110,0],[110,0]
-   ];
-   parts.forEach((el,i)=>{
-     const q=ease((t-(.25+i*.16))/.8),v=vec[i];
-     el.style.opacity=q;
-     el.style.transform='translate('+lerp(v[0],0,q)+'px,'+lerp(v[1],0,q)+'px) rotate('+lerp((i%2?1:-1)*10,0,q)+'deg)';
-   });
-   houseWrap.style.transform='translate(-50%,-50%) scale('+lerp(.92,1,ease((t-.2)/1.4))+')';
- }
- if(style===2){
-   const q=ease(t/1.2),s=ease((t-1.25)/1.1);
-   house.style.opacity=s;
-   house.style.filter='brightness('+lerp(.55,1,s)+')';
-   wire.style.opacity=(1-s)*q;
-   wire.style.transform='translate(-50%,-50%) scale('+lerp(.92,1,q)+')';
-   ring.style.opacity=(1-s)*.45;
-   ring.style.transform='translate(-50%,-50%) scale('+lerp(.5,3.1,ease((t-.2)/1.4))+')';
- }
- if(style===3){
-   const rq=clamp((t-.45)/1.15);
-   ring.style.opacity=(1-rq)*.95;
-   ring.style.transform='translate(-50%,-50%) scale('+lerp(.25,6,ease(rq))+')';
-   const h=ease((t-1.4)/.55);
-   houseWrap.style.transform='translate(-50%,-50%) translateY('+lerp(0,-24,h)+'px) scale('+lerp(1,1.06,h)+')';
-   house.style.filter='brightness('+lerp(1,1.25,h)+')';
-   const b=ease((t-2.0)/.5);
-   badge.style.opacity=b;
-   badge.style.transform='translateX(-50%) translateY('+lerp(18,0,b)+'px) scale('+lerp(.92,1,b)+')';
- }
- if(style===4){
-   const q=smooth((t-.3)/4.2);
-   scene.style.transform='rotateY('+lerp(-10,12,q)+'deg) rotateX('+lerp(2,-2,q)+'deg)';
-   houseWrap.style.transform='translate(-50%,-50%) translateY('+(-8*Math.sin(p*Math.PI))+'px) scale('+lerp(.96,1.04,Math.sin(p*Math.PI))+')';
-   floor.style.transform='translate(-50%,-50%) rotateX('+lerp(55,62,q)+'deg) rotateZ('+lerp(39,50,q)+'deg)';
- }
- if(style===5){
-   const q=ease((t-.8)/.7),focus=ease((t-1.5)/.7);
-   n1.style.opacity=lerp(.32,.06,focus);n2.style.opacity=lerp(.32,.06,focus);
-   n1.style.transform='scale('+lerp(.8,.68,focus)+') translateX('+lerp(0,-40,focus)+'px)';
-   n2.style.transform='scale('+lerp(.9,.76,focus)+') translateX('+lerp(0,35,focus)+'px)';
-   houseWrap.style.transform='translate(-50%,-50%) translateY('+lerp(18,-28,q)+'px) scale('+lerp(.9,1.1,focus)+')';
-   house.style.filter='brightness('+lerp(.8,1.25,focus)+')';
-   const b=ease((t-2.25)/.45); badge.style.opacity=b;badge.style.transform='translateX(-50%) translateY('+lerp(18,0,b)+'px) scale(1)';
- }
- $('scrub').value=t; $('time').textContent=t.toFixed(2)+' / 5.00';
-}
-function select(i){
- style=i;current=0;startStamp=0;startT=0;
- document.querySelectorAll('[data-style]').forEach((b,k)=>b.classList.toggle('active',k===i));
- $('num').textContent='STYLE '+String(i+1).padStart(2,'0');
- $('name').textContent=styles[i].name;$('desc').textContent=styles[i].desc;
- playing=true;$('play').textContent='PAUSE';render(0);
-}
-function tick(ts){
- if(!playing)return;
- if(!startStamp)startStamp=ts;
- current=startT+(ts-startStamp)/1000;
- if(current>=D){current=0;startStamp=ts;startT=0}
- render(current);raf=requestAnimationFrame(tick);
-}
-document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>select(+b.dataset.style));
-$('play').onclick=()=>{
- if(playing){playing=false;cancelAnimationFrame(raf);$('play').textContent='PLAY'}
- else{playing=true;startStamp=0;startT=current;$('play').textContent='PAUSE';raf=requestAnimationFrame(tick)}
-};
-$('scrub').oninput=e=>{playing=false;cancelAnimationFrame(raf);$('play').textContent='PLAY';current=+e.target.value;render(current)};
-window.renderAt=render;window.__duration=D;window.setStyle=select;
-select(0);raf=requestAnimationFrame(tick);
+document.querySelectorAll('.card').forEach(card=>{
+  const btn=card.querySelector('button');
+  btn.addEventListener('click',()=>{
+    card.classList.remove('playing');
+    void card.offsetWidth;
+    card.classList.add('playing');
+  });
+  card.addEventListener('click',e=>{
+    if(e.target.tagName!=='BUTTON'){
+      card.classList.remove('playing');
+      void card.offsetWidth;
+      card.classList.add('playing');
+    }
+  });
+});
 </script>
 </body>
 </html>
